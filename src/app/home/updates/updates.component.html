@@ -1,0 +1,46 @@
+<div class="toolbar">
+    <h3>{{ ((selectedSubFolder$ | async) || (selectedFolder$ | async))?.title || (selectedProvider$ | async)?.full_name || 'All Updates' }}</h3>
+    <idr-default-btn class="green" style="flex: 0;" *ngIf="(selectedSubFolder$ | async)" (click)="addUpdateClicked()">
+        <idr-icon icon="icon-plus"></idr-icon>
+        <span>New Update</span>
+    </idr-default-btn>
+</div>
+<div class="content">
+    <div class="scroll-view">
+        <perfect-scrollbar class="ps-show-always">
+            <!-- TODO: Promote to component-->
+
+            <div class="flex p15">
+                <div class="message" *ngFor="let update of updates$ | async" [ngClass]="{ active: !update.seen }">
+                    <div class="header">
+                        <idr-icon icon="icon-circle" class="small" [ngClass]="{ active: update.active }"></idr-icon>
+                        <idr-icon icon="icon-exclamation" class="red" *ngIf="update.expired"></idr-icon>
+                        <idr-icon icon="icon-flag" [ngClass]="{ 'active-orange': isFlagged(update) }" (click)="setFlagged($event, update)"></idr-icon>
+                        <idr-icon icon="icon-eye-show" [ngClass]="{ active: !update.seen.state, red: update.seen.custom_unseen }" (click)="setSeen($event, update, update.seen)"></idr-icon>
+                        <idr-icon icon="icon-copy" class="hover" (click)="copyUpdateClicked($event, update)"></idr-icon>
+                        <span class="flex">
+                            {{ formatDate(update) }}
+                        </span>
+                    </div>
+                    <div class="body">
+                        <strong>{{ update?.folder?.title }}</strong>
+                        <p>
+                            {{ update.content }}
+                        </p>
+                        <div class="flex flex-row">
+                            <a class="flex flex-row" href="">
+                                <span class="pr5">by</span> {{ update.doctor?.full_name || 'Unknown' }}
+                            </a>
+                            <!-- TODO: Show attachements if "update.files.length > 0"-->
+                            <idr-icon class="flex-nosize" icon="icon-attachment" ng-if="update.active"></idr-icon>
+                        </div>
+                    </div>
+                </div>
+                <idr-no-data *ngIf="!(updates$ | async) || (updates$ | async).length == 0">
+                    - No updates -
+                </idr-no-data>
+            </div>
+
+        </perfect-scrollbar>
+    </div>
+</div>

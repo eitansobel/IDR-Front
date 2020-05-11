@@ -1,0 +1,88 @@
+@import 'styles';
+:host{
+    @extend .flex, .aic, .jcc;
+    ::ng-deep {
+        .mat-icon {
+            @extend .flex, .flex-nosize, .aic, .jcc;
+            width: 17px;
+            height:17px;
+            svg {
+                width: 17px;
+                height:17px;
+                path {
+                    fill: $grey-icon;
+                    transition: fill 0.3s ease-out;
+                }
+            }
+        }
+    }
+
+    &.borderless {
+        width: 28px;
+        height: 28px;
+        cursor: pointer;
+        ::ng-deep svg {
+            width:18px;
+            height: 18px;
+            path {
+                transition: fill 0.3s ease-out;
+            }
+        }
+        &:hover {
+            ::ng-deep svg {
+                path {
+                    fill: $caribbean-green;
+                }
+            }
+        }
+    }
+    &.bordered {
+        width: 24px;
+        height: 24px;
+        border-radius: 3px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.08);
+        background-color: #ffffff;
+        border: solid 0.5px #e6e6e6;
+        text-align: center;
+        cursor: pointer;
+
+        ::ng-deep svg {
+            width:18px;
+            height: 18px;
+            path {
+                transition: fill 0.3s ease-out;
+            }
+        }
+
+        &:hover {
+            ::ng-deep svg {
+                path {
+                    fill: $caribbean-green;
+                }
+            }
+        }
+    }
+    &.small {
+        width: 20px;
+        height: 20px;
+        ::ng-deep {
+            svg {
+                width: 11px;
+                height: 11px;
+            }
+        }
+    }
+    &.suffix {
+        position: absolute;
+        right: 0;
+        top: 0;
+        margin: 10px;
+    }
+    &.red {
+        ::ng-deep svg {
+            path {
+                fill: $red;
+            }
+        }
+    }
+}

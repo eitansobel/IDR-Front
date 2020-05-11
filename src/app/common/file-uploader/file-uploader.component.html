@@ -1,0 +1,14 @@
+<div class="flex flex-row">
+    <div class="clip-item" fxLayoutAlign="center center" *ngFor="let file of filesUploaded; let i = index">
+    <!--<div class="clip-item" fxLayoutAlign="center center" *ngIf="filesUploaded.length && filesUploaded[0]">-->
+        <img [src]="file.path" />
+        <i class="material-icons left" (click)="remove(i)">cancel</i>
+    </div>
+    <div class="download-btn flex-row">
+        <div class="mat-button mat-button-with-icon bg-primary f0">
+            <i class="material-icons left">cloud_upload</i>
+            <span>Add Files</span>
+            <input type="file" (change)="uploadFile($event)" multiple/>
+        </div>
+    </div>
+</div>

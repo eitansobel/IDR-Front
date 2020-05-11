@@ -1,0 +1,134 @@
+<div class="header">
+    <h3 class="title flex">{{headerText}}</h3>
+    <div class="flex-nosize">
+        <idr-icon icon="icon-close" class="flex-nosize" (click)="close()"></idr-icon>
+    </div>
+</div>
+
+<div class="body">
+    <form [formGroup]="form" class="form fieldset-group" novalidate>
+
+        <!-- Providers -->
+        <div class="form-control">
+            <div class="autocomplete-control">
+                <div>
+                    <ng-select [items]="providers$ | async" [selectOnTab]="true" formControlName="provider" bindValue="id" #select (clear)="update($event)"
+                        (add)="addToArray($event)" bindLabel="name" placeholder="Start to Enter Provider's Name">
+                        <ng-template ng-label-tmp let-item="item">
+                            <span class="option">{{item.name}}</span>
+                        </ng-template>
+                    </ng-select>
+                    <label>To:</label>
+                    <idr-validation-message *ngIf="formSubmitted" [control]="form.get('provider')"></idr-validation-message>
+                </div>
+                <div>
+                    <idr-default-btn class="link" (click)="searchProvider()">
+                        <idr-icon icon="icon-search"></idr-icon>
+                    </idr-default-btn>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patients -->
+        <div class="form-control">
+            <div class="autocomplete-control">
+                <div>
+                    <ng-select #select [items]="patients$ | async" [selectOnTab]="true" formControlName="patient" bindValue="id" (clear)="update($event)"
+                        (add)="addToArray($event)" bindLabel="name" placeholder="Start to Enter Patient's Name">
+                        <ng-template ng-label-tmp let-item="item">
+                            <span class="option">{{item.name}}</span>
+                        </ng-template>
+                    </ng-select>
+                    <label>Re:</label>
+                    <idr-validation-message *ngIf="formSubmitted" [control]="form.get('patient')"></idr-validation-message>
+                </div>
+                <div>
+                    <idr-default-btn class="link" (click)="searchPatient()">
+                        <idr-icon icon="icon-search"></idr-icon>
+                    </idr-default-btn>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Subject: -->
+        <div class="form-control flex-nosize">
+            <label>
+                Subject:
+                <!-- <span class="requiredStar">*</span> -->
+            </label>
+            <idr-input-text [hasError]="form.get('subject').invalid && formSubmitted" formControlName="subject"
+                placeholder="Enter Subject" [control]="form.get('title')">
+            </idr-input-text>
+        </div>
+
+        <!-- Message: -->
+        <div class="form-control flex-nosize">
+            <label>
+                Message:
+                <!-- <span class="requiredStar">*</span> -->
+            </label>
+            <textarea class="flex" formControlName="message"></textarea>
+        </div>
+
+        <!-- Attach file -->
+        <div class="form-control flex-nosize">
+            <idr-default-btn class="upload rel">
+                <idr-icon icon="icon-attachment"></idr-icon>
+                <span>Attach file</span>
+                <!-- <div class="pa fill">
+                    <idr-file-uploader (filesChange)="filesChanged($event)" (filesUpdated)="filesUpdated($event)"></idr-file-uploader>
+                </div> -->
+            </idr-default-btn>
+        </div>
+
+        <!-- Flag -->
+        <div class="form-control row">
+            <!-- <mat-button-toggle-group multiple formControlName="flagged" class="borderless"> -->
+                <mat-checkbox formControlName="flagged" class="custom-icon flex">
+                    <div class="flex flex-row">
+                        <idr-icon icon="icon-flag" [ngClass]="{active: form.get('flagged').value }"></idr-icon>
+                        Flag as important
+                    </div>
+                </mat-checkbox>
+
+                <mat-checkbox formControlName="notify_unseen">
+                    Notify if Not Read
+                </mat-checkbox>
+                <!-- <mat-button-toggle formControlName="flagged" ngDefaultControl>
+                    <idr-icon icon="icon-flag"></idr-icon>
+                    Flag as important
+                </mat-button-toggle> -->
+            <!-- </mat-button-toggle-group> -->
+        </div>
+
+        <!-- Send External Alert: -->
+        <div class="form-control">
+            <label>
+                Send External Alert:
+            </label>
+            <div class="group row">
+                <mat-checkbox [value]="0">
+                    Immidiate
+                </mat-checkbox>
+                <mat-checkbox [value]="1">
+                    30 min
+                </mat-checkbox>
+                <mat-checkbox [value]="2">
+                    90 min
+                </mat-checkbox>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="footer">
+    <!-- <idr-default-btn (click)="close()">
+        <idr-icon icon="icon-close"></idr-icon>
+        <span>Cancel</span>
+    </idr-default-btn> -->
+    <idr-default-btn class="green" (click)="ok()">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>Send</span>
+    </idr-default-btn>
+</div>

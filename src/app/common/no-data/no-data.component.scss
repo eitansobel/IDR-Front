@@ -1,0 +1,7 @@
+@import 'styles';
+
+:host {
+    @extend .flex, .aic, .jcc;
+    font-size: 13px;
+    font-weight: bold;
+}

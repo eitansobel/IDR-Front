@@ -1,0 +1,57 @@
+<div class="header">
+    <h3 class="title flex">{{headerText}}</h3>
+    <div class="flex-nosize">
+        <idr-icon icon="icon-close" class="flex-nosize" (click)="closeDialog()"></idr-icon>
+    </div>
+</div>
+<div class="body">
+    <mat-dialog-content>
+        <form [formGroup]="form" *ngIf="!success">
+            <div class="flexSpread">
+                <div class='control-half'>
+                    <label>Current password</label>
+                    <idr-input-pass
+                        [hasError]="form.controls.current_password.invalid && formSubmitted"
+                        formControlName="current_password"
+                        placeholder='Password'
+                        [required]='true'
+                        [control]="form.controls.current_password"
+                        ></idr-input-pass>
+                </div>
+                <div class='control-half'>
+                    <label>New password</label>
+                    <idr-input-pass
+                        [hasError]="form.controls.password.invalid && formSubmitted"
+                        formControlName="password"
+                        placeholder='New Password'
+                        [required]='true'
+                        [control]="form.controls.password"
+                        ></idr-input-pass>
+                </div>
+                <div class='control-half'></div>
+                <div class='control-half'>
+                    <label>Confirm Password</label>
+                    <idr-input-pass
+                        [hasError]="form.controls.confirm_password.invalid && formSubmitted"
+                        formControlName="confirm_password"
+                        placeholder='Confirm Password'
+                        [required]='true'
+                        [control]="form.controls.confirm_password"
+                        ></idr-input-pass>
+                </div>
+            </div>
+                <idr-server-error [message]="message"></idr-server-error>
+        </form>
+        <div *ngIf="success">Password successfully changed</div>
+    </mat-dialog-content>
+</div>
+<div class="footer" *ngIf="!success">
+        <idr-default-btn  (click)="closeDialog()">
+            <idr-icon icon="icon-close" class="flex-nosize"></idr-icon>
+            <span>Cancel</span>
+        </idr-default-btn>
+        <idr-default-btn class="green" (click)="save()">
+            <idr-icon icon="icon-check"></idr-icon>
+            <span>Save changes</span>
+        </idr-default-btn>
+</div>

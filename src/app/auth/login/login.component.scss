@@ -1,0 +1,73 @@
+@import 'styles';
+
+:host {
+    @extend .flex, .flex-center;
+
+    idr-modal-wrap {
+        width: 460px;
+    }
+
+    ::ng-deep {
+        idr-server-error {
+            text-align: center;
+        }
+    }
+}
+
+p {
+    color: $modal-text-color;
+}
+
+.headline {
+    margin-bottom: 30px;
+    display: inline-block;
+}
+
+.log-in-title {
+    color: #000000;
+    font-family: $base-font-family;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: center;
+    margin: 25px auto 35px
+}
+
+::ng-deep {
+    & input::placeholder {
+        color: $new-gray;
+        font-family: $base-font-family;
+        font-size: 13px;
+        line-height: 18px;
+    }
+    .cdk-visually-hidden {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        outline: 0;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+    }
+    .mat-checkbox-inner-container {
+        .mat-checkbox-frame {
+            border-width: 1px;
+            border-color: #dadada;
+        }
+    }
+    .mat-checkbox-checked.mat-accent .mat-checkbox-background {
+        background-color: $caribbean-green;
+    }
+}
+
+.actions {
+    margin: 26px auto 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: $new-gray;
+}

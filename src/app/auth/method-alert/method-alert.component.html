@@ -1,0 +1,102 @@
+<idr-modal-wrap hasIconDecor="true">
+    <div logoIcon class="logoIcon">
+        <idr-icon icon="icon-alert" class="icon-alert"></idr-icon>
+    </div>
+
+    <form novalidate #formDir="ngForm" [formGroup]="form">
+        <mat-checkbox *ngIf="!onDuty" class="green-checkbox duty-off" [(ngModel)]="onDuty" [ngModelOptions]="{standalone: true}">
+            Off-Duty
+        </mat-checkbox>
+        <idr-time-setup *ngIf="onDuty" formControlName="selectedMoment2">
+            <mat-checkbox class="green-checkbox" [(ngModel)]="onDuty" [ngModelOptions]="{standalone: true}">
+                On-Duty Until
+            </mat-checkbox>
+        </idr-time-setup>
+
+        <idr-validation-message *ngIf="formSubmitted" [control]="form.get('selectedMoment2')"></idr-validation-message>
+
+        <div class="work-group">
+            <p class="main-wg-checkbox">
+                <mat-checkbox class="green-checkbox" [(ngModel)]="onCall" [ngModelOptions]="{standalone: true}">
+                    On-Call
+                </mat-checkbox>
+            </p>
+            <div *ngFor="let wg of workGroupList" class="wg-checkbox">
+                <mat-checkbox class="green-checkbox" [(ngModel)]="wg.is_selected" [ngModelOptions]="{standalone: true}">
+                    {{wg.title}}
+                </mat-checkbox>
+            </div>
+        </div>
+
+        <span class="headline">External Alert Methods</span>
+        <div class='flexSpread alertsList'>
+
+            <div class="alertsActiveItem control-half">
+                <ng-select [items]="alerts" [selectOnTab]="true" formControlName="first" bindValue="id" #select (clear)="update($event)"
+                    (add)="addToArray($event)" bindLabel="title" placeholder="Type of contact">
+                    <ng-template ng-label-tmp let-item="item">
+                        <span class="option">{{item.title}} - {{item.value}}</span>
+                    </ng-template>
+                </ng-select>
+                <label>Alert 1st:</label>
+                <idr-validation-message *ngIf="formSubmitted" [control]="form.get('first')"></idr-validation-message>
+            </div>
+
+            <div class="alertsActiveItem control-half">
+                <ng-select [items]="alerts" [selectOnTab]="true" formControlName="third" (add)="addToArray($event)"
+                    (clear)="update($event)" bindValue="id" bindLabel="title" placeholder="Type of contact" #select>
+                    <ng-template ng-label-tmp let-item="item">
+                        <span class="option">{{item.title}} - {{item.value}}</span>
+                    </ng-template>
+                </ng-select>
+                <label>Alert 3rd:</label>
+            </div>
+
+            <div class="alertsActiveItem control-half">
+                <ng-select [items]="alerts" [selectOnTab]="true" formControlName="second" (add)="addToArray($event)"
+                    (clear)="update($event)" bindValue="id" bindLabel="title" placeholder="Type of contact" #select>
+                    <ng-template ng-label-tmp let-item="item">
+                        <span class="option">{{item.title}} - {{item.value}}</span>
+                    </ng-template>
+                </ng-select>
+                <label>Alert 2nd:</label>
+                <idr-validation-message *ngIf="formSubmitted" [control]="form.get('second')"></idr-validation-message>
+            </div>
+
+            <div class="alertsActiveItem control-half">
+                <ng-select [items]="alerts" [selectOnTab]="true" formControlName="forth" (add)="addToArray($event)"
+                    (clear)="update($event)" bindValue="id" bindLabel="title" placeholder="Type of contact" #select>
+                    <ng-template ng-label-tmp let-item="item">
+                        <span class="option">{{item.title}} - {{item.value}}</span>
+                    </ng-template>
+                </ng-select>
+                <label>Alert 4th:</label>
+            </div>
+
+        </div>
+
+        <div class='flexSpread alertsList'>
+            <div class="alertsActiveItem control-half">
+
+                <idr-button icon="icon-plus" (click)="createNewAlert()">
+                    Add an Alert Method
+                </idr-button>
+
+            </div>
+            <div class="alertsActiveItem control-half">
+                <idr-button icon="icon-edit" (click)="editAlert()" *ngIf="alerts && alerts.length">
+                    Edit Alert Method
+                </idr-button>
+            </div>
+        </div>
+
+        <div class="flex aic">
+            <idr-button class="green w50p asc" icon="icon-login" (click)="setAlerts()">Continue</idr-button>
+        </div>
+        <idr-server-error [message]="message"></idr-server-error>
+    </form>
+
+    <div *ngIf="unreadMessage" class="unread-messages">
+        YOU HAVE {{ unreadMessage + " UNREAD MESSAGE" + (unreadMessage > 1 ? "S" : "") + "!" }}
+    </div>
+</idr-modal-wrap>

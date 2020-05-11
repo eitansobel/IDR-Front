@@ -1,0 +1,24 @@
+<div class="avatar" [ngStyle]="{'background-image': 'url(' + imageUrl + chat.display_data?.full_photo + ')', 'background-size': 'cover'}">
+    <span class="acronym" *ngIf="!chat.display_data?.full_photo" >{{chat.display_data?.full_name | acronym}}</span>
+    <span class="count urgency-{{urgency}}" *ngIf="not_read">{{chat.preview.unread_messages_count}}</span>
+</div>
+<div class="message">
+    <header>
+        <div>
+            <span class="name">{{chat.display_data?.full_name }}</span>
+            <span class="badge" [ngClass]="{ active: chat.preview.unread_messages_count > 0 }">{{ chat.preview.total_messages_count }}
+                <ng-container *ngIf="chat.preview.unread_messages_count > 0">/{{chat.preview.unread_messages_count}}</ng-container>
+            </span>
+        </div>
+        <span class="time">{{chat.preview.last_message_time | date: 'H:mm'}}</span>
+        <span class="removeChat" (click)="deleteChat(chat.id)"></span>
+    </header>
+    <div class="subject" *ngIf="chat.title || chat.patient">Re: {{ getPatientById(chat.patient) }}</div>
+    <!--
+        <span class="newIndicator" *ngIf="newPatient">(New)</span>
+        <div class="messageBody">
+            {{chat.history.last_message}}
+        </div>
+    -->
+</div>
+

@@ -1,0 +1,12 @@
+@import 'styles';
+
+:host {
+    @extend .flex, .flex-row, .aic;
+    &.gap {
+        ::ng-deep {
+            & > *:not(:last-child) {
+                margin-right: 10px;
+            }
+        }
+    }
+}

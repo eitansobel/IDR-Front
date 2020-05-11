@@ -1,0 +1,86 @@
+<div class="header">
+    <idr-back-btn class="link back" (click)="closeDialog()">
+        <span>Cancel</span>
+    </idr-back-btn>
+    <div class="logo">
+        <idr-icon icon="icon-alert"></idr-icon>
+    </div>
+    <h3 class="title">{{headerText}}</h3>
+</div>
+<div class="body">
+    <form (keyup.enter)="save()" (ngSubmit)="save()" novalidate #formDir="ngForm" [formGroup]="form">
+        <div *ngIf="data.edit" class="form-control">
+            <ng-select [items]="contactList" (change)="onContact($event)" formControlName="contact" bindLabel="title"
+                bindValue="id">
+                <ng-template ng-label-tmp let-item="item">
+                    <b>{{item.title}}</b>
+                </ng-template>
+            </ng-select>
+        </div>
+
+        <div class="form-control">
+            <ng-select
+                [items]="alert_type"
+                [selectOnTab]="true"
+                placeholder="Type of alert"
+                bindValue="value"
+                [ngClass]="{'hasError': form.controls.alert_type.invalid && formSubmitted } "
+                (change)="onTypeChange($event)"
+                formControlName="alert_type">
+            </ng-select>
+            <idr-validation-message *ngIf="formSubmitted" [control]="form.get('alert_type')"></idr-validation-message>
+        </div>
+
+        <idr-input-text
+            [hasError]="form.get('value').invalid && formSubmitted"
+            formControlName="value"
+            [placeholder]="valuePlaceholder"
+            [control]="form.get('value')"
+            *ngIf="form.get('alert_type').value == 5 || !form.get('alert_type').value">
+        </idr-input-text>
+
+        <div class='form-control phoneMask'
+            *ngIf="form.get('alert_type').value !== 5 && form.get('alert_type').value"
+            [ngClass]="{'hasError' : form.controls.value.invalid && formSubmitted}">
+                <input [attr.placeholder]="valuePlaceholder" [attr.maxlength]="maxLength" phoneMask formControlName="value">
+                <span class='required'>*</span>
+                <idr-validation-message *ngIf="form.get('value').invalid && formSubmitted" [control]="form.get('value')"></idr-validation-message>
+        </div>
+
+        <idr-input-text
+            [hasError]="form.get('title').invalid && formSubmitted || title_uniq"
+            formControlName="title"
+            placeholder='Alert nickname'
+            [control]="form.get('title')">
+        </idr-input-text>
+
+        <!--
+            <h4>Apply contact to:</h4>
+            <ul id="grouplist" class="list-group">
+                <li class="list-group-item" *ngFor="let item of alertsList">
+                    <idr-alert-checkbox [ngClass]="{'active': selectedItem == item.value}" (click)="listClick($event, item)">
+                        {{ item.label }}
+                        <idr-icon icon="icon-check" *ngIf="selectedItem == item.value"></idr-icon>
+                    </idr-alert-checkbox>
+                </li>
+            </ul>
+         -->
+
+        <idr-server-error [message]="message"></idr-server-error>
+    </form>
+</div>
+<div class="footer">
+    <!-- <idr-default-btn (click)="closeDialog()">
+        <idr-icon icon="icon-close"></idr-icon>
+        <span>Cancel</span>
+    </idr-default-btn> -->
+    <idr-default-btn *ngIf="data.edit && form.get('contact').value" (click)="deleteContact()">
+        <idr-icon icon="icon-close"></idr-icon>
+        <span>Delete Alert Method</span>
+    </idr-default-btn>
+    <idr-default-btn class="green" (click)="save()" [disabled]="!(this.form.valid && this.form.dirty)">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>{{ok}}</span>
+    </idr-default-btn>
+</div>
+

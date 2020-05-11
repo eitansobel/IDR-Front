@@ -1,0 +1,96 @@
+<div class="flex flex-row">
+    <div class="flex first-column"
+        style="flex: 0 0 240px"
+        [ngStyle]="{'flex': (hideFolders$ | async) ? '0 0 500px' : '0 0 240px'}">
+            <div class="flex flex-row flex-nosize toolbar">
+                <!-- -->
+
+                <div class="flex flex-row flex-nosize" style="flex: 0 0 240px;">
+                    <idr-default-btn (click)="sortPatients()" className="link sort" class="link">
+                        <idr-icon icon="icon-filter"></idr-icon>
+                        <span>Sort</span>
+                    </idr-default-btn>
+                    <idr-default-btn (click)="importPatients()" className="link import" class="link">
+                        <idr-icon icon="icon-download"></idr-icon>
+                        <span>Import</span>
+                    </idr-default-btn>
+                </div>
+
+                <!-- -->
+                <div class="flex"></div>
+                <div class="flex" style="flex: 0 0 249px" *ngIf="hideFolders$ | async">
+                    <idr-default-btn (click)="viewAllUpdates()" className="link sort" class="link left">
+                        <idr-icon icon="icon-undo"></idr-icon>
+                        <span>View all Update Folders</span>
+                    </idr-default-btn>
+                </div>
+            </div>
+            <div class="flex rel">
+                <div class="pa fill">
+                    <perfect-scrollbar class="ps-show-always">
+
+                        <!-- Patients list -->
+                        <idr-patients
+                            [allPatients]="allPatients$ | async"
+                            [patients]="patients$ | async"
+                            [selectedPatient]="selectPatient$ | async"
+                            [selectedFolder]="selectSubFolder$ | async"
+                            [updateFolders]="updateFolders$ | async"
+                            [folderPerPatient]="hideFolders$ | async"
+                            (pageChanged)="pageChanged($event)"
+                            (patientHidden)="patientHidden($event)"
+                            >
+                        </idr-patients>
+
+                    </perfect-scrollbar>
+                </div>
+            </div>
+    </div>
+
+    <div class="flex">
+        <!-- TOOLBAR -->
+        <div class="flex flex-row flex-nosize toolbar">
+            <div class="sub-folder-options" *ngIf="(selectSubFolder$ | async) && !(hideFolders$ | async)">
+                <idr-default-btn (click)="viewSubForAll()" className="link blue left" class="link">
+                    <idr-icon icon="icon-eye-show"></idr-icon>
+                    <span>View Sub Folder For All Patients</span>
+                </idr-default-btn>
+                <idr-default-btn (click)="unselectFolder()" className="link blue left" class="link">
+                    <idr-icon icon="icon-undo"></idr-icon>
+                    <span>Unselect</span>
+                </idr-default-btn>
+            </div>
+            <div class="flex"></div>
+            <idr-default-btn class="link" style="max-width: 125px;" (click)="refresh()">
+                <idr-icon icon="icon-refresh"></idr-icon>
+                <span>Refresh</span>
+            </idr-default-btn>
+        </div>
+
+        <!-- CONTENT-->
+        <div class="updates-container" *ngIf="selectedPage">
+            <router-outlet></router-outlet>
+        </div>
+
+        <idr-no-data *ngIf="!selectedPage">
+            - Make your selection -
+        </idr-no-data>
+
+    </div>
+</div>
+
+<div class="chatRoom" *ngIf="showChatWindow">
+    <header>
+        <idr-close-round-svg (click)="closeChat()"></idr-close-round-svg>
+        Conversation
+    </header>
+    <idr-create-message [title]="title" [chat]="choosedChat" [patient]="choosedPatient" [homePage]="true" (createdChat)="createdChat($event)">
+        <idr-chat [chat]="choosedChat"></idr-chat>
+    </idr-create-message>
+</div>
+<div class='profile' [ngClass]="{'show': showPatientProfile}">
+    <idr-patient-view-profile (closeAll)="closePatientProfile($event)" [viewProfile]="patientProfileData"
+        [personalEdit]="viewProfileIsEdited" [updateHomePatients]="true">
+    </idr-patient-view-profile>
+</div>
+<div class="overlay" *ngIf="showPatientProfile || showChatWindow"></div>

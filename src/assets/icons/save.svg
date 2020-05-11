@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>save</title>
+    <desc>Created with Sketch.</desc>
+    <g id="save" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+        <path d="M13.1342162,3.29289322 C13.5247405,2.90236893 14.1579055,2.90236893 14.5484298,3.29289322 C14.9389541,3.68341751 14.9389541,4.31658249 14.5484298,4.70710678 L6.29420841,12.9613282 L1.29289322,7.96001296 C0.902368927,7.56948867 0.902368927,6.93632369 1.29289322,6.5457994 C1.68341751,6.15527511 2.31658249,6.15527511 2.70710678,6.5457994 L6.29420841,10.132901 L13.1342162,3.29289322 Z" id="Path-7" fill="#000000" fill-rule="nonzero"></path>
+    </g>
+</svg>

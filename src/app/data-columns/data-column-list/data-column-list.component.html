@@ -1,0 +1,117 @@
+<div class="view-header">
+    <h3>Update Folders</h3>
+    <div class="searchContainer">
+        <idr-search-control [placeholder]="searchHolder" (ngModelChange)="filterUsers(searchText)" [(ngModel)]="searchText"></idr-search-control>
+    </div>
+    <ng-content></ng-content>
+</div>
+
+<div class="table tableList flex">
+
+    <!-- TABLE HEADER -->
+
+    <div class="header row flex-nosize" [ngStyle]="{'transform': 'translate(-' + slideLeft + 'px, 0px)'}">
+        <div class='mainInfo'>
+            <!-- <div class="rowItem">#</div> -->
+            <div class="rowItem" [ngClass]="{'active': active === i, 'asc': (direc && active === i), 'main-column': index === 1 }"
+                (click)="sortable(i); active = i" *ngFor="let headling of listHeader; let i = index">
+                {{headling}}
+                <idr-arrow-svg></idr-arrow-svg>
+            </div>
+        </div>
+        <span class="action">
+            <div class="rowItem">Actions</div>
+        </span>
+    </div>
+
+    <!-- TABLE BODY -->
+
+    <div class="content flex">
+        <perfect-scrollbar class="ps-show-always"> <!-- [trackX]="true" [compact]="true" (scrollState)="scrollDetect($event)" -->
+            <div class="listBody ngx-dnd-container" ngxDroppable [model]="dataColumnList" (drop)="setNewColumnOrder($event)">
+                <div class="row ngx-dnd-item has-handle" ngxDraggable [model]="row" *ngFor="let row of dataColumnList | filter:  searchKeys : searchText; let i = index">
+
+                    <!-- Pager-->
+                    <!-- [ngClass]="{'hide': (i > (end - 1) || (i < start))}" -->
+
+                    <!-- Folders-->
+                    <div class='mainInfo gu-unselectable'>
+                        <!--
+                            TODO: CLEANUP: Row number
+                            <div class="rowItem">{{i + 1}}</div>
+                        -->
+
+                        <div class="rowItem" *ngFor="let key of sortableKeys">
+
+                            <!-- Any other dynamic fileds-->
+                            <span *ngIf="!['is_hidden', 'title', 'update_interval', 'is_private'].includes(key)">{{row[key]}}</span>
+
+                            <!-- Folder name-->
+                            <span *ngIf="key === 'title'">
+                                <span>{{row[key]}}</span>
+                                <!--
+                                    TODO: CLEANUP: Author & Occupation
+                                    <span class="blue-text">{{row.author.full_name}}</span>
+                                    <span>({{row.author.job}})</span>
+                                -->
+                            </span>
+
+                            <!-- Show/Hide toggle-->
+                            <div class="showHide" *ngIf="key === 'is_hidden'">
+                                <mat-slide-toggle class='mat-slide-toggle mat-accent' (change)="toggleColumn($event, row['id'], i)"
+                                    [checked]="row['is_hidden']" [disableRipple]="true">
+                                    <span class='show'>Show</span>
+                                    <span class='hide'>Hide</span>
+                                </mat-slide-toggle>
+                            </div>
+
+                            <!-- Public/Private toggle-->
+                            <div class="isPrivate" *ngIf="key === 'is_private'">
+                                <div class="privacy" [ngClass]="{'inactive-text': row['is_private']}">
+                                    {{ row['is_private'] ? 'Private' : 'Public' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ACTION BUTTONS-->
+                    <span class="action">
+
+                        <!-- EDIT button -->
+                        <div class="rowItem gu-unselectable">
+                            <idr-icon icon="icon-edit" class="bordered flex-nosize" (click)="editDataColumn(row)"
+                                [ngClass]="{ 'active': userCanSeeButton('edit', row) }">
+                            </idr-icon>
+                        </div>
+
+                        <!-- COPY button
+                            <div class="center rowItem gu-unselectable">
+                                <idr-copy-icon-svg *ngIf="userCanSeeButton('copyIsAllowed', row)" (click)="userCanSeeButton('copyIsAllowed', row) && copyRow(i, row.id)"></idr-copy-icon-svg>
+                            </div>
+                        -->
+
+                        <!-- DELETE button -->
+                        <div class="rowItem gu-unselectable">
+                            <idr-icon icon="icon-trash" class="bordered flex-nosize" (click)="deleteRow(i, row)"
+                                [ngClass]="{ 'active': userCanSeeButton('delete', row) }"
+                                ></idr-icon>
+                        </div>
+
+                        <!-- SORT button -->
+                        <div class="rowItem">
+                            <idr-icon icon="icon-move"></idr-icon>
+                            <!-- <idr-move-icon-svg ngxDragHandle></idr-move-icon-svg> -->
+                        </div>
+
+                    </span>
+                </div>
+            </div>
+        </perfect-scrollbar>
+    </div>
+</div>
+
+<!--
+     TODO: OBSOLETE: Pager
+    <idr-pagination class="pagination" *ngIf="dataColumnList?.length && dataColumnList?.length > maxPages" [pages]="pages"
+    (activePage)="activePage($event)"></idr-pagination>
+-->

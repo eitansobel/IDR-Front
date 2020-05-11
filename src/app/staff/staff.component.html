@@ -1,0 +1,251 @@
+<div class="sidebar">
+    <div class="p15">
+        <idr-search placeholder="Search Providers List" [(ngModel)]="search">
+        </idr-search>
+    </div>
+
+    <div class="plr15 pb15">
+        <idr-button icon="icon-plus" class="green stretch" (click)="newList()" *ngIf="myRole" >
+            <span>Create Workgroups</span>
+        </idr-button>
+    </div>
+
+    <div class="list">
+        <idr-button
+            (click)="selectList(item)"
+            [ngClass]="{
+                'selected': (selectedList | async) === item,
+                'system': item.system
+            }"
+            *ngFor="let item of staffList$ | async | filter: ['title']: search"
+        >
+            <div class="flex aifs">{{ item.title }}</div>
+            <idr-icon *ngIf="!item.system" icon="icon-more" class="flex-nosize" [matMenuTriggerFor]="staffListMenu" [matMenuTriggerData]="{ context: item }" ></idr-icon>
+        </idr-button>
+    </div>
+
+
+    <!-- <idr-sortable-list
+        className="list"
+        typeName="stafflist"
+        (chosedData)="onChooseData($event)"
+        [keys]="['title', 'qty', 'update_time']"
+        [listData]="teamList"
+        searchHolder="Search Workgroup"
+        [listHeader]="header">
+    </idr-sortable-list> -->
+
+</div>
+<div class="flex">
+    <idr-row class="toolbar flex-nosize">
+        <h3 class="flex wsnw">{{ getListName(selectedList | async) }} list</h3>
+        <idr-row class="flex-nosize gap">
+            <idr-search [(ngModel)]="searchTableKeyword" placeholder="Search patients"></idr-search>
+            <idr-button icon="icon-plus" class="blue" (click)="newMember()" *ngIf="myRole">Add Provider</idr-button>
+            <idr-button icon="icon-plus" class="blue" (click)="multipleUpload()" *ngIf="myRole">Multiple Upload</idr-button>
+        </idr-row>
+    </idr-row>
+
+    <idr-row class="toolbar flex-nosize">
+        <idr-row class="gap">
+            <idr-button icon="icon-plus" class="blue" [disabled]="true" *ngIf="myRole">Move to...</idr-button>
+            <idr-button icon="icon-plus" class="blue" [disabled]="true" *ngIf="myRole">Copy to...</idr-button>
+            <idr-button icon="icon-plus" class="blue" [disabled]="true" *ngIf="myRole">Replace with...</idr-button>
+            <idr-button icon="icon-download" class="blue" [disabled]="true" *ngIf="myRole">Import List</idr-button>
+        </idr-row>
+        <idr-row class="flex-nosize">
+            <idr-button icon="icon-close" class="green" [disabled]="selection.selected.length === 0" (clicked)="deleteBulk()" *ngIf="myRole">Remove</idr-button>
+        </idr-row>
+    </idr-row>
+
+    <idr-col class="p15 pt0">
+            <mat-table [dataSource]="staffTable$ | async | filter : ['first_name', 'last_name'] : searchTableKeyword"
+                matSort
+                (matSortChange)="sortData($event)"
+                matSortActive="first_name"
+                matSortDirection="asc"
+                matSortDisableClear
+            >
+
+                <!-- Checkbox Column -->
+                <ng-container matColumnDef="select">
+                    <mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox
+                            (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <mat-checkbox
+                            (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- First & Last Column -->
+                <ng-container matColumnDef="Name">
+                    <mat-header-cell *matHeaderCellDef>
+                        <div class="flex flex-row">
+                            <div class="flex flex-nosize mr10" mat-sort-header="first_name">
+                                First
+                            </div>
+                            <div class="flex flex-nosize" mat-sort-header="last_name">
+                                Last
+                            </div>
+                        </div>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <div class="ellipsis">{{element.first_name}}, {{ element.last_name}}</div>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- On-Duty Column -->
+                <ng-container matColumnDef="OnDuty">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header="alerts?.on_duty">On-Duty</mat-header-cell>
+                    <mat-cell mat-cell *matCellDef="let element">
+                        <div class="flex flex-row" [ngClass]="{grayout: !element.alerts?.on_duty}">
+                            <idr-icon icon="icon-circle" class="small flex-nosize pr5" [ngClass]="{ active: element.alerts?.on_duty }"></idr-icon>
+                            <div>{{ element.alerts?.on_duty ? 'On-Duty' : 'Off-Duty' }}</div>
+                        </div>
+
+                    </mat-cell>
+                </ng-container>
+
+                <!-- On-Call Column -->
+                <ng-container matColumnDef="OnCall">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef  mat-sort-header="alerts?.on_call">On-Call</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <idr-icon icon="icon-on-call" class="flex-nosize pr5" [ngClass]="{ active: element.alerts?.on_call }"></idr-icon>
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Video -->
+                <ng-container matColumnDef="Video">
+                    <mat-header-cell *matHeaderCellDef>Video</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <idr-icon icon="icon-video" class="flex-nosize pr5" [ngClass]="{ active: element.alerts?.on_video }"></idr-icon>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- Department -->
+                <ng-container matColumnDef="Department">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header="hospital_department_name">Department</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        {{ element.hospital_department_name }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Role -->
+                <ng-container matColumnDef="Role">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header="hospital_role_name">Role</mat-header-cell>
+                    <mat-cell *matCellDef="let element">{{ element.hospital_role_name }}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Actions">
+                    <mat-header-cell mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+
+                        <!-- MESSAGE action -->
+
+                        <idr-icon
+                            icon="icon-envelope"
+                            class="bordered flex-nosize mr10"
+                        >
+                        </idr-icon>
+
+                        <!-- PROVIDER action (Design Only)-->
+                        <!-- selectUser(element) -->
+                        <idr-icon
+                            (click)="showProfile(element)"
+                            icon="icon-edit"
+                            class="bordered flex-nosize mr10"
+                        >
+                        </idr-icon>
+
+                        <!-- REMOVE action -->
+
+                        <idr-icon
+                            icon="icon-trash"
+                            class="bordered flex-nosize mr10"
+                            (click)="deletePerson(element)"
+                        >
+                        </idr-icon>
+
+                        <!-- PERMISSION action (Undocumented) -->
+
+                        <idr-icon
+                            icon="icon-key"
+                            class="bordered flex-nosize mr10"
+                            (click)="setPermissions(element)"
+                        >
+                        </idr-icon>
+
+                        <!-- REORDER action -->
+                        <idr-icon
+                            icon="icon-menu"
+                            class="flex-nosize"
+                        ></idr-icon>
+
+                    </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+        </idr-col>
+
+    <!-- <idr-sortable-list
+        *ngIf="teamListSingle"
+        className="tableList"
+        typeName="stafflist"
+        searchHolder="Search team member"
+        [listTitle]="checkedTitle"
+        [keys]="['first_name', 'middle_name', 'last_name', 'hospital_department', 'hospital_role', 'title']"
+        [listData]="teamListSingle"
+        (chosedData)="selectUser($event)"
+        [myRole]="myRole"
+        [list_id]="editableListid"
+        [listHeader]="listHeaderSingle">
+        <div class="buttons">
+            <idr-default-btn class="green small wa" (click)="newMember()" *ngIf="myRole" >
+                <idr-icon icon="icon-plus"></idr-icon>
+                <span>New Team Member</span>
+            </idr-default-btn>
+            <idr-default-btn class="green small multyBtn wa" (click)="multipleUpload()" *ngIf="myRole">
+                <idr-icon icon="icon-plus"></idr-icon>
+                <span>Multiple Upload</span>
+            </idr-default-btn>
+            <idr-default-btn class="green small wa" *ngIf="editableListid && myRole" (click)="editList()">
+                <idr-icon icon='icon-edit'></idr-icon>
+                <span>Edit list</span>
+            </idr-default-btn>
+        </div>
+    </idr-sortable-list> -->
+
+    <!-- <div class='profile' [ngClass]="{'show': loadProfile}">
+        <idr-view-profile [myRole]="myRole"  (closeAll)="closeProfile($event)" [viewProfile]="selectedUser"></idr-view-profile>
+    </div> -->
+    <!-- <div class="overlay" *ngIf="loadProfile"></div> -->
+</div>
+<div class="spinner" *ngIf="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+</div>
+
+<mat-menu #staffListMenu class="template-menu">
+    <!-- *ngIf="chosenPatientListTitle == 'My Patients' || (editableListId && myRole)" (click)="editList()" -->
+    <ng-template matMenuContent let-element="context">
+        <div mat-menu-item>
+            <idr-button icon="icon-edit" (click)="editList(element)">Edit</idr-button>
+        </div>
+        <div mat-menu-item>
+            <idr-button icon="icon-trash">Delete</idr-button>
+        </div>
+    </ng-template>
+</mat-menu>

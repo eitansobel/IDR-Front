@@ -1,0 +1,41 @@
+.custom-icon-input {
+    max-width: 35px !important;
+    padding: 5px;
+    color: #b1b9c1;
+}
+
+:host {
+
+    > * {
+        display: flex;
+        border: solid 1px #C1C6C9;
+        border-radius: 5px;
+    }
+
+    > div {
+        input {
+            width: 100%;
+            padding: 8.5px 15px;
+            outline: none;
+            border: none;
+            background: #b2222200;
+            color: #637281 !important;
+        }
+    }
+
+    ::ng-deep {
+        idr-icon {
+            margin-right: 10px;
+            .mat-icon {
+                width: 18px;
+                height: 18px;
+                svg {
+                    path {
+                        fill: #b1b9c1;
+                    }
+                }
+            }
+        }
+    }
+}
+

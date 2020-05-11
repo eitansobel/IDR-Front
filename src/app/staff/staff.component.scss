@@ -1,0 +1,442 @@
+@import 'styles';
+
+:host {
+    @extend .flex, .flex-row;
+    position: relative;
+
+    .sidebar {
+        @extend .flex, .flex-nosize, .br;
+        width: 300px;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .toolbar {
+        padding: 15px;
+        border-bottom: $border-control;
+    }
+
+    ::ng-deep .ng-scrollbar.-horizontal {
+        background: rgba(0, 0, 0, 0.1);
+        visibility: hidden;
+        @include respond-to('extra-large') {
+            height: 3px;
+            visibility: visible;
+        }
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+        }
+    }
+}
+
+:host {
+    /*min-height: calc(100% - 61px);*/
+    @include respond-to('min-large') {
+        left: 0;
+
+        -webkit-transition: left 0.1s ease-in-out;
+        -moz-transition: left 0.1s ease-in-out;
+        -ms-transition: left 0.1s ease-in-out;
+        -o-transition: left 0.1s ease-in-out;
+        transition: left 0.1s ease-in-out;
+
+        &.slide {
+            left: 385px;
+        }
+
+        .leftColumn {
+            position: absolute;
+            height: 100%;
+            left: -385px;
+        }
+        .multyBtn {
+            display: none;
+        }
+    }
+}
+
+.listHeadling {
+    text-transform: uppercase;
+    color: $modal-text-color;
+    margin: 0;
+    font-size: $base-font-size;
+}
+
+.spinner {
+    margin: 100px auto;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin: -40px 0 0 -40px;
+    -webkit-animation: sk-rotate 2.0s infinite linear;
+    animation: sk-rotate 2.0s infinite linear;
+}
+
+.leftColumn {
+    @include respond-to('medium-large') {
+        min-width: 300px;
+    }
+    min-height: 100%;
+
+    ::ng-deep {
+        .searchContainer,
+        .searchContainer input {
+            width: 100%;
+        }
+    }
+}
+
+.dot1,
+.dot2 {
+    width: 60%;
+    height: 60%;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    background-color: $dull-blue;
+    border-radius: 100%;
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+    top: auto;
+    bottom: 0;
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+.flexContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    h3 {
+        margin-top: 10px;
+    }
+
+    idr-default-btn {
+        margin: 0;
+
+        ::ng-deep span {
+            margin: 0;
+        }
+
+        span {
+            padding: 0;
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    margin-left: 20px;
+
+    idr-default-btn {
+        margin-right: 15px;
+        @include respond-to('extra-large') {
+            margin-right: 5px;
+            ::ng-deep {
+                .btn.btn-small span {
+                    font-size: 13px;
+                }
+
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+}
+
+.usersInfo {
+    position: relative;
+    overflow: hidden;
+    /*height: 100%;*/
+
+    @include respond-to('min-large') {
+        ::ng-deep .searchContainer {
+            display: none;
+        }
+    }
+}
+
+.profile {
+    position: fixed;
+    top: 40px;
+    width: 90%;
+    height: calc(100% - 40px);
+    border-radius: 10px 0 0 0;
+    background: $white;
+    padding: 20px;
+    right: -100%;
+    transition: right 0.3s ease-out;
+    z-index: 3;
+
+    &.show {
+        right: 0;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.swipeIcon {
+    @include respond-to('min-large') {
+        display: block;
+    }
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    z-index: 2;
+
+    svg {
+        height: 20px;
+
+        path {
+            fill: $bombay;
+        }
+    }
+}
+
+@-webkit-keyframes sk-rotate {
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@keyframes sk-rotate {
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% {
+        -webkit-transform: scale(0.0)
+    }
+    50% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    }
+    50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+    }
+}
+
+:host {
+
+    // STAFF LIST
+
+    ::ng-deep {
+        .list {
+            @extend .flex, .plr15;
+            idr-button {
+                border: $border-control;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                height: 48px;
+                button {
+                    font-weight: 600;
+                    border: 0;
+                    box-shadow: none;
+                }
+                &.system {
+                    button {
+                        color: #1962F3;
+                    }
+                }
+                &.selected {
+                    border: 2px solid $dull-blue;
+                }
+            }
+        }
+    }
+
+    // STAFF TABLE
+
+    ::ng-deep {
+        // MAT-TABLE
+        .mat-header-row,
+        .mat-row {
+            min-height: 58px;
+            margin: 8px 0;
+            border: $border-control;
+            border-radius: $border-radius;
+            .mat-header-cell,
+            .mat-cell {
+                padding: 0 15px 0 0;
+                white-space: nowrap;
+                &:first-child {}
+            }
+
+            .mat-header-cell,
+            .mat-cell {
+                // Checkbox
+                &:nth-child(1) {
+                    @extend .flex-nosize;
+                    padding-left: 15px;
+                }
+                // First last
+                &:nth-child(2) {
+                    flex: 1;
+                    min-width: 200px;
+                }
+                // On-Duty
+                &:nth-child(3) {
+                    min-width: 120px;
+                }
+                // On-Call
+                &:nth-child(4) {
+                    min-width: 90px;
+                }
+                // Video
+                &:nth-child(5) {
+                    min-width: 90px;
+                }
+                // Department
+                &:nth-child(6) {
+                    min-width: 100px;
+                }
+                // Role
+                &:nth-child(7) {
+                    min-width: 100px;
+                }
+                // Actions
+                &:nth-child(8) {
+                    min-width: 220px;
+                    max-width: 220px;
+                    padding-right: 0;
+                    idr-icon {
+                        width: 30px;
+                        height: 30px;
+                        .mat-icon {
+                            width: 17px!important;
+                            height: 17px!important;
+                        }
+                        &:last-child {
+                            margin-left: 20px;
+                            flex: 0 0 auto;
+                        }
+                    }
+                }
+            }
+        }
+        .mat-row {
+            &:hover {
+                .mat-cell {
+                    color: #1962F3;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .mat-header-row {
+            .mat-sort-header-button {
+                font-family: $base-font-sans-serif;
+                font-size: $base-font-size;
+            }
+            padding: 0;
+            min-height: 38px;
+            border: 0;
+            border-radius: 0;
+        }
+    }
+
+    ::ng-deep {
+        .grayout {
+            color: #aaa;
+        }
+
+        .ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .mat-checkbox {
+            line-height: 0;
+            .mat-checkbox-frame {
+                border: solid 1px #C1C6C9;
+            }
+        }
+    }
+
+    // TODO: Refactor to @mixin
+    ::ng-deep {
+        .idr-icon {
+            &.active {
+                svg {
+                    circle,
+                    path {
+                        fill: $green;
+                    }
+                }
+            }
+            &:not(.small) {
+                .mat-icon {
+                    width: 20px;
+                    height: 20px;
+                    svg {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MAT-MENU
+::ng-deep {
+    .mat-menu-panel {
+        padding: 0;
+        &.template-menu {
+            border-radius: 5px;
+            padding: 0;
+            .mat-menu-content {
+                padding: 0px;
+                .mat-menu-item {
+                    idr-button{
+                        button {
+                            border: 0;
+                            box-shadow: none;
+                            > div {
+                                justify-content: flex-start!important;
+                            }
+                        }
+                    }
+                    @extend .flex, .jcc;
+                    border-bottom: 0;
+                    padding: 0;
+                    idr-icon {
+                        margin-right: 15px!important;
+                        mat-icon {
+                            margin-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

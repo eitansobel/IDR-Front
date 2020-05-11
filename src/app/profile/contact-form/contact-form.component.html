@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup" autocomplete="off">
+    <idr-row class="toolbar">
+        <h3>Contact information</h3>
+        <idr-row class="gap" style="flex: 0 0 auto" *ngIf="showControls">
+            <idr-button icon="icon-close" *ngIf="isEdit" (click)="isEdit = false">Cancel</idr-button>
+            <idr-button icon="icon-check" *ngIf="isEdit" (click)="submit()">Save</idr-button>
+            <idr-button icon="icon-edit" *ngIf="!isEdit" (click)="isEdit = !isEdit">Edit</idr-button>
+        </idr-row>
+    </idr-row>
+    <idr-row class="gap">
+        <idr-col>
+            <idr-input label="Phone" formControlName="phone" phoneMask [edit]="isEdit"></idr-input>
+            <idr-input label="Pager" formControlName="pager" phoneMask [edit]="isEdit"></idr-input>
+            <idr-input label="Cell" formControlName="cell" phoneMask [edit]="isEdit"></idr-input>
+        </idr-col>
+        <idr-col>
+            <idr-input label="Fax" formControlName="fax" phoneMask [edit]="isEdit"></idr-input>
+            <idr-input label="Email" formControlName="email" [edit]="isEdit"></idr-input>
+            <idr-input label="Preferred contact method" formControlName="preferred_mode" [edit]="isEdit"></idr-input>
+        </idr-col>
+    </idr-row>
+</form>

@@ -1,0 +1,17 @@
+<div class="header" *ngIf="header">
+    <h3>{{ header }}</h3>
+    <idr-icon icon="icon-close" (click)="closeDialog(false)"></idr-icon>
+</div>
+<div class="body">
+    {{ body }}
+</div>
+<div class="footer">
+    <idr-default-btn (click)="closeDialog(false)">
+        <idr-icon icon="icon-close"></idr-icon>
+        <span>No</span>
+    </idr-default-btn>
+    <idr-default-btn  class="green" (click)="closeDialog(true)">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>Yes</span>
+    </idr-default-btn>
+</div>

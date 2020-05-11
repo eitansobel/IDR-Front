@@ -1,0 +1,173 @@
+@import 'styles';
+
+:host {
+    @extend .flex,
+    .flex-row,
+    .aic;
+    padding: 0 15px;
+    position: relative;
+
+    &:hover {
+        cursor: pointer;
+
+        .removeChat {
+            // display: flex;
+        }
+    }
+
+    .message {}
+}
+
+.avatar {
+    @extend .flex,
+    .flex-nosize,
+    .aic,
+    .jcc;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #dee1e3;
+    margin-right: 20px;
+    color: #7c8083;
+    font-weight: 600;
+    position: relative;
+}
+
+.name {
+    color: black;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: $base-font-size + 1;
+    padding-right: 10px;
+}
+
+.time {
+    font-size: $base-font-size - 1;
+}
+
+.acronym {
+    text-transform: uppercase;
+}
+
+.badge {
+    background: $grey;
+    border-radius: 3px;
+    padding: 1px 5px;
+    margin-right: 5px;
+    color: #fff;
+    font-weight: 400;
+    font-size: $base-font-size - 3;
+    line-height: $base-font-size - 3;
+
+    &.active {
+        background: $green;
+    }
+}
+
+.subject {
+    font-size: $base-font-size;
+    font-weight: bold;
+    color: $denim;
+}
+
+
+.message {
+    font-size: $base-font-size + 1;
+    flex-basis: calc(100% - 65px);
+    width: calc(100% - 65px);
+    word-break: break-all;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        color: #90979c;
+        font-weight: 600;
+        margin-bottom: 2px;
+        font-size: $base-font-size + 1;
+    }
+
+    &:hover {
+        .time {
+            display: none;
+        }
+        .removeChat{
+            display: block!important;
+        }
+    }
+}
+
+
+
+
+.count {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    font-size: $base-font-size - 3;
+    border-radius: 4px;
+    display: flex;
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
+    background: #ced2d6;
+
+    &.urgency-5 {
+        background: #e9eef4;
+        color: $black;
+    }
+
+    &.urgency-4 {
+        background: $denim;
+        color: $white;
+    }
+
+    &.urgency-3 {
+        background: #f3d66f;
+        color: $white;
+    }
+
+    &.urgency-2 {
+        background: #eba11f;
+        color: $white;
+    }
+
+    &.urgency-1 {
+        background: $red;
+        color: $white;
+    }
+}
+
+.removeChat {
+    @include respond-to('min-large') {
+        display: flex;
+    }
+
+    padding: 2px 4px;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    align-items: center;
+    justify-content: center;
+    background: #f00;
+    cursor: pointer;
+    border-radius: 4px;
+    display: none;
+    line-height: 11px;
+
+    &:hover {
+        background: $denim;
+    }
+
+    &:after {
+        content: '\2716';
+        font-size: 8px;
+        color: $white;
+    }
+}
+
+.newIndicator {
+    color: #b1b6be;
+}

@@ -1,0 +1,493 @@
+@import 'styles';
+
+:host {
+    width: 100%;
+    display: block;
+
+    idr-modal-wrap {
+        display: block;
+        overflow: unset !important;
+        width: 100%;
+    }
+
+    div {
+        mat-dialog-content.mat-dialog-content {
+            overflow: unset !important;
+        }
+    }
+
+    ::ng-deep {
+
+        .cdk-focused
+        {
+            .mat-slide-toggle-persistent-ripple,
+            .mat-radio-persistent-ripple
+            {
+                opacity: 0!important;  // hide stuck overlay
+            }
+        }
+
+        idr-modal-wrap {
+            padding: 0;
+        }
+
+        // TODO: Promote no padding to global to match new designs
+
+        .header {
+            @extend .flex, .flex-row, .aic;
+            padding: 15px;
+            border-bottom: $border-control;
+
+            h3 {
+                @extend .flex;
+                margin: 0;
+            }
+        }
+
+        .body {
+            padding: 15px;
+
+            .mat-radio-button {
+                margin-right: 10px; // TODO: promote to global styles
+
+                label {
+                    @extend .flex,
+                    .flex-row,
+                    .flex-nosize,
+                    .aic;
+                    margin: 0 10px 0 0 !important;
+                    font-weight: normal !important;
+                }
+
+                .mat-radio-outer-circle {
+                    border-width: 1px !important;
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .mat-radio-inner-circle {
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .mat-radio-container {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+
+            .btn-small {
+                > div {
+                    width: auto;
+                    padding: 8px 10px;
+                    min-width: 100px;
+                    margin: 0;
+                    font-size: $base-font-size;
+                    span {
+                        @extend .flex, .flex-row, .aic, .jcc;
+                        //vertical-align: middle;
+                        i { position: relative; margin-right: 14px; line-height: 0; }
+                        span {
+
+                        }
+                    }
+                }
+                &.blue {
+                    > div {
+                        background: $selected-color;
+                        border-color: $selected-color;
+                        color: $white;
+                        ::ng-deep svg {
+                            path, rect {
+                                fill: $white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer {
+            @extend .flex,
+            .aic,
+            .jcc;
+            padding: 10px 15px;
+            border-top: $border-control;
+
+            idr-default-btn {
+                @extend .flex,
+                .flex-row;
+                min-width: 100%;
+                max-width: 100%;
+
+                .btn.btn-active {
+                    margin: 0;
+                }
+            }
+        }
+
+        hr {
+            border: 0;
+            border-bottom: $border-control;
+            margin: 15px 0 20px;
+        }
+
+        ::ng-deep {
+            .form-control {
+                // TODO: promote to global styles
+                width: 100%;
+                label {
+                    display: block;
+                    margin-bottom: 10px;
+                }
+
+                idr-default-btn {
+                    min-width: 47%;
+                    margin: 0;
+
+                    ::ng-deep span {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+
+        .subFolders {
+            @extend .flex;
+
+            .content {
+                margin-bottom: 15px;
+                h4 {
+                    margin-top: 0;
+                }
+
+                .rows {
+                    @extend .flex, .flex-row, .aic;
+                    margin-bottom: 10px;
+                    margin-right: 7px;
+                    .ng-select,
+                    .form-control {
+                        margin: 0!important;
+                    }
+                    > div:first-child {
+                        @extend .flex, .flex-row;
+                        > div:first-child {
+                            @extend .flex50p, .pr5;
+                        }
+                        > div:last-child {
+                            @extend .flex50p, .pl5;
+                        }
+                    };
+                    > div:last-child {
+                        @extend .flex, .flex-nosize, .pl5, .pr5;
+                        width: 33px;
+                    };
+                    // >div {
+                    //     @extend .flex;
+                    //     flex: 0 0 46%; //
+                    //     margin: 0;
+                    // }
+                    // >div:first-child {
+                    //     padding-right: 5px;
+                    //     padding-right: 5px;
+                    // }
+
+                    // >div:last-child {
+                    //     @extend .flex;
+                    //     flex: 0 0 30px;
+                    //     padding-left: 5px;
+                    // }
+                }
+
+                .ng-select {
+                    font-size: 13px;
+                }
+
+                // TOOD: Make it global
+            }
+        }
+        .action {
+            @extend .flex,
+            .aife;
+
+            idr-default-btn {
+                margin: 0 !important;
+
+                >.btn.btn-active.btn-small {
+                    margin: 0;
+                }
+            }
+        }
+
+        idr-server-error {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+
+    }
+
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+        width: 3px;
+
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+            width: 3px;
+        }
+    }
+}
+
+.title {
+    margin-bottom: 35px;
+    text-align: left;
+}
+
+.author {
+    font-size: 13px;
+    font-weight: 600;
+
+    p {
+        color: $bombay;
+    }
+}
+
+.mat-slide-toggle {
+
+    ::ng-deep .mat-slide-toggle-label {
+        position: relative;
+
+        .cdk-visually-hidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            outline: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .mat-slide-toggle-thumb {
+            width: 47.5px;
+            height: 30px;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+
+        .mat-slide-toggle-bar {
+            background-color: $dull-blue;
+            transition: all 80ms linear;
+            transition-property: background-color;
+            transition-delay: 50ms;
+            position: relative;
+            width: 100px;
+            height: 35px;
+
+        }
+
+        .mat-slide-toggle-thumb-container {
+            top: 2px;
+            transform: translate3d(3px, 0, 0);
+        }
+
+        .mat-slide-toggle-content {
+            position: absolute;
+            z-index: 3;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            width: 81px;
+            left: 9px;
+
+            .show {
+                color: #10161d;
+
+            }
+
+            .hide {
+                color: #fff;
+            }
+        }
+    }
+
+    &.mat-checked {
+        ::ng-deep .mat-slide-toggle-thumb-container {
+            transform: translate3d(49px, 0, 0);
+
+        }
+
+        ::ng-deep .mat-slide-toggle-label .mat-slide-toggle-bar {
+            background: #f8f7f7;
+        }
+
+        ::ng-deep .mat-slide-toggle-content {
+
+            .show {
+                color: #babfc4;
+            }
+
+            .hide {
+                color: #10161d;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+.requiredStar {
+    color: $red;
+}
+
+ng-select {
+    position: relative;
+    margin-bottom: 15px;
+
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+::ng-deep .ng-select .ng-select-container {
+    border: $border-control;
+    padding-left: 10px;
+
+    input {
+        padding-left: 10px;
+    }
+
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    text-align: left;
+}
+
+::ng-deep .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+// TODO: WARNING: Redundant styles, promote slider to global, see also "data-column-list.component.scss"
+
+.mat-slide-toggle {
+    height: 32px;
+
+    ::ng-deep .mat-slide-toggle-label {
+        position: relative;
+
+        .cdk-visually-hidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            outline: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .mat-slide-toggle-thumb {
+            width: 47.5px;
+            height: 26px;
+            border-radius: $border-radus;
+            background-color: #fafafa;
+            box-shadow: none;
+        }
+
+        .mat-slide-toggle-bar {
+            background-color: $selected-color;
+            transition: all 80ms linear;
+            transition-property: background-color;
+            transition-delay: 50ms;
+            position: relative;
+            width: 100px;
+            height: 32px;
+            border-radius: $border-radus;
+
+        }
+
+        .mat-slide-toggle-thumb-container {
+            top: 3px;
+            transform: translate3d(3px, 0, 0);
+        }
+
+        .mat-slide-toggle-content {
+            position: absolute;
+            z-index: 3;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            width: 77px;
+            left: 11px;
+            font-size: 12px;
+
+            .show {
+                color: #10161d;
+                border: none;
+            }
+
+            .hide {
+                color: #fff;
+            }
+        }
+    }
+
+    &.mat-checked {
+        ::ng-deep .mat-slide-toggle-thumb-container {
+            transform: translate3d(49px, 0, 0);
+            top: 2px;
+
+            .mat-slide-toggle-thumb {
+                border: solid 1px #ccc;
+            }
+        }
+
+        ::ng-deep .mat-slide-toggle-label .mat-slide-toggle-bar {
+            background: #f8f7f7;
+            border: solid 1px #ccc;
+        }
+
+        ::ng-deep .mat-slide-toggle-content {
+
+            .show {
+                color: #babfc4;
+            }
+
+            .hide {
+                color: #10161d;
+            }
+        }
+    }
+}

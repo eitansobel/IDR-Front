@@ -1,0 +1,329 @@
+@import 'styles';
+:host {
+
+    @include respond-to('min-large') {
+        height: calc(100vh - 167px);
+    }
+    height: calc(100vh - 100px);
+    display: flex;
+
+    .search {
+        border-bottom: $border-control;
+        padding: 17px;
+    }
+}
+
+.newMsg {
+    display: flex;
+    padding: 15px 20px 0;
+    margin-bottom: 0px;
+    margin-right: 8px;
+    flex-wrap: wrap;
+    position: relative;
+    background: rgba(21, 99, 215, 0.06);
+    hr {
+        flex-basis: 100%;
+        height: 0;
+        margin-top: 10px;
+        border: 0;
+        margin-bottom:0;
+        border-bottom: 1px solid #e4e4e4;
+    }
+}
+
+idr-search-control {
+    margin: 0 10px 30px 10px;
+    display: block;
+}
+
+.messagesHistory {
+    padding: 15px 0;
+    border-bottom: $border-control;
+
+    &.active {
+        background: rgba(21, 99, 215, 0.06);
+    }
+}
+
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    flex-basis: 45px;
+    border-radius: 50%;
+    background: #dee1e3;
+    margin-right: 20px;
+    color: #7c8083;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    position: relative;
+}
+
+.message {
+    font-size: $base-font-size;
+    flex-basis: calc(100% - 65px);
+    width: calc(100% - 65px);
+    word-break: break-all;
+    header {
+        display: flex;
+        justify-content: space-between;
+        color: #90979c;
+        font-weight: 600;
+        margin-bottom: 5px;
+        font-size: $base-font-size;
+    }
+}
+
+.chatLog {
+    border-right: $border;
+    overflow: hidden;
+    min-width: 300px;
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb  {
+            background: $dull-blue;
+        }
+    }
+}
+.chatRoom {
+    @include respond-to('min-large') {
+        max-width: 60%;
+        flex-basis: 60%;
+    }
+    flex-basis: 80%;
+    max-width: 77%;
+    display: flex;
+}
+
+#infinite-scroller {
+    height: 500px;
+    width: 700px;
+    border: 1px solid #f5ad7c;
+    overflow: scroll;
+    padding: 0;
+    list-style: none;
+}
+
+:host {
+    .second-column {
+        @extend .flex;
+        flex: 0 0 390px;
+        border-right: $border-control;
+        .toolbar {
+            @extend .flex, .flex-row, .flex-nosize, .aic;
+            padding: 15px;
+            border-bottom: $border-control;
+            h3 {
+                @extend .flex;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin: 0;
+            }
+            ::ng-deep {
+                idr-default-btn {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+:host {
+    @extend .flex;
+
+
+    .sub-folder {
+        @extend .flex, .jcc;
+        // TODO: Refactor to @mixin
+        .idr-icon {
+            &.active {
+                ::ng-deep {
+                    svg {
+                        circle,
+                        path {
+                            fill: $dull-blue;
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    ::ng-deep {
+        .mat-accordion {
+            .mat-expansion-panel {
+                border-radius: 0!important;
+                box-shadow: none!important;
+                &.mat-expanded {
+                    border-bottom: solid 1px $border-color;
+                    .mat-expansion-panel-header {
+                        border-bottom: 0!important;
+                        background: transparent!important;
+                        .mat-expansion-panel-header-title {
+                            font-weight: bold;
+                            color: #000;
+                        }
+                    }
+                }
+                &.active {
+                    background: rgba(21, 99, 215, 0.06);
+                }
+                .mat-expansion-panel-header {
+                    cursor: pointer;
+                    border-bottom: $border-control;
+                    padding: 0 0 0 15px;
+                    .mat-expansion-panel-header-title {
+                        @extend .flex, .flex-row, .aic;
+                        font-size: 13px;
+                        margin-right: 0;
+                        color: $text-color;
+                    }
+                    &.active {
+                        .mat-expansion-panel-header-title {
+                            font-weight: bold;
+                            color: #000;
+                        }
+                    }
+                }
+                .mat-expansion-panel-body {
+                    padding: 0 15px 10px;
+
+                    .message-body {
+                        margin-bottom: 10px;
+                        color: $text-color;
+                    }
+
+                    .message-footer {
+                        @extend .flex, .flex-row, .aic, .flex-nosize;
+                        idr-default-btn.btn-action {
+                            margin: 0 5px 0 0; width: unset;
+                            border-radius: 3px;
+                            > div {
+                                font-weight: normal;
+                                padding: 3px 10px;
+                                min-width: 0;
+                                margin: 0;
+                                width: auto;
+                                &:hover {
+                                    color: #fff;
+                                    svg {
+                                        path {
+                                            fill: white;
+                                        }
+                                    }
+                                }
+                            }
+                            &.blue {
+                                > div {
+                                    background: $dull-blue;
+                                    color: #fff;
+                                    svg {
+                                        path {
+                                            fill: white;
+                                        }
+                                    }
+                                }
+                            }
+                            &:last-child {
+                                margin: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .idr-icon {
+            &.orange {
+                svg path {
+                    fill: $orange!important;
+                }
+            }
+            &.blue {
+                svg path {
+                    fill: $dull-blue!important;
+                }
+            }
+        }
+
+        .icon {
+            @extend .flex, .flex-nosize, .aic, .jcc;
+            &.expired {
+                svg {
+                    path {
+                        fill: $red;
+                    }
+                }
+            }
+            &.active {
+                margin-right: 8px;
+                margin-bottom: 1px;
+                svg {
+                    path {
+                        fill: $dull-blue;
+                    }
+                }
+            }
+            &.inactive {
+                margin-right: 8px;
+                margin-bottom: 1px;
+                svg {
+                    path {
+                        fill: $new-gray;
+                    }
+                }
+            }
+            &.chevron-right {
+                margin: 0 5px 0 0;
+                svg {
+                    transform: rotate(90deg);
+                    path {
+                        fill: $new-gray;
+                    }
+                }
+            }
+            &.chevron-up {
+                margin: 0 5px 0 0;
+                svg {
+                    path {
+                        fill: $dull-blue;
+                    }
+                }
+            }
+            &.chevron-down {
+                margin: 0 5px 0 0;
+                svg {
+                    transform: rotate(180deg);
+                    path {
+                        fill: $new-gray;
+                    }
+                }
+            }
+        }
+
+        .badge {
+            background: $grey;
+            border-radius: 3px;
+            padding: 1px 5px;
+            margin-right: 5px;
+            color: #fff;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 16px;
+            &.active {
+                background: $green;
+            }
+        }
+
+    }
+}

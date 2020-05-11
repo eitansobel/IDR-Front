@@ -1,0 +1,8 @@
+@import 'styles';
+
+:host {
+    @extend .flex;
+    ::ng-deep rect {
+        fill: $modal-text-color;
+    }
+}

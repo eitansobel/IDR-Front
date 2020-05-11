@@ -1,0 +1,29 @@
+@import 'styles';
+
+:host {
+    width: 28px;
+    height: 28px;
+    border-radius: 4px;
+    // box-shadow: 0px 2px 13.4px 0.6px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+
+    ::ng-deep svg {
+        width: 14px;
+        height: 14px;
+        path {
+            fill: $modal-text-color;
+        }
+    }
+
+    // &:hover {
+    //     ::ng-deep svg {
+    //         path {
+    //             fill: $danger-color;
+    //         }
+    //     }
+    // }
+}

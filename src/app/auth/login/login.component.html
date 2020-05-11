@@ -1,0 +1,47 @@
+<idr-modal-wrap hasIconDecor="true">
+
+    <div logoIcon class="logoIcon">
+        <idr-icon *ngIf="!lock" icon="icon-login-logo" class="icon-login-logo"></idr-icon>
+        <idr-icon *ngIf="lock" icon="icon-lock-logo" class="icon-lock-logo"></idr-icon>
+    </div>
+
+    <span class="headline" *ngIf="lock">Lock screen</span>
+
+    <h2 *ngIf="!lock" class="headline log-in-title">Log In</h2>
+
+    <form (keyup.enter)="login($event)" (ngSubmit)="login($event)" novalidate #formDir="ngForm" [formGroup]="form">
+
+        <idr-input-text class="new-input-style" [hasError]="form.get('username').invalid && formSubmitted"
+            formControlName="username" placeholder='Username' [control]="form.get('username')">
+        </idr-input-text>
+
+        <idr-input-pass class="new-input-style" [hasError]="form.get('password').invalid && formSubmitted"
+            formControlName="password" placeholder='Password' [control]="form.get('password')">
+        </idr-input-pass>
+
+        <div class="textRight">
+            <a [routerLink]="['/auth/forgot-pass']" class="defaultLink">Forgot password</a>
+        </div>
+
+        <idr-default-btn class="green mb10" (onClick)=login($event)>
+            <idr-icon icon="icon-login" class="flex-nosize"></idr-icon>
+            <span class="flex">
+                Log In
+            </span>
+        </idr-default-btn>
+        <idr-default-btn *ngIf="!lock" [routerLink]="['/auth/registration']">
+            <idr-icon icon="icon-add-user" class="flex-nosize"></idr-icon>
+            <span class="flex">
+                Create New Account
+            </span>
+        </idr-default-btn>
+        <idr-default-btn *ngIf="lock" type="link" (click)="safeMode()">
+            <idr-icon icon="icon-add-user" class="flex-nosize"></idr-icon>
+            <span class="flex">
+                New user
+            </span>
+        </idr-default-btn>
+
+        <idr-server-error [message]="message"></idr-server-error>
+    </form>
+</idr-modal-wrap>

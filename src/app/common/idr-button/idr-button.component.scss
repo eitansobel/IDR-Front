@@ -1,0 +1,144 @@
+@import 'styles';
+
+:host {
+    @extend .flex, .flex-nosize;
+    button {
+        @extend .flex,
+        .flex-row,
+        .aic;
+        font-size: 14px;
+        font-weight: 400;
+        background: transparent;
+        color: #000;
+        border: solid 1px #ececec;
+        box-shadow: 0 5px 10px #fafafa;
+        padding: 10px 15px;
+        border-radius: 5px;
+        outline: none;
+
+        ::ng-deep {
+            .mat-icon {
+                width: 19px;
+                height: 19px;
+            }
+        }
+
+        > *:not(:last-child) {
+            margin-right: 10px;
+        }
+
+        &[disabled] {
+            pointer-events: none;
+            background: #eee !important;
+            color: #777 !important;
+            border: solid 1px #ccc;
+            ::ng-deep {
+                svg {
+                    path {
+                        fill: #777!important;
+                    }
+                }
+            }
+        }
+
+        idr-icon {
+            @extend .flex, .flex-nosize;
+        }
+    }
+
+    &.light-blue {
+        button {
+            background: #E4EEFE;
+        }
+    }
+
+    &.blue {
+        button {
+            background: #1962F3;
+            color: white;
+            ::ng-deep {
+                svg path {
+                    fill: white;
+                }
+            }
+        }
+    }
+
+    &.tac {
+        button {
+            > div {
+                @extend .jcc;
+            }
+        }
+    }
+
+    &.green {
+        button {
+            background: #0BC899;
+            color: white;
+            ::ng-deep {
+                svg path {
+                    fill: white;
+                }
+            }
+        }
+    }
+
+    &.capsule {
+        button {
+            border-radius: 20px;
+        }
+    }
+
+    &.text-large {
+        button>div {
+            font-size: 17px;
+            font-weight: normal;
+        }
+    }
+
+    &.stretch {
+        @extend .flex;
+        button {
+            text-align: center;
+            >div {
+                @extend .jcc;
+                margin-right: 15px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &.w50p {
+        @extend .flex;
+        width: 50%;
+        button {
+            text-align: center;
+            >div {
+                @extend .jcc;
+                margin-right: 15px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    &.icon-red {
+        ::ng-deep {
+            svg {
+                path {
+                    fill: #FE403A;
+                }
+            }
+        }
+    }
+
+    &.icon-blue {
+        ::ng-deep {
+            svg {
+                path {
+                    fill: #1962F3;
+                }
+            }
+        }
+    }
+}

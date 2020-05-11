@@ -1,0 +1,114 @@
+@import '../dialogOverview/dialog-overview.component.scss';
+
+:host {
+    mat-dialog-content.mat-dialog-content {
+        overflow: unset !important;
+    }
+
+    .header,
+    .body,
+    .footer {
+        padding: 15px;
+    }
+
+    .header {
+        @extend .flex, .flex-row, .aic;
+        border-bottom: $border-control;
+        h3 {
+            @extend .flex;
+            margin: 0;
+        }
+        .idr-icon {
+            @extend .flex-nosize;
+        }
+    }
+
+    .body {
+        @extend .flex, .aic, .jcc;
+        padding: 15px;
+    }
+
+    .footer {
+        @extend .flex, .flex-row, .flex-nosize, .aic;
+        border-top: $border-control;
+        idr-default-btn {
+            @extend .flex;
+            width: auto;
+            margin: 0;
+            margin-right: 15px;
+            &:last-child { margin-right: 0px; }
+        }
+    }
+}
+
+
+label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    padding-top: 3px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: $base-font-size + 1;
+    font-weight: 600;
+    text-align: left;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 3px;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        border-radius: 3px;
+        background-color: $white;
+        border: $border;
+
+        &:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 5px;
+            top: 0px;
+            width: 7px;
+            height: 13px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    }
+
+    &:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+    &:hover input:disabled ~ .checkmark {
+        background-color: #fff;
+        cursor: default;
+    }
+    &:hover input:disabled:checked ~ .checkmark {
+         background-color: $caribbean-green;
+        border-color: $caribbean-green;
+    }
+
+    input:checked ~ .checkmark {
+        background-color: $caribbean-green;
+        border-color: $caribbean-green;
+    }
+
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+}
+

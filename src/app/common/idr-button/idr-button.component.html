@@ -1,0 +1,6 @@
+<button class="flex flex-row aic" [disabled]="disabled" (click)="onClick($event)">
+    <idr-icon [icon]="icon" class="flex flex-nosize" *ngIf="icon"></idr-icon>
+    <div class="flex flex-row aic jcc">
+        <ng-content></ng-content>
+    </div>
+</button>

@@ -1,0 +1,37 @@
+<form [formGroup]="formGroup" autocomplete="off">
+    <idr-row class="toolbar">
+        <h3>Additional information</h3>
+        <idr-row class="gap" style="flex: 0 0 auto" *ngIf="showControls">
+            <idr-button icon="icon-close" *ngIf="isEdit" (click)="isEdit = false">Cancel</idr-button>
+            <idr-button icon="icon-check" *ngIf="isEdit" (click)="submit()">Save</idr-button>
+            <idr-button icon="icon-edit" *ngIf="!isEdit" (click)="isEdit = !isEdit">Edit</idr-button>
+        </idr-row>
+    </idr-row>
+    <idr-row class="gap aifs">
+        <idr-col>
+            <!-- <idr-input label="Hospital Role" formControlName="hospital_role" [edit]="isEdit"></idr-input> -->
+            <idr-select label="Hospital" formControlName="hospital" [items]="hospitals$ | async" (modelChanged)="hospitalChanged($event)" [edit]="isEdit"></idr-select>
+            <idr-select label="Department" formControlName="hospital_department" [items]="departments" [edit]="isEdit"></idr-select>
+            <idr-select label="Role" formControlName="hospital_role" [items]="roles" [edit]="isEdit"></idr-select>
+
+            <!-- <mat-select formControlName="hospital_department" placeholder="Department">
+                <mat-option  *ngFor="let department of departments"  [value]="department.id">
+                    {{department.title}}
+                </mat-option>
+            </mat-select>
+            <mat-select formControlName="hospital_role" placeholder="Role">
+                <mat-option  *ngFor="let role of roles"  [value]="role.id">
+                    {{role.title}}
+                </mat-option>
+            </mat-select> -->
+            <!-- <idr-input label="Hospital" formControlName="hospital" [edit]="isEdit"></idr-input> -->
+            <!-- <idr-input label="Hospital Department" formControlName="hospital_department" [edit]="isEdit"></idr-input> -->
+            <idr-input label="State License #" formControlName="state_license" [edit]="isEdit"></idr-input>
+        </idr-col>
+        <idr-col>
+            <idr-input label="DEA #" formControlName="dea_number" [edit]="isEdit"></idr-input>
+            <idr-input label="User ID #" formControlName="user_id" [edit]="isEdit"></idr-input>
+            <idr-input label="NPI #" formControlName="npi_number" [edit]="isEdit"></idr-input>
+        </idr-col>
+    </idr-row>
+</form>

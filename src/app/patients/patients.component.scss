@@ -1,0 +1,277 @@
+@import '../staff/staff.component.scss';
+@import 'styles';
+
+:host {
+    @extend .flex, .flex-row;
+    position: relative;
+
+    .sidebar {
+        @extend .flex, .flex-nosize, .br;
+        width: 300px;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+    .toolbar {
+        padding: 15px;
+        border-bottom: $border-control;
+    }
+
+
+    ::ng-deep {
+        // MAT-TABLE
+        .mat-header-row,
+        .mat-row {
+            min-height: 58px;
+            margin: 8px 0;
+            border: $border-control;
+            border-radius: $border-radius;
+            .mat-header-cell,
+            .mat-cell {
+                padding: 0 15px 0 0;
+                white-space: nowrap;
+                &:first-child {}
+            }
+
+            .mat-header-cell,
+            .mat-cell {
+                // Checkbox
+                &:nth-child(1) {
+                    @extend .flex-nosize;
+                    padding-left: 15px;
+                }
+                // First last
+                &:nth-child(2) {
+                    flex: 1;
+                    min-width: 125px;
+                }
+                // DOB
+                &:nth-child(3) {
+                    min-width: 90px;
+                }
+                // Age
+                &:nth-child(4) {
+                    min-width: 80px;
+                }
+                // MRN
+                &:nth-child(5) {
+                    min-width: 90px;
+                }
+                // VISIBILITY
+                &:nth-child(6) {
+                    min-width: 130px;
+                    flex: 0;
+                }
+                // ACTIONS
+                &:nth-child(7) {
+                    min-width: 150px;
+                    max-width: 150px;
+                    padding-right: 0;
+                    idr-icon {
+                        width: 30px;
+                        height: 30px;
+                        .mat-icon {
+                            width: 17px!important;
+                            height: 17px!important;
+                        }
+                        &:last-child {
+                            margin-left: 20px;
+                            flex: 0 0 auto;
+                        }
+                    }
+                }
+            }
+        }
+        .mat-row {
+            &:hover {
+                .mat-cell {
+                    color: #1962F3;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .mat-header-row {
+            .mat-sort-header-button {
+                font-family: $base-font-sans-serif;
+                font-size: $base-font-size;
+            }
+            padding: 0;
+            min-height: 38px;
+            border: 0;
+            border-radius: 0;
+        }
+    }
+
+    table {
+        ::ng-deep {
+            idr-default-btn {
+                padding: 2px 0;
+                > div {
+                    padding: 15px 15px;
+                    .idr-icon {
+                        margin: 0;
+                    }
+                }
+                &:active {
+
+                }
+            }
+        }
+    }
+    ::ng-deep {
+        .list {
+            @extend .flex, .plr15;
+            idr-button {
+                border: $border-control;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                height: 48px;
+                button {
+                    font-weight: 600;
+                }
+                &:nth-child(1),
+                &:nth-child(2){
+                    button {
+                        color: #1962F3;
+                    }
+                }
+                &.selected {
+                    border: 2px solid $dull-blue;
+                }
+            }
+        }
+
+        // CHECKBOX
+        .mat-checkbox {
+            line-height: 0;
+            .mat-checkbox-frame {
+                border: solid 1px #C1C6C9;
+            }
+        }
+
+        // SLIDE
+        .mat-slide-toggle {
+            .mat-slide-toggle-ripple {
+                display: none;
+            }
+            .mat-slide-toggle-label {
+                position: relative;
+
+                .cdk-visually-hidden {
+                    border: 0;
+                    clip: rect(0 0 0 0);
+                    height: 1px;
+                    margin: -1px;
+                    overflow: hidden;
+                    padding: 0;
+                    position: absolute;
+                    width: 1px;
+                    outline: 0;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                }
+
+                .mat-slide-toggle-thumb {
+                    width: 47.5px;
+                    height: 26px;
+                    border-radius: $border-radus;
+                    background-color: #fafafa;
+                    box-shadow: none;
+                }
+
+                .mat-slide-toggle-bar {
+                    background-color: $selected-color;
+                    transition: all 80ms linear;
+                    transition-property: background-color;
+                    transition-delay: 50ms;
+                    position: relative;
+                    width: 100px;
+                    height: 32px;
+                    border-radius: $border-radus;
+
+                }
+
+                .mat-slide-toggle-thumb-container {
+                    top: 3px;
+                    transform: translate3d(3px, 0, 0);
+                }
+
+                .mat-slide-toggle-content {
+                    position: absolute;
+                    z-index: 3;
+                    font-weight: 600;
+                    display: flex;
+                    justify-content: space-between;
+                    width: 77px;
+                    left: 11px;
+                    font-size: 12px;
+
+                    .show {
+                        color: #10161d;
+                        border: none;
+                    }
+
+                    .hide {
+                        color: #fff;
+                    }
+                }
+            }
+
+            &.mat-checked {
+                ::ng-deep .mat-slide-toggle-thumb-container {
+                    transform: translate3d(49px, 0, 0);
+                    top: 2px;
+
+                    .mat-slide-toggle-thumb {
+                        border: solid 1px #ccc;
+                    }
+                }
+
+                ::ng-deep .mat-slide-toggle-label .mat-slide-toggle-bar {
+                    background: #f8f7f7;
+                    border: solid 1px #ccc;
+                }
+
+                ::ng-deep .mat-slide-toggle-content {
+
+                    .show {
+                        color: #babfc4;
+                    }
+
+                    .hide {
+                        color: #10161d;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MAT-MENU
+::ng-deep {
+    .mat-menu-panel {
+        padding: 0;
+        &.template-menu {
+            border-radius: 5px;
+            padding: 0;
+            .mat-menu-content {
+                padding: 0px;
+                .mat-menu-item {
+                    @extend .flex, .jcc;
+                    border-bottom: 0;
+                    padding: 0;
+                    idr-icon {
+                        margin-right: 15px!important;
+                        mat-icon {
+                            margin-right: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

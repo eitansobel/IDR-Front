@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>message</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24" rx="2"></rect>
+        <filter x="-29.2%" y="-20.8%" width="158.3%" height="158.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M16.8057899,16 L13.1508646,12.8672069 L12.5206331,13.4074053 C12.2210413,13.6641982 11.7789587,13.6641982 11.4793669,13.4074053 L11.0666667,13.0536622 L7.62927259,16 L16.8057899,16 Z M17.6,14.573427 L17.6,9.05366222 L14.3801372,11.8135446 L17.6,14.573427 Z M6.4,14.9463378 L9.83739407,12 L6.4,9.05366222 L6.4,14.9463378 Z M16.3707274,8 L7.62927259,8 L12,11.7463378 L16.3707274,8 Z M6.4,6.4 L17.6,6.4 C18.4836556,6.4 19.2,7.1163444 19.2,8 L19.2,16 C19.2,16.8836556 18.4836556,17.6 17.6,17.6 L6.4,17.6 C5.5163444,17.6 4.8,16.8836556 4.8,16 L4.8,8 C4.8,7.1163444 5.5163444,6.4 6.4,6.4 Z" id="path-3"></path>
+    </defs>
+    <g id="message" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle" fill-rule="nonzero">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <rect stroke="#E1E1E1" stroke-width="1" stroke-linejoin="square" fill="#FFFFFF" fill-rule="evenodd" x="0.5" y="0.5" width="23" height="23" rx="2"></rect>
+        </g>
+        <mask id="mask-4" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#D0021B" fill-rule="nonzero" xlink:href="#path-3"></use>
+        <g id="colors" mask="url(#mask-4)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="gray" fill="#C1C6C9">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

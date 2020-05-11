@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>facetime</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24" rx="2"></rect>
+        <filter x="-41.7%" y="-33.3%" width="183.3%" height="183.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M19.6516851,6.34675343 C19.5743165,6.31555875 19.4999189,6.29989574 19.4284296,6.29989574 C19.2676881,6.29989574 19.1339037,6.35939548 19.0266697,6.47806659 L15.4284374,10.2469086 L15.4284374,8.70004679 C15.4284374,7.95620158 15.1769427,7.32035562 14.6739532,6.79218054 C14.1709325,6.26407112 13.5654312,6 12.8569491,6 L6.57136323,6 C5.86310002,6 5.25741113,6.26407112 4.75435912,6.79218054 C4.25149474,7.32035562 4,7.95620158 4,8.70004679 L4,15.3000517 C4,16.0438313 4.25149474,16.6796444 4.75439039,17.2077866 C5.2574424,17.7359289 5.86313129,18 6.57139451,18 L12.8570116,18 C13.5654625,18 14.170995,17.7359289 14.6740157,17.2077866 C15.1770052,16.6796444 15.4284999,16.0438641 15.4284999,15.3000517 L15.4284999,13.7437002 L19.0267323,17.5219006 C19.1339662,17.6405388 19.2677507,17.7000057 19.4284921,17.7000057 C19.4999814,17.7000057 19.5743791,17.6843756 19.6517477,17.6532466 C19.8840097,17.5469548 20,17.3626436 20,17.1001486 L20,6.9000156 C19.9999062,6.63738928 19.8839159,6.45304517 19.6516851,6.34675343 Z" id="path-3"></path>
+    </defs>
+    <g id="facetime" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle" fill-rule="nonzero">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <rect stroke="#E1E1E1" stroke-width="1" stroke-linejoin="square" fill="#FFFFFF" fill-rule="evenodd" x="0.5" y="0.5" width="23" height="23" rx="2"></rect>
+        </g>
+        <mask id="mask-4" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <use id="Path" fill="#000000" xlink:href="#path-3"></use>
+        <g id="colors" mask="url(#mask-4)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="gray" fill="#C1C6C9">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

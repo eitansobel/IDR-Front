@@ -1,0 +1,37 @@
+input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.download-btn {
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.clip-item {
+    i {
+        display: none;
+        font-size: 24px !important;
+    }
+}
+
+.clip-item:hover {
+    opacity: 0.8;
+    i {
+        display: block;
+        top: 0;
+        right: 0;
+        cursor: pointer;
+    }
+}
+
+:host /deep/ {
+    display: flex;
+
+    div.mat-button { height: 47px; border-radius: 47px; display: flex; align-items: center; color: white;  }
+    div.mat-button:hover { opacity: 0.8; }
+}

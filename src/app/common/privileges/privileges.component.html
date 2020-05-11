@@ -1,0 +1,19 @@
+<div class="header" *ngIf="headerText">
+    <h3>{{ headerText }}</h3>
+    <idr-icon icon="icon-close" (click)="closeDialog(false)"></idr-icon>
+</div>
+<div class="body">
+    <div class="form-group">
+        <div *ngFor="let option of options">
+            <label>
+                <input type="checkbox" name="options" [disabled]="data.canChanged" value="{{option.value}}" [(ngModel)]="option.checked" />
+                <span class="checkmark"></span>
+                {{option.name}}
+            </label>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <idr-default-btn *ngIf="!data.canChanged" className="default" (click)="closeDialog()"><span>Cancel</span></idr-default-btn>
+    <idr-default-btn className="active" *ngIf="!data.canChanged" (click)="save()"><span>Update</span></idr-default-btn>
+</div>

@@ -1,0 +1,174 @@
+@import 'styles';
+
+:host {
+    display: block;
+    text-align: center;
+    padding-top: 50px;
+}
+
+idr-modal-wrap {
+    width: 630px;
+}
+
+label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.alertsActiveItem {
+    position: relative;
+
+    label {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        font-weight: 600;
+        z-index: 1001;
+    }
+    &.control-half {
+        height: 55px;
+    }
+
+}
+
+.alertsActiveItem ng-select {
+    ::ng-deep .ng-select-container {
+        padding-left: 65px;
+        border: 1px solid #c1c6c9;
+    }
+
+    ::ng-deep input {
+        padding-left: 65px !important;
+    }
+}
+
+.alertsList {
+    margin-top: 20px;
+    margin-bottom: 15px;
+
+}
+
+.option {
+    color: $bombay;
+}
+
+::ng-deep ng-dropdown-panel {
+    text-align: left;
+}
+
+::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items .ng-option.ng-option-disabled {
+    display: none !important;
+}
+
+.back {
+    position: absolute;
+    top: #{($icon-decor-padding + $icon-decor-border + $icon-decor-margin-top + 50px + 18px) / 2 + $modal-wrap-padding};
+    idr-arrow-svg {
+        height: 18px;
+        margin-right: 3px;
+    }
+    display: flex;
+    align-items: center;
+    color: $new-gray;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+    cursor: pointer;
+
+    ::ng-deep svg {
+        width: 18px;
+        path {
+            fill: $modal-text-color;
+        }
+        // polyline {
+        //     stroke: $denim;
+        // }
+    }
+    p {
+        margin: 0;
+    }
+}
+
+.headline {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 27px;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.green-checkbox {
+    &.duty-off {
+        display: block;
+        text-align: left;
+        margin-bottom: 25px;
+    }
+    &::ng-deep {
+        & input::placeholder {
+            color: $new-gray;
+            font-size: 13px;
+            line-height: 18px;
+        }
+        .cdk-visually-hidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+            outline: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        .mat-checkbox-inner-container {
+            width: 16px;
+            height: 16px;
+            svg {
+                // height: 100%;
+                // width: 14px;
+                // margin: auto;
+                path {
+                    stroke: $caribbean-green!important;
+                }
+            }
+
+            .mat-checkbox-frame {
+                border-width: 1px;
+                border-color: #dadada;
+                border-radius: 3px;
+                background: white;
+            }
+            .mat-checkbox-background {
+                background-color: unset;
+            }
+        }
+    }
+}
+
+.work-group {
+    text-align: left;
+    .main-wg-checkbox {
+        width: 100%;
+    }
+    .wg-checkbox {
+        width: 33%;
+        display: inline-block;
+        padding: 10px 25px;
+    }
+
+}
+
+.unread-messages {
+    display: flex;
+    justify-content: center;
+    color: $red-1;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 18px;
+    idr-envelope-svg {
+        margin-right: 5px;
+    }
+}

@@ -1,0 +1,31 @@
+<div class="flex" [ngClass]="{edit: edit}">
+    <label *ngIf="label">{{ label }}</label>
+    <div class="input-container">
+
+        <input
+            [attr.type]="type"
+            [(ngModel)]="value"
+            (ngModelChange)="onModelChange($event)"
+            [ngClass]="{ disabled: !edit}"
+            [placeholder]="placeholder"
+            [readonly]="!edit"
+            autocomplete="false"
+        >
+
+        <idr-icon
+            icon="icon-exclamation-outline"
+            *ngIf="formControlName && !isValid() && edit"
+            [matTooltip]="listOfErrors()[0] || ''"
+            matTooltipClass="tooltip-red"
+            [matTooltipDisabled]="!edit"
+        >
+        </idr-icon>
+        <!--
+                <div *ngIf="formControlName">
+                <ul *ngIf="!isValid()">
+                    <li *ngFor="let error of listOfErrors()">{{error | json}}</li>
+                </ul>
+            </div>
+        -->
+    </div>
+</div>

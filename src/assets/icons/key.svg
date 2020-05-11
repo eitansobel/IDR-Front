@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>key</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M4.28576294,4.35714553 C4.28576294,2.50564454 5.79140748,1 7.64290847,1 C9.49440946,1 11.000054,2.50564454 11.000054,4.35714553 C11.000054,6.20864652 9.49440946,7.71429106 7.64290847,7.71429106 C6.85059777,7.71429106 6.09369893,7.43492139 5.49285012,6.93109611 L4.31679719,8.10714904 L5.26556645,9.0559183 C5.53065009,9.32100194 5.53065009,9.75044167 5.26556645,10.0155253 C5.13786669,10.1432251 4.96541736,10.2142934 4.78576294,10.2142934 C4.60610852,10.2142934 4.43365919,10.1432251 4.30595943,10.0155253 L3.35719017,9.06675606 L2.53108123,9.892865 L3.47985049,10.8416343 C3.74493413,11.1067179 3.74493413,11.5361576 3.47985049,11.8012413 C3.35215074,11.928941 3.1797014,12.0000094 3.00004698,12.0000094 C2.82039256,12.0000094 2.64794323,11.928941 2.52024347,11.8012413 L1.57147422,10.852472 L1.15841975,11.2655265 C1.03071999,11.3932262 0.858270657,11.4642946 0.678616239,11.4642946 C0.498961821,11.4642946 0.326512485,11.3932262 0.19881273,11.2655265 C-0.0662709099,11.0004428 -0.0662709099,10.5710031 0.19881273,10.3059195 L4.64273603,5.86199616 C4.40841749,5.39677883 4.28576294,4.88359306 4.28576294,4.35714553 Z M7.64290847,6.35714787 C8.74533881,6.35714787 9.64291081,5.45957587 9.64291081,4.35714553 C9.64291081,3.25471519 8.74533881,2.35714319 7.64290847,2.35714319 C6.54047813,2.35714319 5.64290613,3.25471519 5.64290613,4.35714553 C5.64290613,5.45957587 6.54047813,6.35714787 7.64290847,6.35714787 Z" id="path-1"></path>
+    </defs>
+    <g id="key" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Bounds" points="0 0 12 0 12 12 0 12"></polygon>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#979797" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="colors" mask="url(#mask-2)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="gray" fill="#000000">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+        </g>
+        <g id="colors" mask="url(#mask-2)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+            <g id="gray" fill="#000000">
+                <rect x="0" y="0" width="12" height="12"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

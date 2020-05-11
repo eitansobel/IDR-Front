@@ -1,0 +1,27 @@
+<form [formGroup]="formGroup" autocomplete="off">
+    <idr-row class="toolbar">
+        <h3>Personal Information</h3>
+        <idr-row class="gap" style="flex: 0 0 auto" *ngIf="showControls">
+            <idr-button icon="icon-close" *ngIf="isEdit" (click)="isEdit = false">Cancel</idr-button>
+            <idr-button icon="icon-check" class="blue" *ngIf="isEdit" (click)="submit()">Save</idr-button>
+            <idr-button icon="icon-edit" *ngIf="!isEdit" (click)="isEdit = !isEdit">Edit</idr-button>
+        </idr-row>
+    </idr-row>
+    <idr-row class="gap">
+        <idr-col class="jcfs">
+            <idr-input label="First name" formControlName="first_name" [edit]="isEdit"></idr-input>
+            <idr-input label="Last name" formControlName="last_name" [edit]="isEdit"></idr-input>
+            <idr-input label="Middle name" formControlName="middle_name" [edit]="isEdit"></idr-input>
+            <idr-input label="Preferred name" formControlName="preferred_name" [edit]="isEdit"></idr-input>
+        </idr-col>
+        <idr-col>
+            <idr-input label="Job" formControlName="title" [edit]="isEdit"></idr-input>
+            <idr-input label="Prefix" formControlName="prefix" [edit]="isEdit"></idr-input>
+            <idr-input label="Suffix" formControlName="suffix" [edit]="isEdit"></idr-input>
+            <!-- <idr-input label="DOB" formControlName="birthday" [edit]="isEdit" placeholder="YYYY-MM-DD"></idr-input> -->
+            <idr-date-picker label="DOB" formControlName="birthday" [edit]="isEdit">
+            </idr-date-picker>
+
+        </idr-col>
+    </idr-row>
+</form>

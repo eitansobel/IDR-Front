@@ -1,0 +1,118 @@
+<div class="header">
+    <h3 class="title flex">{{ headerText }}</h3>
+    <div class="flex-nosize">
+        <idr-icon icon="icon-close" class="flex-nosize" (click)="close()"></idr-icon>
+    </div>
+</div>
+
+<div class="body flex rel">
+    <form [formGroup]="form" class="form flex rel" style="min-height: 300px" novalidate>
+        <div class="pa fill">
+            <perfect-scrollbar class="ps-show-always">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <idr-input-text (control)="form.get('first_name')" formControlName="first_name"
+                                    placeholder="Enter First Name"></idr-input-text>
+                            </th>
+                            <th>
+                                <idr-input-text (control)="form.get('last_name')" formControlName="last_name"
+                                    placeholder="Enter Last Name"></idr-input-text>
+                            </th>
+                            <th>
+                                <idr-input-text (control)="form.get('role')" formControlName="role"
+                                    placeholder="Role"></idr-input-text>
+                            </th>
+                            <th>
+                                <idr-input-text (control)="form.get('wg')" formControlName="wg"
+                                    placeholder="WG"></idr-input-text>
+                            </th>
+                            <th>
+                                <div>
+                                    <mat-checkbox formControlName="onDuty">
+                                        On-Duty
+                                    </mat-checkbox>
+                                </div>
+                            </th>
+                            <th>
+                                <div>
+                                    <mat-checkbox formControlName="onCall">
+                                        On-Call
+                                    </mat-checkbox>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <div (click)="sort(0)">
+                                    <span>First Name</span>
+                                    <idr-icon icon="icon-sort" [ngClass]="{'flipY': sortDirection == 1}">icon-sort</idr-icon>
+                                </div>
+                            </th>
+                            <th>
+                                <div (click)="sort(1)">
+                                    <span>Last Name</span>
+                                    <idr-icon icon="icon-sort" [ngClass]="{'flipY': sortDirection == 1}">icon-sort</idr-icon>
+                                </div>
+                            </th>
+                            <th>
+                                <div (click)="sort(3)">
+                                    <span>Select Role</span>
+                                    <idr-icon icon="icon-sort" [ngClass]="{'flipY': sortDirection == 1}">icon-sort</idr-icon>
+                                </div>
+                            </th>
+                            <th>
+                                <div (click)="sort(4)">
+                                    <span>WG</span>
+                                    <idr-icon icon="icon-sort" [ngClass]="{'flipY': sortDirection == 1}"></idr-icon>
+                                </div>
+                            </th>
+                            <th>
+                                <div (click)="sort(5)">
+                                    <span>On-Duty</span>
+                                    <idr-icon icon="icon-sort" [ngClass]="{'flipY': sortDirection == 1}"></idr-icon>
+                                </div>
+                            </th>
+                            <th>
+                                <div (click)="sort(6)">
+                                    <span>On-Call</span>
+                                    <idr-icon icon="icon-sort" [ngClass]="{'flipY': sortDirection == 1}"></idr-icon>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let person of people$ | async" (click)="selectedPatient = person"
+                            [ngClass]="{'active': selectedPatient == person}">
+                            <td>
+                                {{ person.first_name }}
+                            </td>
+                            <td>
+                                {{ person.last_name }}
+                            </td>
+                            <td>
+                                {{ person.role }}
+                            </td>
+                            <td>
+                                {{ person.wg }}
+                            </td>
+                            <td>
+                                {{ person.onDuty }}
+                            </td>
+                            <td>
+                                {{ person.onCall }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </perfect-scrollbar>
+        </div>
+    </form>
+</div>
+<div class="footer">
+    <idr-default-btn class="green" (click)="ok()">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>Add Patient</span>
+    </idr-default-btn>
+</div>

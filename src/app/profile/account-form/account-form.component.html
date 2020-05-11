@@ -1,0 +1,19 @@
+<form [formGroup]="formGroup" autocomplete="off">
+    <idr-row class="toolbar">
+        <h3>Account Information</h3>
+        <idr-row class="gap" style="flex: 0 0 auto" *ngIf="showControls">
+            <idr-button icon="icon-close" *ngIf="isEdit" (click)="isEdit = false">Cancel</idr-button>
+            <idr-button icon="icon-check" *ngIf="isEdit" (click)="submit()">Save</idr-button>
+            <idr-button icon="icon-edit" *ngIf="!isEdit" (click)="isEdit = !isEdit">Edit</idr-button>
+        </idr-row>
+    </idr-row>
+    <idr-row class="gap">
+        <idr-col class="asfs">
+            <idr-input label="Username" formControlName="username" [edit]="isEdit"></idr-input>
+        </idr-col>
+        <idr-col>
+            <idr-input type="password" label="Password" formControlName="password" [edit]="isEdit"></idr-input>
+            <idr-input type="password" label="Confirm Password" formControlName="confirm_password" [edit]="isEdit"></idr-input>
+        </idr-col>
+    </idr-row>
+</form>

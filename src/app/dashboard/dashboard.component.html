@@ -1,0 +1,79 @@
+<div class="dashboardWrap">
+    <aside>
+        <nav>
+            <ul class="topNav">
+                <li>
+                    <!-- resizable separator from 0px to 20px -->
+                </li>
+                <!-- TODO: REFACTOR: Register svg icons with Material instead of inline approach -->
+                <li routerLinkActive="active" [routerLink]="['/dashboard/home']" *ngIf="is_approved">
+                    <span class="navIcon">
+                        <idr-icon icon="icon-home"></idr-icon>
+                    </span>
+                    Home
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/messages']" *ngIf="is_approved">
+                    <span class="navIcon">
+                        <idr-icon icon="icon-messages"></idr-icon>
+                    </span>
+                    Messages
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/data-columns']" *ngIf="is_approved">
+                    <span class="navIcon">
+                        <idr-icon icon="icon-updates"></idr-icon>
+                    </span>
+                    Updates
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/patients']" *ngIf="is_approved">
+                    <span class="navIcon">
+                        <idr-icon icon="icon-patients"></idr-icon>
+                    </span>
+                    Patients
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/staff']" *ngIf="is_approved">
+                    <span class="navIcon">
+                        <idr-icon icon="icon-stethoscope"></idr-icon>
+                    </span>
+                    Providers
+                </li>
+            <!-- </ul>
+            <ul class="bottomNav"> -->
+                <li class="separator">
+
+                </li>
+                <li routerLinkActive="active" [routerLink]="['/dashboard/profile']" [ngClass]="{'non_approved': !is_approved}">
+                    <span class="navIcon">
+                        <idr-icon icon="icon-profile"></idr-icon>
+                    </span>
+                    Profile
+                </li>
+                <li [ngClass]="{'non_approved': !is_approved}">
+                    <mat-icon mat-list-icon svgIcon="icon-gear" class="list-item-icon grey-icon"></mat-icon>
+                    Settings
+                </li>
+                <li (click)="logout()"> <!-- [ngClass]="{'non_approved': !is_approved}" -->
+                    <span class="navIcon">
+                        <idr-icon icon="icon-logout"></idr-icon>
+                    </span>
+                    Log Out
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <div class="contentWrap">
+        <header class="header">
+            <div class="headerLeftSide">
+                <div class="avatar"
+                    [ngStyle]="{'background-image': 'url(' + avatar + ')', 'background-size': backSize}">
+                </div>
+
+                <h3>{{firstName }} {{lastName}} <span>| {{role}}</span></h3>
+            </div>
+            <div class="currentTime">
+                {{currentTime}}
+            </div>
+            <div class="status"></div>
+        </header>
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+
+<div class="flex" [ngClass]="{edit: edit}">
+    <label *ngIf="label">{{ label }}</label>
+    <div class="input-container">
+        <idr-row class="gap">
+            <idr-select
+                class="flex"
+                style="min-width: 75px"
+                placeholder="MM"
+                [items]="months"
+                [(ngModel)]="dateModel.month"
+                (modelChanged)="monthChanged($event)"
+                [edit]="edit"
+                >
+            </idr-select>
+            <idr-select
+                class="flex"
+                placeholder="DD"
+                [items]="days"
+                [(ngModel)]="dateModel.day"
+                (modelChanged)="dayChanged($event)"
+                [edit]="edit"
+                >
+            </idr-select>
+            <idr-select
+                class="flex"
+                placeholder="YYYY"
+                [items]="years"
+                [(ngModel)]="dateModel.year"
+                (modelChanged)="yearChanged($event)"
+                [edit]="edit"
+                >
+            </idr-select>
+        </idr-row>
+    </div>
+</div>

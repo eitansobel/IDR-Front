@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>unarchive</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="24" height="24" rx="2"></rect>
+        <filter x="-29.2%" y="-20.8%" width="158.3%" height="158.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M17,9.42833435 L17,18.1666667 C17,19.1791887 16.1045695,20 15,20 L9,20 C7.8954305,20 7,19.1791887 7,18.1666667 L7,10 C7,9.44771525 7.44771525,9 8,9 C8.55228475,9 9,9.44771525 9,10 L9,18.1666667 L15,18.1666667 L15,9 C15,8.92653204 15.0079227,8.85491451 15.0229603,8.78595519 L6.52111842,6.02353932 C5.99586441,5.85287395 5.70841352,5.28871982 5.87907889,4.76346581 C6.04974427,4.2382118 6.61389839,3.95076092 7.13915241,4.12142629 L9.99232195,5.04847728 L10.4043446,3.78040192 C10.7214618,2.80441572 11.8330349,2.4921745 12.821486,2.81334171 L14.723599,3.4313757 C15.71205,3.75254292 16.4278009,4.65851768 16.1106837,5.63450389 L15.6986611,6.90257924 L18.5518306,7.82963022 C19.0770846,8.0002956 19.3645355,8.56444972 19.1938701,9.08970374 C19.0232047,9.61495775 18.4590506,9.90240863 17.9337966,9.73174326 L17,9.42833435 Z M11.894435,5.66651126 L13.796548,6.28454525 L14.105565,5.33348874 L12.203452,4.71545475 L11.894435,5.66651126 Z" id="path-3"></path>
+    </defs>
+    <g id="unarchive" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Rectangle" fill-rule="nonzero">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <rect stroke="#E1E1E1" stroke-width="1" stroke-linejoin="square" fill="#FFFFFF" fill-rule="evenodd" x="0.5" y="0.5" width="23" height="23" rx="2"></rect>
+        </g>
+        <mask id="mask-4" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#C1C6C9" fill-rule="nonzero" xlink:href="#path-3"></use>
+        <g id="colors" mask="url(#mask-4)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+            <g id="gray" fill="#C1C6C9">
+                <rect x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

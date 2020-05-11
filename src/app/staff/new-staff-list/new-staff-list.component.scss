@@ -1,0 +1,644 @@
+@import 'styles';
+h4 {
+    font-size: $base-font-size + 2;
+}
+.form-control {
+    margin-bottom: 10px;
+}
+
+.header {
+    border-bottom: $border;
+    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+
+    idr-default-btn {
+        margin-left: 15px;
+
+        ::ng-deep span {
+            margin-bottom: 0;
+            svg {
+                width: 14px;
+                height: 17px;
+                vertical-align: middle;
+                margin-right: 10px;
+
+                path {
+                    fill: $bombay;
+                }
+            }
+        }
+
+        ::ng-deep  .btn-small {
+            ::ng-deep svg {
+                height: 14px!important;
+            }
+        }
+    }
+}
+
+.headline {
+    font-weight: 600;
+}
+
+.list-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.asterisk {
+    color: $red;
+    position: absolute;
+    right: 10px;
+    top: 13px;
+}
+
+.list-group-item {
+    text-align: left;
+    flex-basis: 48%;
+    margin-bottom: 10px;
+}
+
+:host {
+    display: block;
+    width: 100%;
+
+    idr-modal-wrap {
+        display: block;
+    }
+
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+mat-dialog-content {
+    padding: 0px 20px;
+}
+
+.table {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    line-height: 1.5;
+    height: 50vh;
+    font-size: $base-font-size;
+    padding-top: 35px;
+    margin-bottom: 20px;
+
+    & + idr-default-btn {
+        ::ng-deep span {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.columnList {
+    position: relative;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: solid 1.5px  $border;
+    cursor: pointer;
+
+    &.header {
+        border: solid 1px transparent;
+        color: #aaa;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: $white;
+        z-index: 4;
+        padding: 0 5px;
+        margin-bottom: 0;
+
+        .rowItem {
+            @extend .flex, .flex-row;
+            color: #555!important;
+            white-space: nowrap;
+            font-size: 14px!important;
+            padding: 5px 10px!important;
+            &:first-child {
+                @extend .flex-nosize;
+                max-width: 40px;
+                text-align: center;
+            }
+            &:last-child {
+                @extend .flex-nosize;
+                width: 100px;
+                padding-left: 0;
+            }
+        }
+        ::ng-deep .mat-checkbox-input {
+            opacity: 0;
+        }
+        ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+            background: $dull-blue;
+        }
+    }
+
+
+    ::ng-deep  .mat-pseudo-checkbox {
+        border-color: #cbcbcb;
+
+        &.mat-pseudo-checkbox-checked {
+            background: $dull-blue;
+            &:after {
+                border-color: $white;
+                top: 6px;
+                left: 4px;
+            }
+        }
+    }
+
+    &Item {
+        flex-flow: row nowrap;
+        flex-basis: 0;
+        padding: 19px 10px;
+        word-break: break-word;
+        color: $grey;
+        flex-grow: 1;
+        font-weight: 600;
+
+        &.active {
+            ::ng-deep  svg {
+                width: 15px;
+
+                polyline {
+                    stroke: $dull-blue;
+                }
+            }
+        }
+
+        &.asc {
+            ::ng-deep  svg {
+                transform: rotate(180deg);
+                margin-top: 3px;
+            }
+        }
+
+    }
+}
+
+.listBody {
+    margin-top: 0px;
+    padding-right: 20px;
+}
+
+.rowList {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-dialog-content {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0;
+    flex-wrap: wrap;
+
+    .columnList {
+        flex-grow: 1;
+        max-width: 48%;
+        overflow: hidden;
+    }
+}
+
+:host {
+    ::ng-deep .mat-list-item-content-reverse {
+        flex-direction: row!important;
+    }
+
+    ::ng-deep .mat-list-text {
+        margin-left: 20px;
+        flex-flow: row nowrap!important;
+        width: 100%;
+        .rowItem {
+            color: #666;
+        }
+        @include respond-to('min-large') {
+            .rowItem:first-child {
+                flex-grow: 2;
+            }
+        }
+    }
+}
+
+idr-arrow-svg {
+    margin-left: 5px;
+
+    ::ng-deep svg {
+        width: 15px;
+        vertical-align: middle;
+        line-height: 18px;
+
+        polyline {
+            stroke: $grey;
+        }
+    }
+}
+
+.searchContainer {
+    position: relative;
+    width: 100%;
+
+    input{
+        @include placeholder{
+            color: $bombay;
+            -webkit-text-fill-color: $bombay;
+        }
+        min-width: 277px;
+        width: 100%;
+        border: $border-control;
+
+        font-size: $base-font-size;
+        border-radius: 5px;
+        padding: 11px 15px 11px 20px;
+        font-family: $base-font-sans-serif;
+        font-weight: 600;
+        color: $black;
+        -webkit-text-fill-color: $black;
+
+        &:focus{
+            outline: none;
+        }
+    }
+
+    .searchIcon {
+        position: absolute;
+        right: 9px;
+        top: 9px;
+
+        ::ng-deep svg {
+            width: 15px;
+
+            path {
+                fill: $bombay;
+            }
+        }
+    }
+}
+
+.columnTitle {
+    color: $bombay;
+    font-size: $base-font-size + 1;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.desc {
+    color: $bombay;
+    font-size: $base-font-size - 1;
+    font-weight: 600;
+}
+
+mat-checkbox {
+    cursor: pointer;
+}
+
+:host {
+    ::ng-deep .ng-scrollbar.-vertical {
+        @include respond-to('min-large') {
+            width: 3px;
+        }
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb  {
+            background: $dull-blue;
+        }
+    }
+}
+
+.successWrap {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    background: $white;
+    border: $border;
+    border-radius: 4px;
+    height: 0;
+    overflow: hidden;
+    -webkit-animation: slide 1s ease-out;
+    animation: slide 1s ease-out;
+
+
+    .successMessage {
+        color: $caribbean-green;
+        margin-bottom: 15px;
+    }
+    idr-server-error{
+        text-align: center;
+    }
+
+    .errorMessage {
+        color: $red;
+
+        ::ng-deep span {
+            display: block;
+            width: 100%;
+            text-align: center;
+            text-transform: capitalize;
+        }
+    }
+}
+@-webkit-keyframes slide {
+    0% {height: 0;  padding: 0;}
+    50% {height: auto;  padding: 40px 0;}
+    100% {
+        height: 0;
+        padding:  0;
+    }
+}
+@keyframes slide {
+    0% {height: 0;  padding: 0;}
+    50% {height: auto;  padding: 40px 0;}
+    100% {
+        height: 0;
+        padding:  0;
+    }
+}
+
+:host {
+    ::ng-deep {
+        .cdk-focused {
+
+            .mat-slide-toggle-persistent-ripple,
+            .mat-radio-persistent-ripple {
+                opacity: 0 !important; // hide stuck overlay
+            }
+        }
+
+        idr-modal-wrap {
+            padding: 0;
+        }
+
+        // TODO: Promote no padding to global to match new designs
+
+        .header {
+            @extend .flex,
+            .flex-row,
+            .aic;
+            padding: 15px;
+            border-bottom: $border-control;
+
+            h3 {
+                @extend .flex;
+                margin: 0;
+            }
+        }
+
+        .body {
+            padding: 15px;
+
+            .form-control {
+                @extend .flex;
+                margin-bottom: 14px;
+                > label {
+                    margin-bottom: 8px;
+                }
+                &.row { @extend .flex-row }
+
+                textarea,
+                idr-input-text input {
+                    border: solid 1px #ccc;
+                    padding: 8px;
+                }
+
+                .group {
+                    @extend .flex;
+                    &.row {
+                        @extend .flex-row;
+                        mat-checkbox { margin-right: 10px;}
+                    }
+                }
+                idr-default-btn {
+                    margin: 0;
+                }
+
+                .form-control {
+                    margin: 0;
+                }
+            }
+
+            hr {
+                border: 0;
+                border-bottom: $border-control;
+                margin: 15px 0 20px;
+            }
+
+            textarea {
+                resize: none;
+                width: 100%;
+                margin: 0;
+                border-radius: 3px;
+                height: 115px;
+                border: $border-control;
+            }
+
+            .mat-checkbox {
+                font-weight: normal;
+                .mat-checkbox-frame { border: solid 1px #ccc; }
+                &.custom-icon {
+                    .mat-checkbox-inner-container { display: none; }
+                    .mat-checkbox-layout .mat-checkbox-label {
+                        color: $text-color;
+                    }
+                    .idr-icon { margin-right: 5px;
+                        &.active {
+                            svg path {
+                                fill: $orange;
+                            }
+                        }
+                    }
+                }
+            }
+
+            idr-default-btn.upload {
+                max-width: unset;
+                background: $gray;
+                box-shadow: none;
+                > * {
+                    box-shadow: none;
+                }
+                > div {
+                    padding: 8px 17px;
+                    border: $border-control;
+                }
+            }
+
+            .mat-radio-button {
+                margin-right: 10px; // TODO: promote to global styles
+
+                label {
+                    @extend .flex,
+                    .flex-row,
+                    .flex-nosize,
+                    .aic;
+                    margin: 0 10px 0 0 !important;
+                    font-weight: normal !important;
+                }
+
+                .mat-radio-outer-circle {
+                    border-width: 1px !important;
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .mat-radio-inner-circle {
+                    width: 18px;
+                    height: 18px;
+                }
+
+                .mat-radio-container {
+                    width: 18px;
+                    height: 18px;
+                }
+            }
+
+            .btn-small {
+                >div {
+                    width: auto;
+                    padding: 8px 10px;
+                    min-width: 100px;
+                    margin: 0;
+                    font-size: $base-font-size;
+
+                    span {
+                        @extend .flex,
+                        .flex-row,
+                        .aic,
+                        .jcc;
+
+                        //vertical-align: middle;
+                        i {
+                            position: relative;
+                            margin-right: 14px;
+                            line-height: 0;
+                        }
+
+                        span {}
+                    }
+                }
+
+                &.blue {
+                    >div {
+                        background: $selected-color;
+                        border-color: $selected-color;
+                        color: $white;
+
+                        ::ng-deep svg {
+
+                            path,
+                            rect {
+                                fill: $white;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .autocomplete-control {
+                @extend .flex, .flex-row;
+                position: relative;
+
+                .ng-placeholder {
+                    //line-height: 30px;
+                }
+
+                label {
+                    position: absolute;
+                    top: 9px;
+                    left: 10px;
+                    font-weight: 600;
+                    z-index: 1001;
+                    color: #888;
+                }
+
+                > div {
+                    @extend .flex;
+                    .ng-select {
+                        margin: 0;
+                    }
+                    &:last-child {
+                        @extend .flex-nosize;
+                    }
+
+                    ng-select {
+                        ::ng-deep .ng-select-container {
+                            padding-left: 25px;
+                            border: 1px solid #c1c6c9;
+                        }
+
+                        ::ng-deep input {
+                            padding: 0 0 0 25px !important;
+                            line-height: 22px;
+                        }
+                    }
+
+                    idr-default-btn.link {
+                        margin: 0;
+                        border: 0;
+                        box-shadow: none;
+                        > div {
+                            padding: 10px;
+                        }
+                        > span {
+                            padding: 0;
+                        }
+                        idr-icon {
+                            margin: 0;
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer {
+            @extend .flex, .flex-row,
+            .aic,
+            .jcc;
+            padding: 10px 15px;
+            border-top: $border-control;
+
+            idr-default-btn {
+                @extend .flex, .flex-row;
+                max-width: 100%;
+                margin: 0;
+                .btn.btn-active {
+                    margin: 0;
+                }
+            }
+        }
+
+        .mat-pseudo-checkbox {
+            border: solid 1px #ccc!important;
+            &:after {
+                top: 4px!important;
+                left: 2px!important;
+            }
+        }
+    }
+}

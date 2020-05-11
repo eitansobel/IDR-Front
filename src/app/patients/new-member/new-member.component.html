@@ -1,0 +1,636 @@
+<form class="form" novalidate [formGroup]="patient">
+    <div class="header">
+        <h3 class="title flex">New Patient</h3>
+        <div class="flex flex-row flex-nosize">
+            <idr-icon icon="icon-close" class="flex-nosize" (click)="closeDialog()"></idr-icon>
+        </div>
+    </div>
+    <div class="body">
+            <div class="formWrap">
+                <h4>Patient information</h4>
+                <div class='flexSpread'>
+                    <div class='control-half'>
+                        <label>First Name <span class='requiredStar'>*</span></label>
+                        <idr-input-text [hasError]="patient.get('first_name').invalid && formSubmitted"
+                            formControlName='first_name' placeholder='First Name' [control]="patient.get('first_name')">
+                        </idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Sex <span class='requiredStar'>*</span></label>
+                        <ng-select [items]='sex' [selectOnTab]='true' bindLabel='label' bindValue='value'
+                            placeholder='Sex' [ngClass]="{'hasError': patient.get('sex').invalid && formSubmitted}"
+                            formControlName="sex">
+                        </ng-select>
+                        <idr-validation-message *ngIf="formSubmitted" [control]="patient.get('sex')">
+                        </idr-validation-message>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Last Name <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="patient.get('last_name').invalid && formSubmitted"
+                            formControlName="last_name" placeholder='Last Name' [control]="patient.get('last_name')">
+                        </idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Prefix</label>
+                        <idr-input-text [hasError]="patient.get('prefix').invalid && formSubmitted"
+                            formControlName="prefix" placeholder='Prefix' [control]="patient.get('prefix')">
+                        </idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Middle Name</label>
+                        <idr-input-text [hasError]="patient.get('middle_name').invalid && formSubmitted"
+                            formControlName="middle_name" placeholder='Middle Name'
+                            [control]="patient.get('middle_name')"></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Suffix</label>
+                        <idr-input-text [hasError]="patient.get('suffix').invalid && formSubmitted"
+                            formControlName="suffix" placeholder='Suffix' [control]="patient.get('suffix')">
+                        </idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Preferred Name</label>
+                        <idr-input-text [hasError]="patient.get('preferred_name').invalid && formSubmitted"
+                            formControlName="preferred_name" placeholder='Preferred Name'
+                            [control]="patient.get('preferred_name')"></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Date of Birth <span class="requiredStar">*</span></label>
+                        <idr-date-select [date]="this.patient.get('birth_date').value" formControlName="birth_date">
+                        </idr-date-select>
+                        <idr-validation-message *ngIf="formSubmitted" [control]="patient.get('birth_date')">
+                        </idr-validation-message>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Previous Last Name</label>
+                        <idr-input-text [hasError]="patient.get('previous_last_name').invalid && formSubmitted"
+                            formControlName="previous_last_name" placeholder='Previous Last Name'
+                            [control]="patient.get('previous_last_name')"></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Preferred Language</label>
+                        <idr-input-text [hasError]="patient.get('preferred_language').invalid && formSubmitted"
+                            formControlName="preferred_language" placeholder='Preferred Language'
+                            [control]="patient.get('preferred_language')"></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Mother's Maiden Name</label>
+                        <idr-input-text [hasError]="patient.get('mother_maiden_name').invalid && formSubmitted"
+                            formControlName="mother_maiden_name" placeholder="Mother's Maiden Name"
+                            [control]="patient.get('mother_maiden_name')"></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Ethnicity/Race</label>
+                        <idr-input-text [hasError]="patient.get('ethnicity').invalid && formSubmitted"
+                            formControlName="ethnicity" placeholder='Ethnicity/Race'
+                            [control]="patient.get('ethnicity')"></idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>MRN <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="patient.get('mrn').invalid && formSubmitted" formControlName="mrn"
+                            placeholder='MRN' [control]="patient.get('mrn')"></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Home Phone <span class="hint">At least one phone number required *</span></label>
+
+                        <div class='form-control phoneMask'
+                            [ngClass]="{'hasError' : (patient.get('mobile_phone').invalid || (patient.get('work_phone').invalid && patient.get('home_phone').invalid)) && formSubmitted}">
+                            <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="home_phone">
+                            <idr-validation-message
+                                *ngIf="(patient.get('mobile_phone').invalid || (patient.get('work_phone').invalid && patient.get('home_phone').invalid)) && formSubmitted"
+                                [control]="patient.get('home_phone')"></idr-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Mobile Phone</label>
+                        <div class='form-control phoneMask'
+                            [ngClass]="{'hasError' :(patient.get('mobile_phone').invalid || (patient.get('work_phone').invalid && patient.get('home_phone').invalid))  && formSubmitted}">
+                            <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="mobile_phone">
+                            <idr-validation-message
+                                *ngIf="(patient.get('mobile_phone').invalid || (patient.get('work_phone').invalid && patient.get('home_phone').invalid))  && formSubmitted"
+                                [control]="patient.get('mobile_phone')"></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-half'>
+                        <label>Work Phone</label>
+                        <div class='form-control phoneMask'
+                            [ngClass]="{'hasError' :(patient.get('mobile_phone').invalid || (patient.get('work_phone').invalid && patient.get('home_phone').invalid))  && formSubmitted}">
+                            <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="work_phone">
+                            <idr-validation-message
+                                *ngIf="(patient.get('mobile_phone').invalid || (patient.get('work_phone').invalid && patient.get('home_phone').invalid))  && formSubmitted"
+                                [control]="patient.get('work_phone')"></idr-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Email <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="patient.get('email').invalid  && formSubmitted"
+                            formControlName="email" placeholder='Email' [control]="patient.get('email')">
+                        </idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Preferred Communications Method <span class="requiredStar">*</span></label>
+                        <ng-select [items]="preferred_mode" [selectOnTab]="true" bindLabel="label" bindValue="value"
+                            placeholder="Preferred Communications Method"
+                            [ngClass]="{'hasError': patient.get('preferred_communication').invalid && formSubmitted}"
+                            formControlName="preferred_communication">
+                        </ng-select>
+                        <idr-validation-message *ngIf="formSubmitted"
+                            [control]="patient.get('preferred_communication')"></idr-validation-message>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Address Line 1 <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="patient.get('address1').invalid && formSubmitted"
+                            formControlName="address1" placeholder='Address Line 1' [control]="patient.get('address1')">
+                        </idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Address Line 2</label>
+                        <idr-input-text [hasError]="patient.get('address2').invalid && formSubmitted"
+                            formControlName="address2" placeholder='Address Line 2' [control]="patient.get('address2')">
+                        </idr-input-text>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Address Line 3</label>
+                        <idr-input-text [hasError]="patient.get('address3').invalid && formSubmitted"
+                            formControlName="address3" placeholder='Address Line 3' [control]="patient.get('address3')">
+                        </idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Preferred Pharmacy</label>
+                        <idr-input-text [hasError]="patient.get('preferred_pharmacy').invalid && formSubmitted"
+                            formControlName="preferred_pharmacy" placeholder='Preferred Pharmacy'
+                            [control]="patient.get('preferred_pharmacy')"></idr-input-text>
+                    </div>
+                </div>
+                <idr-country-contacts formControlName="state" #state [formSubmitted]="formSubmitted"
+                    [stateChoosed]="patient.get('country').value">
+                    <div class="country">
+                        <label>Country <span class="requiredStar">*</span></label>
+                        <ng-select [items]="country" [selectOnTab]="true" bindLabel="name" bindValue="name"
+                            placeholder="Country" (change)="onChangeCountry($event, state)"
+                            [ngClass]="{'hasError': patient.get('country').invalid && formSubmitted}"
+                            formControlName="country">
+                        </ng-select>
+                        <idr-validation-message *ngIf="formSubmitted" [control]="patient.get('country')">
+                        </idr-validation-message>
+                    </div>
+                    <div class="city">
+                        <label>City <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="patient.get('city').invalid && formSubmitted" formControlName="city"
+                            placeholder='City' [control]="patient.get('city')"></idr-input-text>
+                    </div>
+                    <div class="zip">
+                        <label>Zip Code <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="patient.get('zip_code').invalid && formSubmitted"
+                            formControlName="zip_code" placeholder='Zip Code' [control]="patient.get('zip_code')">
+                        </idr-input-text>
+                    </div>
+                </idr-country-contacts>
+                <div class="flexSpread">
+                    <div class='control-third'>
+                        <label>SSN <span class="requiredStar">*</span></label>
+                        <div class='form-control phoneMask'
+                            [ngClass]="{'hasError' : patient.get('ssn').invalid && formSubmitted}">
+                            <input placeholder="XXX-XXX-XXXX" ssnMask formControlName="ssn">
+                            <idr-validation-message *ngIf="patient.get('ssn').invalid && formSubmitted"
+                                [control]="patient.get('ssn')"></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-third'>
+                        <label>PCP</label>
+                        <idr-input-text [hasError]="patient.get('pcp').invalid && formSubmitted" formControlName="pcp"
+                            placeholder='PCP' [control]="patient.get('pcp')"></idr-input-text>
+                    </div>
+                    <div class='control-third'>
+                        <label>Room</label>
+                        <idr-input-text [hasError]="patient.get('room').invalid && formSubmitted" formControlName="room"
+                            [readonly]="personalEdit" [control]="patient.get('room')"></idr-input-text>
+                    </div>
+                </div>
+                <div class="importWrap">
+                    <ng4-files-drop (filesSelect)="filesSelect($event)" class="dragDrop">
+                        <ng4-files-click (filesSelect)="filesSelect($event)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+                                <path fill="#C6C8CB" fill-rule="evenodd"
+                                    d="M42 44.001H2A2 2 0 0 1 .001 42V27.001a2 2 0 1 1 3.999 0V40h35.999V27.001a2 2 0 0 1 4 0V42A2 2 0 0 1 42 44.001zM35.001 17a1.99 1.99 0 0 1-1.415-.586l-9.585-9.585V32a2 2 0 0 1-4 0V6.828l-9.587 9.586a2 2 0 1 1-2.828-2.828l13-13c.001-.002.004-.002.006-.004.184-.183.403-.329.646-.429.012-.005.024-.007.035-.011.226-.089.469-.141.726-.141L22 0c.258 0 .502.053.729.142l.031.01c.247.102.469.25.655.435l12.999 12.999A1.998 1.998 0 0 1 35.001 17z" />
+                            </svg>{{filename}}
+                        </ng4-files-click>
+                    </ng4-files-drop>
+                    <idr-default-btn className="default" *ngIf="showCancel" (click)="cancelImport()"><span>Cancel</span>
+                    </idr-default-btn>
+                    <idr-default-btn *ngIf="showClear" className="default" (click)="clearForm()"><span>Clear</span>
+                    </idr-default-btn>
+                    <idr-default-btn className="active" (click)="importData()"><span>Import</span></idr-default-btn>
+                </div>
+                <p class="csvError" *ngIf="csvError">X {{csvErrorText}} </p>
+            </div>
+            <div class="formWrap" formArrayName="emergency_contacts">
+                <h4>Emergency Contact <span (click)="addNewEmContact()" class="createNewIcon">&#43;</span>
+                </h4>
+                <div class="formDynamicWrap" *ngFor="let item of getEmergencyContacts(); let i=index"
+                    [formGroupName]="i">
+                    <div class="titleRemoveButtonBlock">
+                        <h2>Emergency Contact #{{i+1}}</h2>
+                        <span (click)="removeNewEmContact(i)" class="removeNewIcon">&minus;</span>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>First Name <span class="requiredStar">*</span></label>
+                            <idr-input-text formControlName="first_name" placeholder="First Name">
+                            </idr-input-text>
+                            <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.first_name.invalid && formSubmitted" -->
+                            <!-- [control]="patient.get('emergency_contacts').value[i]?.controls?.first_name" -->
+                        </div>
+                        <div class='control-half'>
+                            <label>Address Line 1</label>
+                            <idr-input-text formControlName="address1" placeholder='Address Line 1'>
+                            </idr-input-text>
+                            <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.address1.invalid && formSubmitted"
+                            [control]="patient.get('emergency_contacts').value[i]?.controls?.address1" -->
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Last Name <span class="requiredStar">*</span></label>
+                            <idr-input-text formControlName="last_name" placeholder='Last Name'>
+                                <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.last_name.invalid && formSubmitted"
+                                [control]="patient.get('emergency_contacts').value[i]?.controls?.last_name" -->
+                            </idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Address Line 2</label>
+                            <idr-input-text formControlName="address2" placeholder='Address Line 2'>
+                                <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.address2.invalid && formSubmitted"
+                                [control]="patient.get('emergency_contacts').value[i]?.controls?.address2" -->
+                            </idr-input-text>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Relationship to Patients <span class="requiredStar">*</span></label>
+                            <idr-input-text formControlName="relation_to_patient" placeholder='Relationship to Patients'></idr-input-text>
+                                <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.relation_to_patient.invalid && formSubmitted"
+                                [control]="patient.get('emergency_contacts').value[i]?.controls?.relation_to_patient" -->
+                        </div>
+                        <div class='control-half'>
+                            <label>Address Line 3</label>
+                            <idr-input-text formControlName="address3" placeholder='Address Line 3'></idr-input-text>
+                                <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.address3.invalid && formSubmitted"
+                                [control]="patient.get('emergency_contacts').value[i]?.controls?.address3" -->
+                        </div>
+                    </div>
+                    <idr-country-contacts [formSubmitted]="formSubmitted" formControlName="state" #state
+                        [stateChoosed]="patient.get('emergency_contacts').value[i]?.controls?.country.value">
+                        <div class="country">
+                            <label>Country <span class="requiredStar">*</span></label>
+                            <ng-select
+                                formControlName="country"
+                                [items]="country"
+                                [selectOnTab]="true"
+                                bindLabel="name"
+                                bindValue="name"
+                                placeholder="Country"
+                                (change)="onChangeCountry($event, state)">
+                                <!-- [ngClass]="{'hasError': patient.get('emergency_contacts').value[i]?.controls?.country.invalid && formSubmitted}" -->
+                            </ng-select>
+                            <!-- <idr-validation-message *ngIf="formSubmitted"
+                                [control]="patient.get('emergency_contacts').value[i]?.controls?.country">
+                            </idr-validation-message> -->
+                        </div>
+                        <div class="city">
+                            <label>City <span class="requiredStar">*</span></label>
+                            <idr-input-text formControlName="city" placeholder='City'>
+                            </idr-input-text>
+                            <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.city.invalid && formSubmitted"
+                            [control]="patient.get('emergency_contacts').value[i]?.controls?.city" -->
+                        </div>
+                        <div class="zip">
+                            <label>Zip Code <span class="requiredStar">*</span></label>
+                            <idr-input-text formControlName="zip_code" placeholder='Zip Code'>
+                            </idr-input-text>
+                            <!-- [hasError]="patient.get('emergency_contacts').value[i]?.controls?.zip_code.invalid && formSubmitted"
+                            [control]="patient.get('emergency_contacts').value[i]?.controls?.zip_code" -->
+                        </div>
+                    </idr-country-contacts>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Home Phone <span class="hint">At least one phone number required *</span></label>
+                            <div class='form-control phoneMask'>
+                                    <!-- [ngClass]="{'hasError' : (patient.get('emergency_contacts').value[i]?.controls?.home_phone.invalid ||
+                                    (patient.get('emergency_contacts').value[i]?.controls?.mobile_phone.invalid &&
+                                    patient.get('emergency_contacts').value[i]?.controls?.work_phone.invalid)) &&
+                                    formSubmitted}" -->
+                                <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="home_phone">
+                                <!-- <idr-validation-message *ngIf="(patient.get('emergency_contacts').value[i]?.controls?.home_phone.invalid ||
+                                        (patient.get('emergency_contacts').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('emergency_contacts').value[i]?.controls?.work_phone.invalid)) &&
+                                        formSubmitted"
+                                    [control]="patient.get('emergency_contacts').value[i]?.controls?.home_phone">
+                                </idr-validation-message> -->
+                            </div>
+                        </div>
+                        <div class='control-half'>
+                            <label>Mobile Phone</label>
+
+                            <div class='form-control phoneMask'>
+                                    <!-- [ngClass]="{'hasError' :  (patient.get('emergency_contacts').value[i]?.controls?.home_phone.invalid ||
+                                    (patient.get('emergency_contacts').value[i]?.controls?.mobile_phone.invalid &&
+                                    patient.get('emergency_contacts').value[i]?.controls?.work_phone.invalid)) &&
+                                    formSubmitted}" -->
+                                <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="mobile_phone">
+                                <!-- <idr-validation-message *ngIf=" (patient.get('emergency_contacts').value[i]?.controls?.home_phone.invalid ||
+                                        (patient.get('emergency_contacts').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('emergency_contacts').value[i]?.controls?.work_phone.invalid)) &&
+                                        formSubmitted"
+                                    [control]="patient.get('emergency_contacts').value[i]?.controls?.mobile_phone">
+                                </idr-validation-message> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Work Phone</label>
+                            <div class='form-control phoneMask'>
+                                    <!-- [ngClass]="{'hasError' :  (patient.get('emergency_contacts').value[i]?.controls?.work_phone.invalid ||
+                                    (patient.get('emergency_contacts').value[i]?.controls?.mobile_phone.invalid &&
+                                    patient.get('emergency_contacts').value[i]?.controls?.home_phone.invalid)) &&
+                                    formSubmitted}" -->
+                                <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="work_phone">
+                                <!-- <idr-validation-message *ngIf=" (patient.get('emergency_contacts').value[i]?.controls?.work_phone.invalid ||
+                                        (patient.get('emergency_contacts').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('emergency_contacts').value[i]?.controls?.home_phone.invalid)) &&
+                                        formSubmitted"
+                                    [control]="patient.get('emergency_contacts').value[i]?.controls?.work_phone">
+                                </idr-validation-message> -->
+                            </div>
+                        </div>
+                        <div class='control-half'>
+                            <label>Next of Kin</label>
+                            <ng-select
+                                [items]="kin"
+                                [selectOnTab]="true"
+                                bindLabel="label"
+                                bindValue="value"
+                                placeholder="Next of Kin"
+                                formControlName="next_of_kin">
+                                <!-- [ngClass]="{'hasError': patient.get('emergency_contacts').value[i]?.controls?.next_of_kin.invalid && formSubmitted}" -->
+                            </ng-select>
+                            <!-- <idr-validation-message *ngIf="formSubmitted"
+                                [control]="patient.get('emergency_contacts').value[i]?.controls?.next_of_kin">
+                            </idr-validation-message> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formWrap" formArrayName="guarantors">
+                <h4>Guarantor
+                    <span (click)="addNewGuarantor()" class="createNewIcon">&#43;</span>
+                </h4>
+                <div class="formDynamicWrap" *ngFor="let item of getGuarantors(); let i=index" [formGroupName]="i">
+                    <div class="titleRemoveButtonBlock">
+                        <h2>Guarantor #{{i+1}}</h2>
+                        <span (click)="removeNewGuarantor(i)" class="removeNewIcon">&minus;</span>
+                    </div>
+                    <div class="flexSpread">
+
+                        <div class='control-half'>
+                            <label>First Name <span class="requiredStar">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.first_name.invalid && formSubmitted"
+                                formControlName="first_name" placeholder='First Name'
+                                [control]="patient.get('guarantors').value[i]?.controls?.first_name"></idr-input-text>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>Date of Birth <span class="requiredStar">*</span></label>
+                            <idr-date-select [date]="patient.get('guarantors').value[i]?.controls?.birth_date.value"
+                                formControlName="birth_date"></idr-date-select>
+                            <idr-validation-message *ngIf="formSubmitted"
+                                [control]="patient.get('guarantors').value[i]?.controls?.birth_date">
+                            </idr-validation-message>
+                        </div>
+
+                    </div>
+                    <div class="flexSpread">
+
+                        <div class='control-half'>
+                            <label>Last Name <span class="requiredStar">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.last_name.invalid && formSubmitted"
+                                formControlName="last_name" placeholder='Last Name'
+                                [control]="patient.get('guarantors').value[i]?.controls?.last_name"></idr-input-text>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>Sex <span class="requiredStar">*</span></label>
+                            <ng-select [items]="sex" [selectOnTab]="true" bindLabel="label" bindValue="value"
+                                placeholder="Sex"
+                                [ngClass]="{'hasError': patient.get('guarantors').value[i]?.controls?.sex.invalid && formSubmitted}"
+                                formControlName="sex">
+                            </ng-select>
+                            <idr-validation-message *ngIf="formSubmitted"
+                                [control]="patient.get('guarantors').value[i]?.controls?.sex"></idr-validation-message>
+                        </div>
+
+                    </div>
+                    <div class="flexSpread">
+
+                        <div class='control-half'>
+                            <label>Middle Name</label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.middle_name.invalid && formSubmitted"
+                                formControlName="middle_name" placeholder="Middle Name"
+                                [control]="patient.get('guarantors').value[i]?.controls?.middle_name"></idr-input-text>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>SSN</label>
+                            <div class='form-control phoneMask'
+                                [ngClass]="{'hasError' : patient.get('guarantors').value[i]?.controls?.ssn.invalid && formSubmitted}">
+                                <input placeholder="XXX-XXX-XXXX" ssnMask formControlName="ssn">
+                                <idr-validation-message
+                                    *ngIf="patient.get('guarantors').value[i]?.controls?.ssn.invalid && formSubmitted"
+                                    [control]="patient.get('guarantors').value[i]?.controls?.ssn">
+                                </idr-validation-message>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flexSpread">
+
+                        <div class='control-half'>
+                            <label>Relationship to Patient <span class="requiredStar">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.relation_to_patient.invalid && formSubmitted"
+                                formControlName="relation_to_patient" placeholder="Relationship to Patient"
+                                [control]="patient.get('guarantors').value[i]?.controls?.relation_to_patient">
+                            </idr-input-text>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>Address Line 1</label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.address1.invalid && formSubmitted"
+                                formControlName="address1" placeholder="Address Line 1"
+                                [control]="patient.get('guarantors').value[i]?.controls?.address1"></idr-input-text>
+                        </div>
+
+                    </div>
+                    <div class="flexSpread">
+
+                        <div class='control-half'>
+                            <label>Home Phone <span class="hint">At least one phone number required *</span></label>
+                            <div class='form-control phoneMask' [ngClass]="{'hasError' :  patient.get('guarantors').value[i]?.controls?.home_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.work_phone.invalid &&
+                                        formSubmitted}">
+                                <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="home_phone">
+                                <idr-validation-message *ngIf=" patient.get('guarantors').value[i]?.controls?.home_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.work_phone.invalid &&
+                                        formSubmitted"
+                                    [control]="patient.get('guarantors').value[i]?.controls?.home_phone">
+                                </idr-validation-message>
+                            </div>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>Address Line 2</label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.address2.invalid && formSubmitted"
+                                formControlName="address2" placeholder="Address Line 2"
+                                [control]="patient.get('guarantors').value[i]?.controls?.address2"></idr-input-text>
+                        </div>
+
+                    </div>
+                    <div class="flexSpread">
+
+                        <div class='control-half'>
+                            <label>Mobile Phone</label>
+                            <div class='form-control phoneMask' [ngClass]="{'hasError' : patient.get('guarantors').value[i]?.controls?.home_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.work_phone.invalid &&
+                                        formSubmitted}">
+                                <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="mobile_phone">
+                                <idr-validation-message *ngIf=" patient.get('guarantors').value[i]?.controls?.home_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.work_phone.invalid &&
+                                        formSubmitted"
+                                    [control]="patient.get('guarantors').value[i]?.controls?.mobile_phone">
+                                </idr-validation-message>
+                            </div>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>Address Line 3</label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.address3.invalid && formSubmitted"
+                                formControlName="address3" placeholder="Address Line 3"
+                                [control]="patient.get('guarantors').value[i]?.controls?.address3"></idr-input-text>
+                        </div>
+
+                    </div>
+                    <idr-country-contacts formControlName="state" #state [formSubmitted]="formSubmitted"
+                        [stateChoosed]="patient.get('guarantors').value[i]?.controls?.country.value">
+
+                        <div class="country">
+                            <label>Country <span class="requiredStar">*</span></label>
+                            <ng-select [items]="country" [selectOnTab]="true" bindLabel="name" bindValue="name"
+                                placeholder="Country" (change)="onChangeCountry($event, state)"
+                                [ngClass]="{'hasError':patient.get('guarantors').value[i]?.controls?.country.invalid && formSubmitted}"
+                                formControlName="country">
+                            </ng-select>
+                            <idr-validation-message *ngIf="formSubmitted"
+                                [control]="patient.get('guarantors').value[i]?.controls?.country">
+                            </idr-validation-message>
+                        </div>
+
+                        <div class="city">
+                            <label>City <span class="requiredStar">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.city.invalid && formSubmitted"
+                                formControlName="city" placeholder='City'
+                                [control]="patient.get('guarantors').value[i]?.controls?.city"></idr-input-text>
+                        </div>
+
+                        <div class="zip">
+                            <label>Zip Code <span class="requiredStar">*</span></label>
+                            <idr-input-text
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.zip_code.invalid && formSubmitted"
+                                formControlName="zip_code" placeholder='Zip Code'
+                                [control]="patient.get('guarantors').value[i]?.controls?.zip_code"></idr-input-text>
+                        </div>
+
+                    </idr-country-contacts>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Work Phone</label>
+                            <div class='form-control phoneMask' [ngClass]="{'hasError' :patient.get('guarantors').value[i]?.controls?.home_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.work_phone.invalid &&
+                                        formSubmitted}">
+                                <input placeholder="(XXX) XXX-XXXX" phoneMask formControlName="work_phone">
+                                <idr-validation-message *ngIf="patient.get('guarantors').value[i]?.controls?.home_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.mobile_phone.invalid &&
+                                        patient.get('guarantors').value[i]?.controls?.work_phone.invalid &&
+                                        formSubmitted"
+                                    [control]="patient.get('guarantors').value[i]?.controls?.work_phone">
+                                </idr-validation-message>
+                            </div>
+                        </div>
+                        <div class='control-half'>
+                            <label>Employer</label>
+                            <idr-textarea
+                                [hasError]="patient.get('guarantors').value[i]?.controls?.employer.invalid && formSubmitted"
+                                formControlName="employer" placeholder="Employer"
+                                [control]="patient.get('guarantors').value[i]?.controls?.employer"></idr-textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="formWrap">
+                <h4>Coverage Information</h4>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <label>Primary Payor</label>
+                        <idr-input-text [hasError]="patient.get('primary_payor').invalid && formSubmitted"
+                            formControlName="primary_payor" placeholder="Primary Payor"
+                            [control]="patient.get('primary_payor')"></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <label>Secondary Payor</label>
+                        <idr-input-text [hasError]="patient.get('secondary_payor').invalid && formSubmitted"
+                            formControlName="secondary_payor" placeholder="Secondary Payor"
+                            [control]="patient.get('secondary_payor')"></idr-input-text>
+                    </div>
+                </div>
+                <idr-server-error [message]="message"></idr-server-error>
+            </div>
+    </div>
+    <div class="footer">
+        <idr-default-btn *ngIf="!data.canChanged" className="default" (click)="cancel()"><span>Cancel</span>
+        </idr-default-btn>
+        <idr-default-btn className="active" *ngIf="!data.canChanged" (click)="save()"><span>Save</span>
+        </idr-default-btn>
+    </div>
+</form>

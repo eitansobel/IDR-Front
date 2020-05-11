@@ -1,0 +1,76 @@
+<div class="flex flex-row">
+    <div class="col-providers rel">
+        <div class="pa fill">
+            <perfect-scrollbar class="ps-show-always">
+                <table #tableSidebar class="table table-bordered table-border">
+                    <tbody>
+                        <tr *ngFor="let provider of providers$ | async">
+                            <td class="title-cell" (click)="showUpdates(provider)" [ngClass]="{ selected: provider?.id === selectedProvider?.id }">
+                                <div class="flex flex-row" style="padding: 10px 10px 10px 12px;">
+                                    <div class="flex patient-title-name">
+                                        <!-- Provider Avatar & name -->
+                                        <div class="flex flex-row aic">
+                                            <div class="avatar flex-nosize" [ngStyle]="{'background-image': 'url(' + imageUrl + provider.photo + ')', 'background-size': 'cover'}">
+                                                <!-- TODO: Avatar image once available -->
+                                                <!-- [ngStyle]="{'background-image': 'url(' + imageUrl + patient.avatar + ')', 'background-size': 'cover'}"> -->
+                                            </div>
+                                            <p class="flex patient-name">
+                                                <a>
+                                                    <!-- PROVIDER NAME-->
+                                                    <span class="title">
+                                                        {{ provider.full_name || 'Unknown' }}
+                                                    </span>
+                                                    <span class="badge" [ngClass]="{active: provider.unseen > 0}">
+                                                        {{ provider.total }} / {{ provider.unseen }}
+                                                    </span>
+                                                </a>
+                                                <span>
+                                                    {{ provider.title }}
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="patient-actions" style="justify-content: space-between;">
+                                        <div>
+                                            <idr-icon icon="icon-video" class="bordered mb5"></idr-icon>
+                                            <div class="badges" *ngIf="false">
+                                                <div class="expired">
+
+                                                </div>
+                                                <div class="new">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <idr-icon icon="icon-pager" class="bordered mb5"></idr-icon>
+                                            <div class="badges" *ngIf="false">
+                                                <div class="expired">
+
+                                                </div>
+                                                <div class="new">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <idr-icon icon="icon-envelope" class="bordered mb5"></idr-icon>
+                                            <div class="badges" *ngIf="provider.unseen > 0">
+                                                <div class="new">
+                                                    {{ provider.unseen }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </perfect-scrollbar>
+        </div>
+    </div>
+    <div class="col-updates">
+        <idr-updates general="true"></idr-updates>
+    </div>
+</div>

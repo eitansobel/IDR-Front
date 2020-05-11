@@ -1,0 +1,114 @@
+<div class="flex flex-row">
+    <div class="chatLog flex first-column" style="flex: 0 0 340px">
+
+        <div class="search">
+            <idr-search-control class="m0" placeholder="Search" (ngModelChange)="changeSearch($event)" [(ngModel)]="search"></idr-search-control>
+        </div>
+
+        <!--
+            <idr-default-btn class="green">
+                <idr-icon icon="icon-check"></idr-icon>
+                <span>New message</span>
+            </idr-default-btn>
+        -->
+
+        <div class="flex rel">
+            <div class="pa fill">
+                <perfect-scrollbar class="ps-show-always">
+                    <!-- <div *ngIf="newChatShow" class="newMsg" (click)="createMessage()">
+                        <div class="avatar">
+                            <span class="acronym">N</span>
+                        </div>
+                        <div class="message">
+                            <header>
+                                <span class="name">New Dialogue</span>
+                            </header>
+                            <div class="messageBody">
+                                Your conversation starts here...
+                            </div>
+                        </div>
+                        <hr />
+                    </div> -->
+                    <div class="messagesHistory" [ngClass]="{'active': choosedChat && (chat.id === choosedChat.id)}"
+                        *ngFor="let chat of chats$ | async | sortBy: 'preview', 'asc'">
+                        <!-- OLD: *ngFor="let chat of chatsLog | sortBy: 'history', 'asc'"> -->
+
+                        <idr-messages-log
+                            [myPatients]="allPatients$ | async"
+                            (removeChat)="removeChat($event)"
+                            (click)="selectChat(chat); choosedChat = chat; patient = chat.patient"
+                            [chat]="chat"
+                            [choosedChat]="choosedChat"
+                            alertType="immediate">
+                        </idr-messages-log>
+                    </div>
+                </perfect-scrollbar>
+            </div>
+        </div>
+
+    </div>
+    <div class="second-column">
+        <div class="toolbar">
+            <h3>Messages</h3>
+            <idr-default-btn class="green wa" (click)="createMessage()">
+                <idr-icon icon="icon-plus"></idr-icon>
+                <span>New Message</span>
+            </idr-default-btn>
+        </div>
+        <div class="flex rel">
+            <div class="pa fill">
+                <perfect-scrollbar class="ps-show-always">
+                    <!-- TODO: Promote to component Folders -->
+                    <mat-accordion #myaccordion *ngFor="let item of (messages$ | async).results" [multi]= "true"> <!-- sortBy:'title', 'asc' -->
+                        <mat-expansion-panel #panel [disabled]="true"
+                            [expanded]="isExpanded(item)"
+                            (opened)="closeOtherPanels(panel)"
+                            (opened)="folderOpened(item)"
+                            (closed)="folderClosed(item)"
+                            [@.disabled]="true"
+                            hideToggle="true"
+                            [ngClass]="{ active: !item.seen }">
+                                <mat-expansion-panel-header
+                                    [collapsedHeight]="'40px'"
+                                    [expandedHeight]="'40px'"
+                                    [ngClass]="{ active: !item.seen }"
+                                    (click)="folderClicked(item, $event);">
+                                        <mat-panel-title>
+                                            <idr-icon [icon]="getIconByType(item.direction)" class="flex-nosize mr10" [ngClass]="{ blue: !item.seen }"></idr-icon>
+                                            <span class="title flex">{{ item.subject }}</span>
+                                            <span class="flex"></span>
+                                            <idr-icon icon="icon-eye-show" class="flex-nosize mr10" [ngClass]="{ blue: !item.seen }" (click)="seenClicked(item)"></idr-icon>
+                                            <idr-icon icon="icon-flag" class="flex-nosize mr10" [ngClass]="{ orange: item.flagged_custom || item.flagged }" (click)="flaggedClicked(item)"></idr-icon>
+                                        </mat-panel-title>
+                                </mat-expansion-panel-header>
+
+                                <div class="sub-folder">
+                                    <div class="message-body">
+                                        {{ item.text }}
+                                    </div>
+                                    <div class="message-footer">
+                                        <idr-icon icon="icon-attachment" class="flex-nosize mr10" [ngClass]="{ active: false }"></idr-icon>
+                                        1
+                                        <div class="flex"></div>
+                                        <idr-default-btn class="btn-action mr10"  (click)="forwardMessage(item)"><span>Forward</span></idr-default-btn>
+                                        <idr-default-btn class="btn-action blue"  (click)="replyMessage(item)"><span>Reply</span></idr-default-btn>
+                                    </div>
+                                </div>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </perfect-scrollbar>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="chatRoom">
+        <idr-create-message
+            [title]="title"
+            [chat]="choosedChat"
+            [messagesL]="messages.length"
+            [myPatients]="myPatients"
+            (changeMyPatient)="changeMyPatient($event)"
+            (createdChat)="createdChat($event)">
+            <idr-chat [chat]="choosedChat"></idr-chat>
+        </idr-create-message>
+    </div> -->
+</div>

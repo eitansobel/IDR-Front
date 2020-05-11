@@ -1,0 +1,231 @@
+<div class="header">
+    <h3 class="flex">{{ viewProfile.first_name }} {{ viewProfile.last_name }}</h3>
+    <div class="flex-nosize">
+        <idr-icon icon="icon-close" class="flex-nosize" (click)="close()"></idr-icon>
+    </div>
+</div>
+<div class="body flex" style="height: 80vh;">
+    <div class="flex rel">
+        <div class="pa fill">
+
+            <perfect-scrollbar class="ps-show-always">
+                <idr-row class="aifs">
+                    <idr-col>
+                        <idr-personal-form [profile]="viewProfile"></idr-personal-form>
+                        <idr-contact-form [profile]="viewProfile"></idr-contact-form>
+                        <idr-additional-form [profile]="viewProfile"></idr-additional-form>
+                    </idr-col>
+                    <idr-col class="flex-nosize p15">
+                        <div class="loadImageWrap" style="margin-bottom: 15px;">
+                            <!-- <idr-icon icon="icon-edit" (click)="uploadPhoto()"></idr-icon> -->
+                            <img *ngIf="croppedImage" [src]="croppedImage" />
+                        </div>
+                        <idr-button icon="icon-plus" class="green mb10" (click)="uploadPhoto()">
+                            <span class="flex">Change Photo</span>
+                        </idr-button>
+                    </idr-col>
+                </idr-row>
+
+                <!-- <div class="formContainer">
+                <form class="form" novalidate [formGroup]="personal">
+
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>First Name</label>
+                            <idr-input-text
+                                [hasError]="personal.get('first_name').invalid && formSubmitted && !personalEdit"
+                                formControlName="first_name" [readonly]="personalEdit" [required]='true'
+                                [control]="personal.get('first_name')"></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Phone</label>
+
+                            <div class='form-control phoneMask'
+                                [ngClass]="{'hasError' : personal.get('phone').invalid && formSubmitted && !personalEdit}">
+                                <input [readonly]="personalEdit" placeholder="(XXX) XXX-XXXX" [attr.maxlength]="maxLength"
+                                    phoneMask formControlName="phone">
+                                <span class='required'>*</span>
+                                <idr-validation-message
+                                    *ngIf="personal.get('phone').invalid && formSubmitted && !personalEdit"
+                                    [control]="personal.get('phone')"></idr-validation-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Last Name</label>
+                            <idr-input-text [hasError]="personal.get('last_name').invalid && formSubmitted && !personalEdit"
+                                formControlName="last_name" [readonly]="personalEdit" [required]='true'
+                                [control]="personal.get('last_name')"></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Pager</label>
+                            <div class='form-control phoneMask'
+                                [ngClass]="{'hasError' : personal.get('pager').invalid && formSubmitted && !personalEdit}">
+                                <input [readonly]="personalEdit" placeholder="(XXX) XXX-XXXX" [attr.maxlength]="maxLength"
+                                    phoneMask formControlName="pager">
+                                <idr-validation-message
+                                    *ngIf="personal.get('pager').invalid && formSubmitted && !personalEdit"
+                                    [control]="personal.get('pager')"></idr-validation-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Middle Name</label>
+                            <idr-input-text
+                                [hasError]="personal.get('middle_name').invalid && formSubmitted && !personalEdit"
+                                formControlName="middle_name" [readonly]="personalEdit"
+                                [control]="personal.get('middle_name')"></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Fax</label>
+                            <idr-input-text [hasError]="personal.get('fax').invalid && formSubmitted && !personalEdit"
+                                formControlName="fax" [readonly]="personalEdit" [control]="personal.get('fax')">
+                            </idr-input-text>
+
+                            <div class='form-control phoneMask'
+                                [ngClass]="{'hasError' : personal.get('fax').invalid && formSubmitted && !personalEdit}">
+                                <input [readonly]="personalEdit" placeholder="(XXX) XXX-XXXX" phoneMask
+                                    formControlName="fax">
+                                <idr-validation-message
+                                    *ngIf="personal.get('fax').invalid && formSubmitted && !personalEdit"
+                                    [control]="personal.get('fax')"></idr-validation-message>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Job</label>
+                            <idr-input-text [hasError]="personal.get('title').invalid && formSubmitted && !personalEdit"
+                                formControlName="title" [readonly]="personalEdit" [required]='true'
+                                [control]="personal.get('title')"></idr-input-text>
+
+                        </div>
+                        <div class='control-half'>
+                            <label>Hospital Role</label>
+                            <ng-select [items]="hospital_role" [selectOnTab]="true" class="required" bindLabel="title"
+                                bindValue="id" (change)="onChange($event)" placeholder="Select Your Hospital Role"
+                                formControlName="hospital_role">
+                            </ng-select>
+                            <idr-validation-message [control]="personal.get('hospital_role')"></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Prefix</label>
+                            <idr-input-text [hasError]="personal.get('prefix').invalid  && formSubmitted && !personalEdit"
+                                formControlName="prefix" [readonly]="personalEdit" [control]="personal.get('prefix')">
+                            </idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Hospital</label>
+                            <p>{{static_hospital_title}}</p>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Suffix</label>
+                            <idr-input-text [hasError]="personal.get('suffix').invalid && formSubmitted && !personalEdit"
+                                formControlName="suffix" [readonly]="personalEdit" [control]="personal.get('suffix')">
+                            </idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Hospital Department</label>
+                            <ng-select [items]="hospital_department" [selectOnTab]="true" bindLabel="title" bindValue="id"
+                                placeholder="Hospital Department" class="required" (change)="onChangeDepartment($event)"
+                                [ngClass]="{'hasError': personal.get('hospital_department').invalid && !personalEdit}"
+                                formControlName="hospital_department">
+                            </ng-select>
+                            <idr-validation-message *ngIf="formSubmitted" [control]="personal.get('hospital_department')">
+                            </idr-validation-message>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>Preferred Name</label>
+                            <idr-input-text
+                                [hasError]="personal.get('preferred_name').invalid && formSubmitted && !personalEdit"
+                                formControlName="preferred_name" [readonly]="personalEdit"
+                                [control]="personal.get('preferred_name')"></idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Preferred</label>
+                            <ng-select [items]="preferred_mode" [selectOnTab]="true" placeholder="Preferred Mode"
+                                bindValue="value" formControlName="preferred_mode">
+                            </ng-select>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>DOB</label>
+                            <p *ngIf="personalEdit">{{this.personal.get('birthday').value}}</p>
+                            <idr-date-select [readonly]="personalEdit" [date]="this.personal.get('birthday').value"
+                                formControlName="birthday"></idr-date-select>
+                            <idr-validation-message [control]="personal.get('birthday')"></idr-validation-message>
+                        </div>
+                        <div class='control-half'>
+                            <label>State License #</label>
+                            <idr-input-text [hasError]="personal.get('state_license').invalid && !personalEdit"
+                                formControlName="state_license" [readonly]="personalEdit"
+                                [control]="personal.get('state_license')"></idr-input-text>
+                        </div>
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>DEA #</label>
+                            <idr-input-text [hasError]="personal.get('dea_number').invalid && !personalEdit"
+                                formControlName="dea_number" [readonly]="personalEdit"
+                                [control]="personal.get('dea_number')"></idr-input-text>
+                        </div>
+
+                        <div class='control-half'>
+                            <label>NPI #</label>
+                            <idr-input-text [hasError]="personal.get('npi_number').invalid && !personalEdit"
+                                formControlName="npi_number" [readonly]="personalEdit"
+                                [control]="personal.get('npi_number')"></idr-input-text>
+                        </div>
+
+                    </div>
+                    <div class="flexSpread">
+                        <div class='control-half'>
+                            <label>User ID #</label>
+                            <idr-input-text [hasError]="personal.get('user_id').invalid && !personalEdit"
+                                formControlName="user_id" [readonly]="personalEdit" [control]="personal.get('user_id')">
+                            </idr-input-text>
+                        </div>
+                        <div class='control-half'>
+                            <label>Cell</label>
+
+                            <div class='form-control phoneMask'
+                                [ngClass]="{'hasError' : personal.get('cell').invalid && formSubmitted && !personalEdit}">
+                                <input [readonly]="personalEdit" placeholder="(XXX) XXX-XXXX" [attr.maxlength]="maxLength"
+                                    phoneMask formControlName="cell">
+                                <span class='required'>*</span>
+                                <idr-validation-message
+                                    *ngIf="personal.get('cell').invalid && formSubmitted && !personalEdit"
+                                    [control]="personal.get('cell')"></idr-validation-message>
+                            </div>
+                        </div>
+                    </div>
+
+                    <idr-server-error [message]="message"></idr-server-error>
+
+                </form>
+                <div class="photo">
+                    <div class="avatarWrap">
+                        <!- <input type="file" (change)="uploadFile($event)" /> ->
+                        <idr-icon icon="icon-edit" (click)="uploadPhoto()"></idr-icon>
+                        <img *ngIf="croppedImage" [src]="croppedImage" />
+                    </div>
+
+                </div>
+            </div> -->
+                <!-- <div class="footerNavigation" *ngIf="!personalEdit">
+                <idr-default-btn className="default btn-small" (click)="cancel()"><span>Cancel</span></idr-default-btn>
+                <idr-default-btn className="active btn-small" (click)="save()"><span>Update</span></idr-default-btn>
+            </div> -->
+            </perfect-scrollbar>
+        </div>
+    </div>
+</div>

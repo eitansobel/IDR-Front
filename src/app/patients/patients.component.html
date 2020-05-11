@@ -1,0 +1,231 @@
+<div class="sidebar">
+    <div class="p15">
+        <idr-search placeholder="Search Patients List" (ngModelChange)="changeSearch($event)" [(ngModel)]="search">
+        </idr-search>
+    </div>
+
+    <div class="plr15 pb15">
+        <idr-default-btn class="green small" (click)="newList()" *ngIf="myRole">
+            <idr-icon icon="icon-plus"></idr-icon>
+            <span>Create New Patient List</span>
+        </idr-default-btn>
+    </div>
+
+    <div class="list">
+        <idr-button (click)="selectPatientsList(listTypes.MyPatients)" [ngClass]="{'selected': selectedListType === listTypes.MyPatients}">
+            <div class="flex aifs">My Patients</div>
+            <idr-icon icon="icon-more" class="flex-nosize" [matMenuTriggerFor]="patientsListMenu"></idr-icon>
+        </idr-button>
+
+        <idr-button (click)="selectPatientsList(listTypes.AllPatients)" [ngClass]="{'selected': selectedListType === listTypes.AllPatients}">
+            <div class="flex aifs">All Patients</div>
+        </idr-button>
+
+        <idr-button
+            (click)="selectPatientsList(listTypes.Custom, item)"
+            *ngFor="let item of patientsList$ | async | orderBy: 'title' | filter: ['title']: search"
+            [ngClass]="{'selected': item?.id === selectedList?.id}"
+        >
+            <div class="flex aifs">{{ item.title }}</div>
+            <idr-icon icon="icon-more" class="flex-nosize" [matMenuTriggerFor]="patientsListMenu"></idr-icon>
+        </idr-button>
+    </div>
+
+    <!-- <div class="flex plr15">
+        <table>
+            <tbody>
+                <tr *ngFor="let item of combinedPatientLists">
+                    <td>
+                        <idr-default-btn (click)="onChooseData(item)">
+                            <span class="flex tal">{{ item.title }}</span>
+                            <idr-icon icon="icon-more"></idr-icon>
+                        </idr-default-btn>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div> -->
+    <!-- <idr-sortable-list className="list" (chosedData)="onChooseData($event)" [keys]="['title', 'qty', 'update_time']"
+        [listData]="combinedPatientLists" searchHolder="Search lists" typeName="patients" [listHeader]="header"></idr-sortable-list> -->
+</div>
+<div class="flex">
+
+    <idr-row class="toolbar flex-nosize">
+        <h3 class="flex wsnw">{{ getPatientListName() }} list</h3>
+        <idr-row class="flex-nosize gap">
+            <idr-search [(ngModel)]="searchPatientKeyword" placeholder="Search patients"></idr-search>
+            <idr-button icon="icon-plus" class="blue" (click)="newMember()" *ngIf="myRole">Create New Patient</idr-button>
+            <idr-button icon="icon-plus" class="blue" (click)="multipleUpload()" *ngIf="myRole">Multiple Upload</idr-button>
+            <idr-button icon="icon-download" class="blue">Import From</idr-button>
+        </idr-row>
+    </idr-row>
+
+    <idr-row class="toolbar flex-nosize">
+        <idr-row class="gap">
+            <idr-button icon="icon-plus" class="blue" [disabled]="true" *ngIf="myRole">Move to...</idr-button>
+            <idr-button icon="icon-plus" class="blue" [disabled]="true" *ngIf="myRole">Copy to...</idr-button>
+            <idr-button icon="icon-plus" class="blue" [disabled]="true" *ngIf="myRole">Replace with...</idr-button>
+            <idr-button icon="icon-download" class="blue" [disabled]="true" *ngIf="myRole">Import List</idr-button>
+        </idr-row>
+        <idr-row class="flex-nosize">
+            <idr-button icon="icon-close" class="blue" [disabled]="true" *ngIf="myRole">Remove</idr-button>
+        </idr-row>
+    </idr-row>
+
+
+    <idr-col class="p15 pt0">
+        <mat-table [dataSource]="_dataSource | async | filter : ['first_name', 'last_name', 'mrn'] : searchPatientKeyword"
+            matSort
+            (matSortChange)="sortData($event)"
+            matSortActive="first_name"
+            matSortDirection="asc"
+            matSortDisableClear
+        >
+
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox
+                        (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+                    </mat-checkbox>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <mat-checkbox
+                        (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </mat-cell>
+            </ng-container>
+
+            <!-- First & Last Column -->
+            <ng-container matColumnDef="Name">
+                <mat-header-cell *matHeaderCellDef>
+                    <div class="flex flex-row">
+                        <div class="flex flex-nosize mr10" mat-sort-header="first_name">
+                            First
+                        </div>
+                        <div class="flex flex-nosize" mat-sort-header="last_name">
+                            Last
+                        </div>
+                    </div>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <div class="ellipsis">{{element.first_name}}, {{ element.last_name}}</div>
+                </mat-cell>
+            </ng-container>
+
+            <!-- DOB Column -->
+            <ng-container matColumnDef="DOB">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="birth_date">DOB</mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let element">{{ element.birth_date }}</mat-cell>
+            </ng-container>
+
+            <!-- AGE Column -->
+            <ng-container matColumnDef="Age">
+                <mat-header-cell mat-header-cell *matHeaderCellDef  mat-sort-header="age">Age</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.age }}</mat-cell>
+            </ng-container>
+
+            <!-- MRN Column -->
+            <ng-container matColumnDef="MRN">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="mrn">MRN</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{ element.mrn }}</mat-cell>
+            </ng-container>
+
+            <!-- SHOW/HIDE Column -->
+            <ng-container matColumnDef="Visibility">
+                <mat-header-cell *matHeaderCellDef mat-sort-header="show" [ngClass]="{'dn': selectedListType !== listTypes.MyPatients}">Visibility</mat-header-cell>
+                <mat-cell *matCellDef="let element" [ngClass]="{'dn': selectedListType !== listTypes.MyPatients }">
+                    <mat-slide-toggle
+                        class="mat-slide-toggle mat-accent"
+                        (change)="toggleVisibility($event, element)"
+                        [checked]="!element.show"
+                        [disableRipple]="true">
+                        <span class='show'>Show</span>
+                        <span class='hide'>Hide</span>
+                    </mat-slide-toggle>
+                </mat-cell>
+            </ng-container>
+
+            <!-- ACTIONS Column -->
+            <ng-container matColumnDef="Actions">
+                <mat-header-cell mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <idr-icon
+                        (click)="chosedPfData(element)"
+                        icon="icon-edit"
+                        class="bordered flex-nosize mr10"
+                    >
+                    </idr-icon>
+                    <!-- element -->
+
+                    <idr-icon
+                        icon="icon-trash"
+                        class="bordered flex-nosize mr10"
+                        (click)="deletePerson(element)"
+                    >
+                    </idr-icon>
+                    <!-- element -->
+
+                    <idr-icon
+                        icon="icon-menu"
+                        class="flex-nosize"
+                    ></idr-icon>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </idr-col>
+
+    <!--
+    <idr-sortable-list *ngIf="patientsListSingle" className="tableList" typeName="patients"
+        searchHolder="Search patients" [listTitle]="chosenPatientListTitle"
+        [keys]="['first_name', 'middle_name', 'last_name', 'birth_date', 'age']" [listData]="patientsListSingle"
+        (chosedData)="chosedPfData($event)" [myRole]="myRole" [list_id]="editableListId"
+        [listHeader]="listHeaderSingle">
+        <div class="buttons">
+            <idr-default-btn class="green small" (click)="newMember()" *ngIf="myRole">
+                <idr-icon icon="icon-plus"></idr-icon>
+                <span>Create New Patient</span>
+            </idr-default-btn>
+            <idr-default-btn class="green small" (click)="multipleUpload()" *ngIf="myRole" class="multyBtn">
+                <idr-icon icon="icon-plus"></idr-icon>
+                <span>Multiple Upload</span>
+            </idr-default-btn>
+            <idr-default-btn class="green small">
+                <idr-icon icon="icon-donwload"></idr-icon>
+                <span>Import From</span>
+            </idr-default-btn>
+            -- *ngIf="chosenPatientListTitle == 'My Patients' || (editableListId && myRole)"  --
+        </div>
+    </idr-sortable-list>
+    -->
+
+    <div class='profile' [ngClass]="{'show': loadProfile}">
+        <idr-patient-view-profile (closeAll)="closeProfile($event)" [viewProfile]="chosedProfile">
+
+        </idr-patient-view-profile>
+    </div>
+    <div class="overlay" *ngIf="loadProfile"></div>
+</div>
+<div class="spinner" *ngIf="spinner">
+    <div class="dot1"></div>
+    <div class="dot2"></div>
+</div>
+
+<mat-menu #patientsListMenu class="template-menu">
+    <!-- *ngIf="chosenPatientListTitle == 'My Patients' || (editableListId && myRole)" (click)="editList()" -->
+    <div mat-menu-item>
+        <idr-button icon="icon-edit" (click)="editPatientsList()">Edit</idr-button>
+    </div>
+    <div mat-menu-item *ngIf="selectedListType !== listTypes.MyPatients">
+        <idr-button icon="icon-trash">Delete</idr-button>
+    </div>
+</mat-menu>

@@ -1,0 +1,26 @@
+<div class="header">
+    <h3>{{ header }}</h3>
+    <idr-icon icon="icon-close" (click)="close()"></idr-icon>
+</div>
+<div class="body">
+    <label>
+        <input type="radio" value="1" checked (click)="logoutControl(true)" name="logout"/>
+        <span class="checkmark"></span>
+        Lock (continue using application in secure mode)
+    </label>
+    <label>
+        <input type="radio" value="2" (click)="logoutControl(false)" name="logout" />
+        <span class="checkmark"></span>
+        End shift early (Logout)
+    </label>
+</div>
+<div class="footer">
+    <idr-default-btn (click)="close()">
+        <idr-icon icon="icon-close"></idr-icon>
+        <span>No</span>
+    </idr-default-btn>
+    <idr-default-btn  class="green" (click)="logout()">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>Yes</span>
+    </idr-default-btn>
+</div>

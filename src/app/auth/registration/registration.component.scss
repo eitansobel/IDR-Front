@@ -1,0 +1,338 @@
+@import 'styles';
+
+:host {
+    @extend .flex,
+    .flex-nosize,
+    .aic,
+    .jcc;
+    text-align: center;
+    background: #fff;
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 0 25px 1px #e0e0e0;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+
+    .header {
+        h3 {
+            @extend .flex;
+            margin: 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 27px;
+            margin-top: 14px;
+        }
+        .logo {
+            @extend .flex,
+            .jcc,
+            .aic;
+            border-radius: 50%;
+            background: $link-water;
+            padding: $icon-decor-padding;
+            border: $icon-decor-border solid $white;
+            width: 105px;
+            height: 105px;
+            vertical-align: middle;
+            margin: $icon-decor-margin-top auto 0;
+            box-shadow: 0 0 25px lighten($shadow-color, 5%);
+            margin-bottom: 30px;
+
+            ::ng-deep {
+                .idr-icon {
+                    .mat-icon {
+                        width: 50px;
+                        height: 50px;
+
+                        svg {
+                            width: 100%;
+                            height: 100%;
+                            display: inline-block;
+                            vertical-align: middle;
+                            line-height: 100px;
+
+                            path {
+                                fill: $denim;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .footer {
+        @extend .flex,
+        .aic,
+        .jcc;
+        width: 100%;
+
+        idr-default-btn {
+            @extend .flex;
+            max-width: unset;
+            width: 100%;
+            margin: 0 0 10px 0;
+        }
+    }
+
+    .form-control.phoneMask {
+        margin-bottom: 10px;
+        width: 100%;
+        position: relative;
+
+        input {
+            @include placeholder {
+                color: $bombay;
+                -webkit-text-fill-color: $bombay;
+            }
+
+            width: 100%;
+            border: $border-control;
+            font-size: $base-font-size;
+            border-radius: 5px;
+            font-family: $base-font-sans-serif;
+            font-weight: 600;
+            padding: 8px 15px 8px 20px;
+            color: $black;
+            -webkit-text-fill-color: $black;
+
+            &:focus {
+                outline: none;
+            }
+
+            &[readonly] {
+                border: 0;
+                padding-left: 0;
+                font-size: $base-font-size + 1;
+
+                &+.required {
+                    display: none;
+                }
+            }
+        }
+
+
+        &.hasError {
+            input {
+                border-color: $red;
+            }
+        }
+
+        .required {
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+        }
+
+    }
+}
+
+.flexSpread {
+    display: flex;
+    justify-content: space-between;
+}
+
+idr-modal-wrap {
+    max-width: 400px;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0 !important;
+}
+
+.control-half {
+    text-align: left;
+    width: 48%;
+}
+
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon,
+::ng-deep .mat-horizontal-stepper-header .mat-step-icon-not-touched {
+    margin-right: 0 !important;
+    text-indent: -9999px;
+    border: $border;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    background: $white;
+
+    span,
+    .mat-icon {
+        display: none;
+    }
+}
+
+::ng-deep .mat-stepper-horizontal-line {
+    border: $border;
+    border-width: 2px;
+    margin: 0 !important;
+}
+
+::ng-deep .mat-step-label {
+    min-width: auto !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+    padding: 0 !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header[ng-reflect-active="true"]+.mat-stepper-horizontal-line,
+::ng-deep .mat-horizontal-stepper-header[aria-selected="true"]+.mat-stepper-horizontal-line {
+    border-color: $caribbean-green;
+}
+
+::ng-deep .mat-horizontal-stepper-header[ng-reflect-active="true"],
+::ng-deep .mat-horizontal-stepper-header[aria-selected="true"] {
+    .mat-step-icon {
+        border-color: $caribbean-green;
+
+        &:after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: $caribbean-green;
+            border-radius: 50%;
+        }
+    }
+}
+
+.step-1 {
+    ::ng-deep .mat-horizontal-stepper-header-container {
+        .mat-horizontal-stepper-header:first-child {
+            .mat-step-icon {
+                border-color: $caribbean-green;
+
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .mat-stepper-horizontal-line:nth-child(2) {
+            border-color: $caribbean-green;
+        }
+    }
+}
+
+.step-2 {
+    ::ng-deep .mat-horizontal-stepper-header-container {
+        .mat-horizontal-stepper-header:first-child {
+            .mat-step-icon {
+                border-color: $caribbean-green;
+
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .mat-horizontal-stepper-header:nth-child(3) {
+            .mat-step-icon {
+                border-color: $caribbean-green;
+
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .mat-stepper-horizontal-line:nth-child(2),
+        .mat-stepper-horizontal-line:nth-child(4) {
+            border-color: $caribbean-green;
+        }
+    }
+}
+
+.step-3 {
+    ::ng-deep .mat-horizontal-stepper-header-container {
+
+        .mat-horizontal-stepper-header:first-child,
+        .mat-horizontal-stepper-header:nth-child(3),
+        .mat-horizontal-stepper-header:nth-child(5),
+        .mat-horizontal-stepper-header:nth-child(7) {
+            .mat-step-icon {
+                border-color: $caribbean-green;
+
+                &:after {
+                    content: '';
+                    width: 4px;
+                    height: 4px;
+                    background: $caribbean-green;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .mat-stepper-horizontal-line:nth-child(2),
+        .mat-stepper-horizontal-line:nth-child(4),
+        .mat-stepper-horizontal-line:nth-child(6) {
+            border-color: $caribbean-green;
+        }
+
+    }
+}
+
+ng-select {
+    position: relative;
+    margin-bottom: 15px;
+
+    &.required ::ng-deep .ng-select-container {
+        &:before {
+            content: '*';
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            color: $red;
+            z-index: 2;
+        }
+
+        &.ng-has-value {
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+::ng-deep .mat-horizontal-content-container {
+    overflow: visible !important;
+}
+
+::ng-deep .mat-horizontal-stepper-content[aria-expanded="true"] {
+    overflow: visible !important;
+}
+
+::ng-deep .ng-select .ng-select-container {
+    border: $border-control;
+    padding-left: 10px;
+
+    input {
+        padding-left: 10px;
+    }
+
+}
+
+::ng-deep .ng-dropdown-panel.ng-select-bottom {
+    text-align: left;
+}
+
+::ng-deep .ng-select.hasError .ng-select-container {
+    border-color: $red;
+}
+
+p {
+    color: $modal-text-color;
+}

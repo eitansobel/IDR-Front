@@ -1,0 +1,45 @@
+<div class="header">
+    <h3 class="flex">Profile Photo</h3>
+    <div class="flex-nosize">
+        <idr-icon icon="icon-close" class="flex-nosize" (click)="closeDialog()"></idr-icon>
+    </div>
+</div>
+<div class="body">
+    <mat-dialog-content>
+        <div class="loadImageWrap">
+            <!-- <idr-edit-icon-svg class="editProfile"></idr-edit-icon-svg> -->
+            <idr-crop-svg *ngIf="!showCrop && croppedImage" (click)="crop()"></idr-crop-svg>
+            <div *ngIf="!file" class="image">
+                <img *ngIf="croppedImage" [attr.src]="croppedImage">
+            </div>
+            <image-cropper
+                *ngIf="showCrop"
+                [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true"
+                [aspectRatio]="3 / 2.35 "
+                [resizeToWidth]="300"
+                format="png, jpg"
+                (imageCropped)="imageCropped($event)"
+                (imageLoaded)="imageLoaded($event)"
+                (loadImageFailed)="loadImageFailed($event)"
+                [imageBase64]="imageBase64">
+            </image-cropper>
+        </div>
+        <idr-button icon="icon-plus" class="green mb10 rel">
+            <span class="flex">Upload</span>
+            <input size="60" type="file" class="loadImage" (change)="fileChangeEvent($event)" />
+        </idr-button>
+        <p class="hint" *ngIf="showCropError">Please upload your Profile picture in one of these formats jpg, jpeg, png</p>
+    </mat-dialog-content>
+</div>
+<div class="footer">
+    <idr-button icon="icon-close" *ngIf="croppedImage && !showCrop" (click)="deleteImage()">
+        <span>Delete photo</span>
+    </idr-button>
+    <idr-button icon="icon-close" *ngIf="croppedImage && showCrop" (click)="cancelCrop()">
+        <span>Cancel</span>
+    </idr-button>
+    <idr-button icon="icon-check" (click)="save()">
+        <span>Save changes</span>
+    </idr-button>
+</div>

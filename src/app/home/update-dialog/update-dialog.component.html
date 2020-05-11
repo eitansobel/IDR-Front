@@ -1,0 +1,87 @@
+<idr-dialog-wrap>
+    <div>
+        <mat-dialog-content>
+
+            <div class="header">
+                <h3 class="title">{{headerText}}</h3>
+                <idr-icon icon="icon-close" class="flex-nosize" (click)="closeDialog()"></idr-icon>
+            </div>
+
+            <div class="body">
+
+                <!-- FOLDER FORM -->
+                <form class="form" novalidate [formGroup]="updateForm">
+
+                    <div class="flex flex-row aic">
+
+                        <!-- ACTIVE & INACTIVE -->
+                        <mat-radio-group class="flex flex-row" formControlName="active">
+                            <mat-radio-button class="flex-nosize" [value]="true">
+                                Active
+                            </mat-radio-button>
+                            <mat-radio-button class="flex-nosize" [value]="false">
+                                Inactive
+                            </mat-radio-button>
+                        </mat-radio-group>
+
+                        <div class="flex flex-nosize">
+                            <!-- <mat-button-toggle-group multiple formControlName="flagged" class="borderless"> -->
+                                <mat-checkbox formControlName="flagged" class="custom-icon">
+                                    <div class="flex flex-row">
+                                        <idr-icon icon="icon-flag" [ngClass]="{active: updateForm.get('flagged').value }"></idr-icon>
+                                        Flag as important
+                                    </div>
+                                </mat-checkbox>
+
+                                <!-- <mat-button-toggle formControlName="flagged" ngDefaultControl>
+                                    <idr-icon icon="icon-flag"></idr-icon>
+                                    Flag as important
+                                </mat-button-toggle> -->
+                            <!-- </mat-button-toggle-group> -->
+                        </div>
+
+                    </div>
+
+                    <div class="flex">
+                        <textarea class="flex" formControlName="content"></textarea>
+                    </div>
+
+                    <!-- Attach File-->
+
+
+                    <div class="flex flex-nosize">
+                        <idr-default-btn class="upload rel">
+                            <idr-icon icon="icon-attachment"></idr-icon>
+                            <span>Attach file</span>
+                            <!-- <div class="pa fill">
+                                <idr-file-uploader (filesChange)="filesChanged($event)" (filesUpdated)="filesUpdated($event)"></idr-file-uploader>
+                            </div> -->
+                        </idr-default-btn>
+                    </div>
+
+
+                    <!-- Remind me to update -->
+
+                    <div class="flex flex-row aic">
+                        <idr-icon icon="icon-exclamation" class="red flex-nosize mr10"></idr-icon>
+                        <mat-checkbox formControlName="remind_time_enabled">
+                            Remind me to update
+                        </mat-checkbox>
+                        <idr-time-setup formControlName="remind_time">
+                        </idr-time-setup>
+                    </div>
+
+                </form>
+
+                <idr-server-error [message]="message" *ngIf="message"></idr-server-error>
+            </div>
+
+            <div class="footer">
+                <idr-default-btn class="green m0" (click)="save()" [disabled]="!(this.updateForm.valid && this.updateForm.dirty)">
+                    <idr-icon icon="icon-plus"></idr-icon>
+                    <span>{{ currentUpdate?.id > 0 ? 'Save' : 'Create' }} Update</span>
+                </idr-default-btn>
+            </div>
+        </mat-dialog-content>
+    </div>
+</idr-dialog-wrap>

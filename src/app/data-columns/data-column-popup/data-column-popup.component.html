@@ -1,0 +1,120 @@
+<div>
+    <mat-dialog-content>
+
+        <div class="header">
+            <h3 class="title flex">{{headerText}}</h3>
+            <div class="flex-nosize">
+                <idr-icon icon="icon-close" class="flex-nosize" (click)="closeDialog()"></idr-icon>
+            </div>
+        </div>
+
+        <div class="body">
+            <!-- FOLDER FORM -->
+            <form *ngIf="columnForm" class="form rowList" novalidate [formGroup]="columnForm">
+                <div class="flexSpread">
+                    <div class="form-control">
+                        <label>Name of Update <span class="requiredStar">*</span></label>
+                        <idr-input-text [hasError]="columnForm.get('title').invalid && formSubmitted" formControlName="title"
+                            placeholder="Enter name" [control]="columnForm.get('title')">
+                            <!-- [maxLength]="maxLength" -->
+                        </idr-input-text>
+                    </div>
+                </div>
+
+                <div class="flex flex-row aic">
+                    <mat-radio-group class="flex flex-row" formControlName="is_private">
+                        <mat-radio-button class="flex-nosize" [value]="false">
+                            Public
+                        </mat-radio-button>
+                        <mat-radio-button class="flex-nosize" [value]="true">
+                            Private
+                        </mat-radio-button>
+                    </mat-radio-group>
+
+                    <div class="showHide">
+                        <mat-slide-toggle class='mat-slide-toggle mat-accent' formControlName="is_hidden">
+                            <span class='show'>Show</span>
+                            <span class='hide'>Hide</span>
+                        </mat-slide-toggle>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- SUB-FOLDERS -->
+
+                <div class="subFolders" formArrayName="subfolders" *ngIf="subFolders?.length > 0">
+
+                    <div class="content">
+
+                        <h4>Subfolders</h4>
+
+                        <!-- HEADER ROW -->
+
+                        <div class="rows mb10">
+                            <div>
+                                <div>
+                                    <label>Name of subfolder: <span class="requiredStar">*</span></label>
+                                </div>
+                                <div>
+                                    <label>Update needed: <span class="requiredStar">*</span></label>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                        </div>
+
+                        <!-- CONTENT ROWS -->
+
+                        <div class="flex rel" style="max-height: 200px" [ngStyle]="{height: subFoldersHeight + 'px'}">
+                            <div class="pa fill">
+                                <perfect-scrollbar style="max-width: 100%; max-height: 100%;" class="ps-show-always">
+
+                                    <div *ngFor="let subFolder of subFolders.controls; let i=index;" class="rows"
+                                        [formGroupName]="i">
+                                        <div>
+                                            <div>
+                                                <idr-input-text formControlName="title" placeholder="Enter name"></idr-input-text>
+                                            </div>
+                                            <div>
+                                                <ng-select formControlName="update_interval" [items]="updateIntervalTypes"
+                                                    appendTo="body" bindLabel="label" bindValue="value">
+                                                </ng-select>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <idr-icon icon="icon-close" class="flex-nosize mt10" (click)="deleteSubFolder(subFolder, i)"></idr-icon>
+                                        </div>
+                                    </div>
+
+                                </perfect-scrollbar>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="action">
+
+                    <div class="flex flex-nosize asfe">
+                        <idr-default-btn class="btn-small blue" (click)="addSubFolder()">
+                            <idr-icon icon="icon-plus"></idr-icon>
+                            <span>Add Subfolder</span>
+                        </idr-default-btn>
+                    </div>
+
+                </div>
+            </form>
+
+            <idr-server-error [message]="message" *ngIf="message"></idr-server-error>
+        </div>
+
+        <div class="footer">
+            <idr-default-btn class="green m0" (click)="save()" [disabled]="!(this.columnForm.valid && this.columnForm.dirty)">
+                <idr-icon icon="icon-plus"></idr-icon>
+                <span>{{ currentColumn?.id > 0 ? 'Save' : 'Create' }} Update Folder</span>
+            </idr-default-btn>
+        </div>
+    </mat-dialog-content>
+</div>

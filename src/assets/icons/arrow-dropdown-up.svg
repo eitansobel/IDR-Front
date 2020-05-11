@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="arrow-dropdown-up" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+        <path d="M12.5367656,5.25105133 C12.8715007,4.91631622 13.4142136,4.91631622 13.7489487,5.25105133 C14.0836838,5.58578644 14.0836838,6.12849928 13.7489487,6.46323438 L8,12.2121831 L2.25105133,6.46323438 C1.91631622,6.12849928 1.91631622,5.58578644 2.25105133,5.25105133 C2.58578644,4.91631622 3.12849928,4.91631622 3.46323438,5.25105133 L8,9.78781695 L12.5367656,5.25105133 Z" id="Rectangle" fill="#000000" fill-rule="nonzero" transform="translate(8.000000, 8.606092) scale(1, -1) translate(-8.000000, -8.606092) "></path>
+    </g>
+</svg>

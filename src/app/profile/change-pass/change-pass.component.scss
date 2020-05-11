@@ -1,0 +1,56 @@
+@import 'styles';
+
+:host {
+    display: block;
+    width: 100%;
+
+    idr-modal-wrap {
+        display: block;
+    }
+
+    ::ng-deep .mat-dialog-actions {
+        display: block;
+    }
+}
+
+::ng-deep .mat-dialog-container {
+    padding: 0;
+    box-shadow: none;
+    overflow: visible;
+}
+
+label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+mat-dialog-content {
+    padding: 20px 20px;
+}
+
+:host {
+    .header {
+        @extend .flex, .flex-row, .aic;
+        padding: 15px;
+        border-bottom: $border-control;
+
+        h3 {
+            @extend .flex;
+            margin: 0;
+        }
+    }
+    .body {
+        padding: 15px;
+    }
+    .footer {
+        @extend .flex, .flex-row, .flex-nosize, .aic, .p15;
+        border-top: $border-control;
+        idr-default-btn {
+            @extend .flex;
+            width: auto;
+            margin: 0;
+            margin-right: 15px;
+            &:last-child { margin-right: 0px; }
+        }
+    }
+}

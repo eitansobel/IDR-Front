@@ -1,0 +1,28 @@
+@import 'styles';
+
+:host { @extend .flex;
+    ::ng-deep ng-scrollbar-y {
+        width: 5px;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 5px!important;
+
+        .ng-scrollbar-thumb {
+            background: $dull-blue;
+            width: 3px;
+        }
+    }
+    ::ng-deep ng-scrollbar-x {
+        background: rgba(0, 0, 0, 0.1);
+
+        .ng-scrollbar-thumb {
+            background: $dull-blue!important;
+        }
+    }
+
+    ::ng-deep {
+        .ng-scroll-view {
+            width: calc(100% + 18px)!important;
+        }
+    }
+}
+

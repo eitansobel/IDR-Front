@@ -1,0 +1,99 @@
+<table #tableSidebar class="table table-bordered table-border">
+    <tbody>
+        <tr *ngFor="let key of objectKeys(patients) | filter: patientSearchKeys:patientSearchText:true; let i = index"
+            [attr.data-index]="i">
+            <td class="title-cell" [ngClass]="{ selected: patients[key]?.id === selectedPatient?.id }">
+                <div class="flex flex-row" style="padding: 10px 10px 10px 12px;">
+                    <div class="flex patient-title-name">
+                        <!-- Patient Avatar & name -->
+                        <div class="flex flex-row aic mb10">
+                            <div class="avatar flex-nosize" [ngStyle]="{'background-image': 'url(' + getPatientAvatar(patients[key]) + ')', 'background-size': 'cover'}">
+                                <!-- TODO: Avatar image once available -->
+                                <!--[ngStyle]="{'background-image': 'url(' + imageUrl + patient.avatar + ')', 'background-size': 'cover'}"> -->
+                            </div>
+                            <p class="flex patient-name">
+                                <a class="overflow-ellipsis"> <!-- TODO: OBSOLETE: (click)="openPatientProfile(item.patient)" -->
+                                    {{patients[key].first_name}} {{patients[key].last_name}}
+                                </a>
+                            </p>
+                        </div>
+                        <p class="patient-text overflow-ellipsis">
+                            <span class="patient-prefix">MRN: </span>{{patients[key].mrn}}
+                        </p>
+                        <p class="patient-text overflow-ellipsis">
+                            <span class="patient-prefix">Room: </span>{{patients[key].room || 'not added'}}
+                        </p>
+                        <p class="patient-text overflow-ellipsis">
+                            <span class="patient-prefix">Age: </span>{{patients[key].age}}
+                        </p>
+                        <p class="patient-text overflow-ellipsis">
+                            <span class="patient-prefix">DOB: </span>{{patients[key].birth_date}}
+                        </p>
+                    </div>
+
+                    <!-- TODO: Promote to patientMenu module -->
+                    <div class="flex flex-nosize patient-actions" style="justify-content: space-between;">
+                        <div>
+                            <!-- <idr-eye-hide-svg class="icon no-shadow" (click)="hidePatient(myPatient)"></idr-eye-hide-svg> -->
+                            <idr-icon icon="icon-eye-hide" class="borderless" (click)="hidePatient(patients[key])"></idr-icon>
+                        </div>
+                        <div>
+                            <idr-icon icon="icon-storage" class="bordered" (click)="selectPatient(patients[key])"></idr-icon>
+                            <div class="badges">
+
+                                <div class="new" [ngClass]="{ o0: patients[key].unseen == 0 }">
+                                    {{ patients[key].unseen }}
+                                </div>
+
+                                <div class="expired" [ngClass]="{ o0: patients[key].expired == 0 }">
+                                    {{ patients[key].expired }}
+                                </div>
+
+                            </div>
+                        </div>
+                        <div>
+                            <!-- <idr-stethoscope-svg class="icon" (click)="selectProvider(myPatient)"></idr-stethoscope-svg> -->
+                            <idr-icon icon="icon-stethoscope" class="bordered" (click)="selectProvider(patients[key])"></idr-icon>
+                            <div class="badges">
+
+                                <div class="new" [ngClass]="{o0: totalProviderNewUpdates(patients[key]) == 0}">
+                                    {{ totalProviderNewUpdates(patients[key]) }}
+                                </div>
+
+                                <div class="expired" [ngClass]="{o0: totalProviderExpiredUpdates(patients[key]) == 0}">
+                                    {{ totalProviderExpiredUpdates(patients[key]) }}
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--
+                            <idr-edit-home-svg class="btn-right-middle"
+                                (click)="openPatientProfile(patient, false)">
+                            </idr-edit-home-svg>
+                        -->
+                        <div>
+                            <idr-icon icon="icon-envelope" class="bordered" (click)="selectMessages(patients[key])"></idr-icon>
+                            <!-- <idr-mail-svg class="icon" (click)="selectMessages(myPatient)"></idr-mail-svg> <- (click)="createChat(patient)" -> -->
+                            <div class="badges">
+                                <div class="new" [ngClass]="{o0: totalNewMessages(patients[key]) == 0}">
+                                    {{ totalNewMessages(patients[key]) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+            <td class="folders-container"
+                *ngIf="selectedFolder && folderPerPatient"
+                [ngClass]="{ selected: patients[key]?.id === selectedPatient?.id }"
+                (click)="selectPatientFolder(patients[key])">
+                    <div class="flex flex-row">
+                        <div class="ellipsis">{{ getFolderByPatient(patients[key])?.title }}</div>
+                        <span class="flex flex-nosize aic jcc badge" [ngClass]="{active: getFolderByPatient(patients[key])?.unseen > 0}">
+                            {{ getFolderByPatient(patients[key])?.total || 0 }} / {{ getFolderByPatient(patients[key])?.unseen || 0 }}
+                        </span>
+                    </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

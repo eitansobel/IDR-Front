@@ -1,0 +1,23 @@
+<div class="flex" [ngClass]="{edit: edit}">
+    <label *ngIf="label">{{ label }}</label>
+    <div class="input-container">
+        <mat-select
+            (ngModelChange)="onModelChange($event)"
+            [(ngModel)]="value"
+            [placeholder]="placeholder"
+            [ngClass]="{ disabled: !edit}"
+        >
+            <mat-option *ngFor="let item of items" [value]="item.id">
+                {{item.title}}
+            </mat-option>
+        </mat-select>
+        <idr-icon
+            icon="icon-exclamation-outline"
+            *ngIf="formControlName && !isValid() && edit"
+            [matTooltip]="listOfErrors()[0] || ''"
+            matTooltipClass="tooltip-red"
+            [matTooltipDisabled]="!edit"
+        >
+        </idr-icon>
+    </div>
+</div>

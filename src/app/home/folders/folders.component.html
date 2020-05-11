@@ -1,0 +1,59 @@
+<div class="flex flex-row">
+
+    <!-- Column Folders -->
+
+    <div class="col-folders" *ngIf="!(hideFolders$ | async)">
+        <div class="pa fill">
+
+            <perfect-scrollbar class="ps-show-always">
+                <!-- TODO: Promote to component Folders -->
+                <mat-accordion #myaccordion *ngFor="let folder of updateFolders$ | async" [multi]= "true"> <!-- sortBy:'title', 'asc' -->
+                    <mat-expansion-panel #panel [disabled]="true"
+                        [expanded]="isExpanded(folder)"
+                        (opened)="closeOtherPanels(panel)"
+                        (opened)="folderOpened(folder)"
+                        (closed)="folderClosed(folder)"
+                        [@.disabled]="true"
+                        hideToggle="true">
+                            <mat-expansion-panel-header
+                                [collapsedHeight]="'40px'"
+                                [expandedHeight]="'40px'"
+                                (click)="folderClicked(folder, $event);">
+                                    <mat-panel-title>
+                                        <span class="title">{{ folder.title }}</span>
+                                        <span class="badge" [ngClass]="{active: folder.unseen > 0}">
+                                            {{ folder.total }} / {{ folder.unseen }}
+                                        </span>
+                                        <idr-icon icon="icon-exclamation" class="red flex-nosize" *ngIf="folder.expired"></idr-icon>
+                                        <span class="flex"></span>
+                                        <idr-chevron-svg *ngIf="panel.expanded" class="icon chevron-up"></idr-chevron-svg>
+                                        <idr-chevron-svg *ngIf="!panel.expanded" class="icon chevron-down"></idr-chevron-svg>
+                                    </mat-panel-title>
+                            </mat-expansion-panel-header>
+
+                            <div class="sub-folder"
+                                *ngFor="let subFolder of folder.subfolders"
+                                (click)="subFolderClicked(subFolder, $event)"
+                                [ngClass]="{active: subFolder == selectedFolder}">
+                                    <idr-icon icon="icon-circle" class="small flex-nosize pr5" [ngClass]="{ active: subFolder.active }"></idr-icon>
+                                    <span class="title">{{ subFolder.title }}</span>
+                                    <span class="badge" [ngClass]="{active: subFolder.unseen > 0}">
+                                        {{ subFolder.total }} / {{ subFolder.unseen }}
+                                    </span>
+                                    <idr-icon icon="icon-exclamation" class="red flex-nosize" *ngIf="subFolder.expired"></idr-icon>
+                                    <span class="flex"></span>
+                                    <idr-chevron-svg class="icon chevron-right"></idr-chevron-svg>
+                            </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </perfect-scrollbar>
+        </div>
+    </div>
+
+    <!-- Column: Updates -->
+
+    <div class="col-updates">
+        <idr-updates></idr-updates>
+    </div>
+
+</div>

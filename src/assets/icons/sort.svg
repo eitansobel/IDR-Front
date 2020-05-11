@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>sort</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M3.60002547,4.78391599 L6.85785373,7.29786533 C7.05415371,7.44934299 7.16912238,7.68327913 7.16912238,7.93122905 L7.16912238,12.4660431 L8.61156221,13.0290944 L8.61156221,7.93122905 C8.61156221,7.67521709 8.73408717,7.43466805 8.94116457,7.2841321 L12.4001656,4.76959398 L12.4001656,4.60002547 L3.60002547,4.60002547 L3.60002547,4.78391599 Z M12.6940939,4.60002547 L12.729768,4.52998789 L12.6334242,4.60002547 L12.6940939,4.60002547 Z M5.56909691,8.3243979 L2.31126865,5.81044856 C2.11496867,5.6589709 2,5.42503476 2,5.17708484 L2,3.80001274 C2,3.3581779 2.3581779,3 2.80001274,3 L13.2001783,3 C13.6420132,3 14.0001911,3.3581779 14.0001911,3.80001274 L14.0001911,5.17708484 C14.0001911,5.4330968 13.8776661,5.67364584 13.6705887,5.82418179 L10.2115877,8.33871991 L10.2115877,14.2001783 C10.2115877,14.7633087 9.64525143,15.1501949 9.12067,14.9454264 L6.0782047,13.7578108 C5.77119863,13.6379721 5.56909691,13.3421292 5.56909691,13.0125628 L5.56909691,8.3243979 Z" id="path-1"></path>
+    </defs>
+    <g id="sort" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Rectangle-2" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="colors" mask="url(#mask-2)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="gray" fill="#000000">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

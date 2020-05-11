@@ -1,0 +1,524 @@
+<div class="header">
+    <idr-back-btn
+        class="link back stepBack"
+        *ngIf="stepper.selectedIndex"
+        (click)="goBack(stepper)">
+        <span>Back</span>
+    </idr-back-btn>
+    <div class="logo">
+        <idr-icon icon="icon-suitcase"></idr-icon>
+    </div>
+    <h3 class="title">Create Account</h3>
+</div>
+
+<div class="body">
+    <mat-horizontal-stepper
+        [linear]="true"
+        class="step-{{stepper.selectedIndex}}"
+        #stepper="matHorizontalStepper"
+        >
+        <mat-step [stepControl]="firstFormGroup"  >
+            <form [formGroup]="firstFormGroup" >
+                <ng-template matStepLabel ></ng-template>
+
+                <idr-input-text
+                    [hasError]="firstFormGroup.get('first_name').invalid && formSubmitted"
+                    formControlName="first_name"
+                    placeholder='First Name'
+                    [control]="firstFormGroup.get('first_name')"
+                    [required]='true'
+                    ></idr-input-text>
+                <idr-input-text
+                    [hasError]="firstFormGroup.get('last_name').invalid && formSubmitted"
+                    formControlName="last_name"
+                    placeholder='Last Name'
+                    [control]="firstFormGroup.get('last_name')"
+                    [required]='true'
+                    ></idr-input-text>
+                <idr-input-text
+                    [hasError]="firstFormGroup.get('middle_name').invalid && formSubmitted"
+                    formControlName="middle_name"
+                    placeholder='Middle Name'
+                    [control]="firstFormGroup.get('middle_name')"
+                    ></idr-input-text>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel></ng-template>
+                <idr-input-text
+                    [hasError]="secondFormGroup.get('title').invalid && formSubmitted"
+                    formControlName="title"
+                    placeholder='Job'
+                    [required]='true'
+                    [control]="secondFormGroup.get('title')"
+                    ></idr-input-text>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <idr-input-text
+                            formControlName="prefix"
+                            placeholder='Prefix'
+                            class='half'
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <idr-input-text
+                            formControlName="suffix"
+                            class='half'
+                            placeholder='Suffix'
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <idr-input-text
+                    formControlName="preferred_name"
+                    placeholder='Preferred Name'
+                    ></idr-input-text>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+                <ng-template matStepLabel></ng-template>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('phone').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Phone"
+                                   phoneMask
+                                   formControlName="phone"
+                                   >
+                               <span class='required'>*</span>
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('phone').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('phone')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-half'>
+
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('cell').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Cell"
+                                   phoneMask
+                                   formControlName="cell"
+                                   >
+                               <span class='required'>*</span>
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('cell').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('cell')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('pager').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Pager"
+                                   phoneMask
+                                   formControlName="pager"
+                                   >
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('pager').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('pager')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-half'>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('fax').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Fax"
+                                   phoneMask
+                                   formControlName="fax"
+                                   >
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('fax').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('fax')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <idr-input-text
+                            [hasError]="thirdFormGroup.get('email').invalid && formSubmitted"
+                            formControlName="email"
+                            placeholder='Email'
+                            [required]='true'
+                            [control]="thirdFormGroup.get('email')"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <ng-select [items]="preferred_mode"
+                            [selectOnTab]="true"
+                            placeholder="Preferred Mode"
+                            bindValue="value"
+                            formControlName="preferred_mode">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="thirdFormGroup.get('preferred_mode')"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="fourthFormGroup">
+            <form [formGroup]="fourthFormGroup">
+                <ng-template matStepLabel></ng-template>
+                <ng-select [items]="hospital"
+                            [selectOnTab]="true"
+                            placeholder="Hospital"
+                            bindLabel="title"
+                            bindValue="hospital_id"
+                            (change)="onChange($event)"
+                            class="required"
+                            [ngClass]="{'hasError': fourthFormGroup.get('hospital').invalid && formSubmitted}"
+                            formControlName="hospital">
+                        </ng-select>
+                            <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="fourthFormGroup.get('hospital')"
+                            ></idr-validation-message>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <ng-select [items]="hospital_department"
+                            [selectOnTab]="true"
+                            placeholder="Hospital Department"
+                            bindLabel="title"
+                            bindValue="id"
+                            class="required"
+                            [ngClass]="{'hasError': fourthFormGroup.get('hospital_department').invalid && formSubmitted}"
+                            formControlName="hospital_department">
+                        </ng-select>
+                            <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="fourthFormGroup.get('hospital_department')"
+                            ></idr-validation-message>
+
+                    </div>
+                    <div class='control-half'>
+                        <ng-select [items]="hospital_role"
+                            [selectOnTab]="true"
+                            placeholder="Role"
+                            bindLabel="title"
+                            bindValue="id"
+                            class="required"
+                            [ngClass]="{'hasError': fourthFormGroup.get('hospital_role').invalid && formSubmitted}"
+                            formControlName="hospital_role">
+                        </ng-select>
+                            <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="fourthFormGroup.get('hospital_role')"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+                <idr-input-text
+                    [hasError]="fourthFormGroup.get('username').invalid && formSubmitted"
+                    formControlName="username"
+                    placeholder='Username'
+                    [required]='true'
+                    [control]="fourthFormGroup.get('username')"
+                    ></idr-input-text>
+
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <idr-input-pass
+                            [hasError]="fourthFormGroup.get('password').invalid && formSubmitted"
+                            formControlName="password"
+                            placeholder='Password'
+                            [required]='true'
+                            [control]="fourthFormGroup.get('password')"
+                            ></idr-input-pass>
+                    </div>
+                    <div class='control-half'>
+                        <idr-input-pass
+                            [hasError]="fourthFormGroup.get('confirm_password').invalid && formSubmitted"
+                            formControlName="confirm_password"
+                            placeholder='Confirm Password'
+                            [required]='true'
+                            [control]="fourthFormGroup.get('confirm_password')"
+                            ></idr-input-pass>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+    <idr-server-error *ngFor="let mes of message; let i = index" [message]="message[i]"></idr-server-error>
+</div>
+
+<div class="footer">
+    <idr-default-btn class="green" (click)="goForward(stepper)">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>
+            Continue
+        </span>
+    </idr-default-btn>
+    <p class='greyText'>Already have an account?</p>
+    <idr-default-btn  (click)="cancel()">
+        <idr-icon icon="icon-login"></idr-icon>
+        <span>
+            Log In
+        </span>
+    </idr-default-btn>
+</div>
+
+<!-- <idr-modal-wrap hasIconDecor='true'>
+    <span class="headline">Create Account</span>
+    <idr-back-btn
+        (click)="goBack(stepper)"
+        *ngIf="stepper.selectedIndex"
+        class='stepBack'
+        >
+        Back
+    </idr-back-btn>
+    <mat-horizontal-stepper
+        [linear]="true"
+        class="step-{{stepper.selectedIndex}}"
+        #stepper="matHorizontalStepper"
+        >
+        <mat-step [stepControl]="firstFormGroup"  >
+            <form [formGroup]="firstFormGroup" >
+                <ng-template matStepLabel ></ng-template>
+
+                <idr-input-text
+                    [hasError]="firstFormGroup.get('first_name').invalid && formSubmitted"
+                    formControlName="first_name"
+                    placeholder='First Name'
+                    [control]="firstFormGroup.get('first_name')"
+                    [required]='true'
+                    ></idr-input-text>
+                <idr-input-text
+                    [hasError]="firstFormGroup.get('last_name').invalid && formSubmitted"
+                    formControlName="last_name"
+                    placeholder='Last Name'
+                    [control]="firstFormGroup.get('last_name')"
+                    [required]='true'
+                    ></idr-input-text>
+                <idr-input-text
+                    [hasError]="firstFormGroup.get('middle_name').invalid && formSubmitted"
+                    formControlName="middle_name"
+                    placeholder='Middle Name'
+                    [control]="firstFormGroup.get('middle_name')"
+                    ></idr-input-text>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+            <form [formGroup]="secondFormGroup">
+                <ng-template matStepLabel></ng-template>
+                <idr-input-text
+                    [hasError]="secondFormGroup.get('title').invalid && formSubmitted"
+                    formControlName="title"
+                    placeholder='Job'
+                    [required]='true'
+                    [control]="secondFormGroup.get('title')"
+                    ></idr-input-text>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <idr-input-text
+                            formControlName="prefix"
+                            placeholder='Prefix'
+                            class='half'
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <idr-input-text
+                            formControlName="suffix"
+                            class='half'
+                            placeholder='Suffix'
+                            ></idr-input-text>
+                    </div>
+                </div>
+                <idr-input-text
+                    formControlName="preferred_name"
+                    placeholder='Preferred Name'
+                    ></idr-input-text>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup">
+            <form [formGroup]="thirdFormGroup">
+                <ng-template matStepLabel></ng-template>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('phone').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Phone"
+                                   phoneMask
+                                   formControlName="phone"
+                                   >
+                               <span class='required'>*</span>
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('phone').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('phone')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-half'>
+
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('cell').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Cell"
+                                   phoneMask
+                                   formControlName="cell"
+                                   >
+                               <span class='required'>*</span>
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('cell').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('cell')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('pager').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Pager"
+                                   phoneMask
+                                   formControlName="pager"
+                                   >
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('pager').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('pager')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                    <div class='control-half'>
+                        <div class='form-control phoneMask' [ngClass]="{'hasError' : thirdFormGroup.get('fax').invalid && formSubmitted}">
+                                <input
+                                   placeholder="Fax"
+                                   phoneMask
+                                   formControlName="fax"
+                                   >
+                               <idr-validation-message
+                               *ngIf="thirdFormGroup.get('fax').invalid && formSubmitted"
+                               [control]="thirdFormGroup.get('fax')"
+                               ></idr-validation-message>
+                        </div>
+                    </div>
+                </div>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <idr-input-text
+                            [hasError]="thirdFormGroup.get('email').invalid && formSubmitted"
+                            formControlName="email"
+                            placeholder='Email'
+                            [required]='true'
+                            [control]="thirdFormGroup.get('email')"
+                            ></idr-input-text>
+                    </div>
+                    <div class='control-half'>
+                        <ng-select [items]="preferred_mode"
+                            [selectOnTab]="true"
+                            placeholder="Preferred Mode"
+                            bindValue="value"
+                            formControlName="preferred_mode">
+                        </ng-select>
+                        <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="thirdFormGroup.get('preferred_mode')"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="fourthFormGroup">
+            <form [formGroup]="fourthFormGroup">
+                <ng-template matStepLabel></ng-template>
+                <ng-select [items]="hospital"
+                            [selectOnTab]="true"
+                            placeholder="Hospital"
+                            bindLabel="title"
+                            bindValue="hospital_id"
+                            (change)="onChange($event)"
+                            class="required"
+                            [ngClass]="{'hasError': fourthFormGroup.get('hospital').invalid && formSubmitted}"
+                            formControlName="hospital">
+                        </ng-select>
+                            <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="fourthFormGroup.get('hospital')"
+                            ></idr-validation-message>
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <ng-select [items]="hospital_department"
+                            [selectOnTab]="true"
+                            placeholder="Hospital Department"
+                            bindLabel="title"
+                            bindValue="id"
+                            class="required"
+                            [ngClass]="{'hasError': fourthFormGroup.get('hospital_department').invalid && formSubmitted}"
+                            formControlName="hospital_department">
+                        </ng-select>
+                            <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="fourthFormGroup.get('hospital_department')"
+                            ></idr-validation-message>
+
+                    </div>
+                    <div class='control-half'>
+                        <ng-select [items]="hospital_role"
+                            [selectOnTab]="true"
+                            placeholder="Role"
+                            bindLabel="title"
+                            bindValue="id"
+                            class="required"
+                            [ngClass]="{'hasError': fourthFormGroup.get('hospital_role').invalid && formSubmitted}"
+                            formControlName="hospital_role">
+                        </ng-select>
+                            <idr-validation-message
+                            *ngIf="formSubmitted"
+                            [control]="fourthFormGroup.get('hospital_role')"
+                            ></idr-validation-message>
+                    </div>
+                </div>
+                <idr-input-text
+                    [hasError]="fourthFormGroup.get('username').invalid && formSubmitted"
+                    formControlName="username"
+                    placeholder='Username'
+                    [required]='true'
+                    [control]="fourthFormGroup.get('username')"
+                    ></idr-input-text>
+
+                <div class="flexSpread">
+                    <div class='control-half'>
+                        <idr-input-pass
+                            [hasError]="fourthFormGroup.get('password').invalid && formSubmitted"
+                            formControlName="password"
+                            placeholder='Password'
+                            [required]='true'
+                            [control]="fourthFormGroup.get('password')"
+                            ></idr-input-pass>
+                    </div>
+                    <div class='control-half'>
+                        <idr-input-pass
+                            [hasError]="fourthFormGroup.get('confirm_password').invalid && formSubmitted"
+                            formControlName="confirm_password"
+                            placeholder='Confirm Password'
+                            [required]='true'
+                            [control]="fourthFormGroup.get('confirm_password')"
+                            ></idr-input-pass>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+
+    </mat-horizontal-stepper>
+    <idr-server-error *ngFor="let mes of message; let i = index" [message]="message[i]"></idr-server-error>
+    <idr-default-btn class="green" (click)="goForward(stepper)">
+        <idr-icon icon="icon-check"></idr-icon>
+        <span>
+            Continue
+        </span>
+    </idr-default-btn>
+    <p class='greyText'>Already have an account?</p>
+    <idr-default-btn  (click)="cancel()">
+        <idr-icon icon="icon-login"></idr-icon>
+        <span>
+            Log In
+        </span>
+    </idr-default-btn>
+
+</idr-modal-wrap> -->

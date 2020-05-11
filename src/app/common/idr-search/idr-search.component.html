@@ -1,0 +1,11 @@
+<div>
+    <input
+        class="input-field"
+        type="text"
+        [placeholder]="placeholder"
+        [(ngModel)]="searchText"
+        (change)="onChange($event)"
+        (keyup)="onChange($event)"
+    >
+    <idr-icon [icon]="icon"></idr-icon>
+</div>

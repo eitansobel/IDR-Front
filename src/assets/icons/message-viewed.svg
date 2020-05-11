@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>message-viewed</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11.1342162,4.29289322 C11.5247405,3.90236893 12.1579055,3.90236893 12.5484298,4.29289322 C12.9389541,4.68341751 12.9389541,5.31658249 12.5484298,5.70710678 L6.29420841,11.9613282 L3.29289322,8.96001296 C2.90236893,8.56948867 2.90236893,7.93632369 3.29289322,7.5457994 C3.68341751,7.15527511 4.31658249,7.15527511 4.70710678,7.5457994 L6.29420841,9.13290103 L11.1342162,4.29289322 Z" id="path-1"></path>
+    </defs>
+    <g id="message-viewed" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill-rule="nonzero" x="0" y="0" width="16" height="16"></rect>
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Path" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="colors" mask="url(#mask-2)" fill-rule="nonzero">
+            <g id="blue" fill="#1563D7">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="orange" fill="#FFA512">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="red" fill="#F92842">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="white" fill="#FFFFFF">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="green" fill="#0BC899">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="dark-gray" fill="#8D9092">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+            <g id="gray" fill="#000000">
+                <rect x="0" y="0" width="16" height="16"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

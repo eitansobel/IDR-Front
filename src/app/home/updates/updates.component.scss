@@ -1,0 +1,111 @@
+@import 'styles';
+
+:host {
+    @extend .flex;
+    width: 390px;
+    .toolbar {
+        @extend .flex, .flex-row, .flex-nosize, .aic;
+        padding: 15px;
+        border-bottom: $border-control;
+        h3 {
+            @extend .flex;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: 0 10px 0 0;
+            display: block;
+        }
+        ::ng-deep {
+            idr-default-btn {
+                margin: 0;
+            }
+        }
+    }
+    .content {
+        @extend .flex;
+        position: relative;
+        padding: 10px;
+        .scroll-view {
+            @extend .flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            ::ng-deep {
+                .ng-scrollbar-view {
+                    padding: 15px;
+                }
+            }
+        }
+        .message {
+            @extend .flex;
+            color: $modal-text-color;
+            border: $border-control;
+            padding: 10px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            &.active {
+                background: #fbfcff;
+            }
+            .header {
+                @extend .flex, .flex-row;
+                margin-bottom: 10px;
+                > * { @extend .flex, .flex-nosize; margin-right: 10px; }
+                > :last-child { @extend .flex, .aife; margin: 0; }
+            };
+            .body {
+                font-size: 13px;
+                color: black;
+                p {
+                    display: block;
+                    width: 100%;
+                    word-wrap: break-word;
+                    margin: 5px 0;
+                    overflow: hidden;
+                }
+                strong { font-weight: bold; }
+                a {
+                    text-decoration: none;
+                    color: $dull-blue;
+                    span {
+                        color: $modal-text-color;
+                    }
+                }
+            }
+        }
+    }
+
+    .idr-icon {
+        &.active {
+            ::ng-deep {
+                svg {
+                    circle,
+                    path {
+                        fill: $dull-blue;
+                    }
+                }
+            }
+            &.red {
+                ::ng-deep {
+                    svg {
+                        circle,
+                        path {
+                            fill: $red;
+                        }
+                    }
+                }
+            }
+        }
+        &.active-orange {
+            ::ng-deep {
+                svg {
+                    circle,
+                    path {
+                        fill: $orange;
+                    }
+                }
+            }
+        }
+    }
+}
